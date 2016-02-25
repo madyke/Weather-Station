@@ -29,7 +29,7 @@ public class XMLParse
     {
         //Set-up for XML parsing
         SAXBuilder builder = new SAXBuilder();
-        File xmlFile = new File( "2010-01.xml" );
+        File xmlFile = new File( "XMLTest.xml" );
         
         YearlyStats currYearStats = new YearlyStats();
         MonthlyStats currMonthStats = new MonthlyStats();
@@ -66,11 +66,12 @@ public class XMLParse
                 {
                     //Add previous day's readings to list of all readings
                     dailyReadings.add( currDayReadings );
+                    currDayStats.PrintStats();
                     
                     //Calculate daily averages and add to list of daily averages
                     currDayStats.CalculateAverages();
                     dailyAverages.add( currDayStats );
-                    currDayStats.PrintStats();
+                    
                     //Create new array for new day
                     currDayReadings = new ArrayList<WeatherReading>();
                     
@@ -81,6 +82,14 @@ public class XMLParse
                 //Add current reading to list of today's readings
                 currDayReadings.add( currReading );
             }
+            
+            //Add previous day's readings to list of all readings
+            dailyReadings.add( currDayReadings );
+
+            //Calculate daily averages and add to list of daily averages
+            currDayStats.CalculateAverages();
+            dailyAverages.add( currDayStats );
+            currDayStats.PrintStats();
             
             //Calculate monthly stats and add to list of monthly averages
             currMonthStats.CalculateAverages();
