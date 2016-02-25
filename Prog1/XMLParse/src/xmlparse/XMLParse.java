@@ -20,10 +20,10 @@ import org.jdom2.input.SAXBuilder;
  */
 public class XMLParse
 {
-    private static ArrayList<YearlyStats> yearlyAverages = new ArrayList<YearlyStats>();
-    private static ArrayList<MonthlyStats> monthlyAverages = new ArrayList<MonthlyStats>();
-    private static ArrayList<DailyStats> dailyAverages = new ArrayList<DailyStats>();
-    private static ArrayList<ArrayList<WeatherReading>> dailyReadings = new ArrayList<ArrayList<WeatherReading>>();
+    public static ArrayList<YearlyStats> yearlyAverages = new ArrayList<>();
+    public static ArrayList<MonthlyStats> monthlyAverages = new ArrayList<>();
+    public static ArrayList<DailyStats> dailyAverages = new ArrayList<>();
+    public static ArrayList<ArrayList<WeatherReading>> dailyReadings = new ArrayList<>();
     
     public static void main(String[] args)
     {
