@@ -13,4 +13,11 @@ public class MonthlyStats extends WeatherStats
 {
     public int month;
     public int year;
+    
+    @Override
+    public void PrintStats()
+    {
+        System.out.println( "\nMONTHLY : " + month + "/" + year );
+        super.PrintStats();
+    }
 }

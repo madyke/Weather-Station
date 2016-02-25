@@ -12,4 +12,11 @@ package xmlparse;
 public class YearlyStats extends WeatherStats
 {
     public int year;
+    
+    @Override
+    public void PrintStats()
+    {
+        System.out.println( "\nYEARLY : " + year );
+        super.PrintStats();
+    }
 }

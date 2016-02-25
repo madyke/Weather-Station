@@ -14,4 +14,11 @@ public class DailyStats extends WeatherStats
     public int day;
     public int month;
     public int year;
+    
+    @Override
+    public void PrintStats()
+    {
+        System.out.println( "\nDAILY : " + month + "/" + day + "/" + year );
+        super.PrintStats();
+    }
 }
