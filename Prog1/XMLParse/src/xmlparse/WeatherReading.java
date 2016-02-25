@@ -33,7 +33,7 @@ public class WeatherReading
     public double uvIndex;
     public double rainFall;
     
-    public void ReadData( Element node )
+    public void ReadData( Element node, DailyStats daily, MonthlyStats monthly, YearlyStats yearly )
     {
         //Get date from current reading
         String date = node.getChildText( "date" );
@@ -47,8 +47,16 @@ public class WeatherReading
         this.month = Integer.parseInt( date.substring( firstSlash + 1, secondSlash ) );
         this.year = Integer.parseInt( date.substring( secondSlash + 1 ) );       
 
-        //Read in time of reading
-        this.time = node.getChildText( "time" );
+        //Attempt to read in time value
+        try
+        {
+            this.time = node.getChildText( "time" ).trim();        
+        }
+        catch( Exception e)
+        {
+            //If failure, set time to empty string
+            this.time = "";
+        }
         
         //Attempt to read in temperature value
         try
@@ -86,7 +94,7 @@ public class WeatherReading
         //Attempt to read in windSpeed value
         try
         {
-            this.windSpeed = Double.parseDouble( node.getChildText( "windSpeed" ) );        
+            this.windSpeed = Double.parseDouble( node.getChildText( "windspeed" ) );        
         }
         catch( Exception e)
         {
@@ -97,18 +105,18 @@ public class WeatherReading
         //Attempt to read in windDirection value
         try
         {
-            this.windDirection = node.getChildText( "windDirection" ).trim();        
+            this.windDirection = node.getChildText( "winddirection" ).trim();        
         }
         catch( Exception e)
         {
-            //If failure, set windDirection to invalid number
+            //If failure, set windDirection to empty string
             this.windDirection = "";
         }
         
         //Attempt to read in windGust value
         try
         {
-            this.windGust = Double.parseDouble( node.getChildText( "windGust" ) );        
+            this.windGust = Double.parseDouble( node.getChildText( "windgust" ) );        
         }
         catch( Exception e)
         {
@@ -119,7 +127,7 @@ public class WeatherReading
         //Attempt to read in windChill value
         try
         {
-            this.windChill = Double.parseDouble( node.getChildText( "windChill" ) );        
+            this.windChill = Double.parseDouble( node.getChildText( "windchill" ) );        
         }
         catch( Exception e)
         {
@@ -130,7 +138,7 @@ public class WeatherReading
         //Attempt to read in heatIndex value
         try
         {
-            this.heatIndex = Double.parseDouble( node.getChildText( "heatIndex" ) );        
+            this.heatIndex = Double.parseDouble( node.getChildText( "heatindex" ) );        
         }
         catch( Exception e)
         {
@@ -141,7 +149,7 @@ public class WeatherReading
         //Attempt to read in uvIndex value
         try
         {
-            this.uvIndex = Double.parseDouble( node.getChildText( "uvIndex" ) );        
+            this.uvIndex = Double.parseDouble( node.getChildText( "uvindex" ) );        
         }
         catch( Exception e)
         {
@@ -152,7 +160,7 @@ public class WeatherReading
         //Attempt to read in rainFall value
         try
         {
-            this.rainFall = Double.parseDouble( node.getChildText( "rainFall" ) );        
+            this.rainFall = Double.parseDouble( node.getChildText( "rainfall" ) );        
         }
         catch( Exception e)
         {
