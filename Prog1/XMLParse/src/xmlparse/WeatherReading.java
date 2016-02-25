@@ -33,7 +33,9 @@ public class WeatherReading
     public double uvIndex;
     public double rainFall;
     
-    public void ReadData( Element node, DailyStats daily, MonthlyStats monthly, YearlyStats yearly )
+    private int INVALID_DATA = -10000;
+    
+    public void ReadData( Element node, DailyStats currDayStats, MonthlyStats currMonthStats, YearlyStats currYearStats )
     {
         //Get date from current reading
         String date = node.getChildText( "date" );
@@ -66,7 +68,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set temperature to invalid number
-            this.temperature = -10000;
+            this.temperature = INVALID_DATA;
         }
         
         //Attempt to read in humidity value
@@ -77,7 +79,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set humidity to invalid number
-            this.humidity = -10000;
+            this.humidity = INVALID_DATA;
         }
         
         //Attempt to read in barometer value
@@ -88,7 +90,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set barometer to invalid number
-            this.barometer = -10000;
+            this.barometer = INVALID_DATA;
         }
         
         //Attempt to read in windSpeed value
@@ -99,7 +101,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set windSpeed to invalid number
-            this.windSpeed = -10000;
+            this.windSpeed = INVALID_DATA;
         }
         
         //Attempt to read in windDirection value
@@ -121,7 +123,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set windGust to invalid number
-            this.windGust = -10000;
+            this.windGust = INVALID_DATA;
         }
         
         //Attempt to read in windChill value
@@ -132,7 +134,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set windChill to invalid number
-            this.windChill = -10000;
+            this.windChill = INVALID_DATA;
         }
         
         //Attempt to read in heatIndex value
@@ -143,7 +145,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set heatIndex to invalid number
-            this.heatIndex = -10000;
+            this.heatIndex = INVALID_DATA;
         }
         
         //Attempt to read in uvIndex value
@@ -154,7 +156,7 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set uvIndex to invalid number
-            this.uvIndex = -10000;
+            this.uvIndex = INVALID_DATA;
         }
         
         //Attempt to read in rainFall value
@@ -165,12 +167,14 @@ public class WeatherReading
         catch( Exception e)
         {
             //If failure, set rainFall to invalid number
-            this.rainFall = -10000;
+            this.rainFall = INVALID_DATA;
         }
         
         
         //Add new readings to running totals for daily, monthly, yearly stats
-        
+        currDayStats.AddToRunningTotals( this );
+        currMonthStats.AddToRunningTotals( this );
+        currYearStats.AddToRunningTotals( this );
     }
     
     public void PrintData()

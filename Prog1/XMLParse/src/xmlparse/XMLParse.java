@@ -31,6 +31,9 @@ public class XMLParse
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File( "2010-01.xml" );
         
+        YearlyStats currYearStats = new YearlyStats();
+        MonthlyStats currMonthStats = new MonthlyStats();
+        
         try
         {
             //Create new document object from XML file
@@ -43,6 +46,7 @@ public class XMLParse
             //Create for new day
             int currDay = 0;
             ArrayList<WeatherReading> currDayReadings = new ArrayList<WeatherReading>();
+            DailyStats currDayStats = new DailyStats();
             
             //Loop over each weather reading
             for (int i = 0; i < list.size(); i++)
@@ -54,8 +58,8 @@ public class XMLParse
                 WeatherReading currReading = new WeatherReading();
 
                 //Read in data
-                currReading.ReadData( node );
-                currReading.PrintData();
+                currReading.ReadData( node, currDayStats , currMonthStats, currYearStats );
+                //currReading.PrintData();
                 
                 //If current reading from a new day
                 if( currReading.day != currDay && i != 0 )
@@ -63,13 +67,29 @@ public class XMLParse
                     //Add previous day's readings to list of all readings
                     dailyReadings.add( currDayReadings );
                     
+                    //Calculate daily averages and add to list of daily averages
+                    currDayStats.CalculateAverages();
+                    dailyAverages.add( currDayStats );
+                    currDayStats.PrintStats();
                     //Create new array for new day
                     currDayReadings = new ArrayList<WeatherReading>();
+                    
+                    //Create new daily stats object for new day
+                    currDayStats = new DailyStats();
                 }
                 
                 //Add current reading to list of today's readings
                 currDayReadings.add( currReading );
             }
+            
+            //Calculate monthly stats and add to list of monthly averages
+            currMonthStats.CalculateAverages();
+            monthlyAverages.add( currMonthStats );
+            currMonthStats.PrintStats();
+            //Calculate yearly stats and add to list of yearly averages
+            currYearStats.CalculateAverages();
+            yearlyAverages.add( currYearStats );
+            currYearStats.PrintStats();
 	}
         catch (IOException io)
         {
