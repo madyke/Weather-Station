@@ -6,10 +6,7 @@
 
 package xmlparse;
 
-import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
 
 
 /**
@@ -45,8 +42,8 @@ public class WeatherReading
         }
         int firstSlash = date.indexOf( "/" );
         int secondSlash = date.lastIndexOf( "/" );
-        this.day = Integer.parseInt( date.substring( 0, firstSlash ) );
-        this.month = Integer.parseInt( date.substring( firstSlash + 1, secondSlash ) );
+        this.month = Integer.parseInt( date.substring( 0, firstSlash ) );
+        this.day = Integer.parseInt( date.substring( firstSlash + 1, secondSlash ) );
         this.year = Integer.parseInt( date.substring( secondSlash + 1 ) );       
 
         //Attempt to read in time value
@@ -175,6 +172,13 @@ public class WeatherReading
         currDayStats.AddToRunningTotals( this );
         currMonthStats.AddToRunningTotals( this );
         currYearStats.AddToRunningTotals( this );
+        
+        currDayStats.day = this.day;
+        currDayStats.month = this.month;
+        currDayStats.year = this.year;
+        currMonthStats.month = this.month;
+        currMonthStats.year = this.year;
+        currYearStats.year = this.year;
     }
     
     public void PrintData()
