@@ -1,0 +1,33 @@
+<xml>
+
+    <weather>
+        <date> 01/01/10 </date>
+        <time> 12:15A </time>
+        <temperature> 10 </temperature>
+        <humidity> 80.0 </humidity>
+        <barometer> 25.0 </barometer>
+        <windspeed> 1.0 </windspeed>
+        <winddirection> E </winddirection>
+        <windgust> 5.0 </windgust>
+        <windchill> 8.0 </windchill>
+        <heatindex> 8.0 </heatindex>
+        <uvindex> 1.0 </uvindex>
+        <rainfall> 1.00 </rainfall>
+    </weather>
+	
+    <weather>
+        <date> 01/02/10 </date>
+        <time> 12:15A </time>
+        <temperature> 20 </temperature>
+        <humidity> 90.0 </humidity>
+        <barometer> 26.0 </barometer>
+        <windspeed> 3.0 </windspeed>
+        <winddirection> E </winddirection>
+        <windgust> 10.0 </windgust>
+        <windchill> 10.0 </windchill>
+        <heatindex> 10.0 </heatindex>
+        <uvindex> 0.0 </uvindex>
+        <rainfall> 0.00 </rainfall>
+    </weather>
+	
+</xml>
