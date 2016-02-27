@@ -18,18 +18,18 @@ import org.jdom2.input.SAXBuilder;
  *
  * @author 7025592
  */
-public class XMLParse
+public abstract class XMLParse
 {
     public static ArrayList<YearlyStats> yearlyAverages = new ArrayList<>();
     public static ArrayList<MonthlyStats> monthlyAverages = new ArrayList<>();
     public static ArrayList<DailyStats> dailyAverages = new ArrayList<>();
     public static ArrayList<ArrayList<WeatherReading>> dailyReadings = new ArrayList<>();
     
-    public static void main(String[] args)
+    public static void parseFile( String fileName )
     {
         //Set-up for XML parsing
         SAXBuilder builder = new SAXBuilder();
-        File xmlFile = new File( "XMLTest.xml" );
+        File xmlFile = new File( fileName );
         
         YearlyStats currYearStats = new YearlyStats();
         MonthlyStats currMonthStats = new MonthlyStats();
