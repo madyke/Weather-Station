@@ -7,6 +7,7 @@ package xmlparse;
 
 // import statements
 import javax.swing.*;
+import java.util.ArrayList;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -26,7 +27,7 @@ public class GUItest extends JFrame
       JFreeChart lineChart = ChartFactory.createLineChart(
          chartTitle,
          "Years","Number of Schools",
-         createDataset(),
+         createDataset( XMLParse.dailyAverages ),
          PlotOrientation.VERTICAL,
          true,true,false);
          
@@ -44,25 +45,28 @@ public class GUItest extends JFrame
     } );
    }
 
-   private DefaultCategoryDataset createDataset( )
+   private DefaultCategoryDataset createDataset( ArrayList<DailyStats> stats )
    {
       DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
-      dataset.addValue( 15 , "schools" , "1970" );
-      dataset.addValue( 30 , "schools" , "1980" );
-      dataset.addValue( 60 , "schools" ,  "1990" );
-      dataset.addValue( 120 , "schools" , "2000" );
-      dataset.addValue( 240 , "schools" , "2010" );
-      dataset.addValue( 300 , "schools" , "2014" );
+      
+      for( Integer i = 0; i < stats.size(); i++ )
+      {
+          dataset.addValue( stats.get( i ).highTemp, "High Temp", i.toString() );
+      }
+      
       return dataset;
    }
    public static void main( String[ ] args ) 
-   {
-      GUItest chart = new GUItest(
-      "School Vs Years" ,
-      "Numer of Schools vs years");
+   {    
+       //Parse test file
+       XMLParse.parseFile( "XMLTest.xml" );
 
-      chart.pack( );
-      RefineryUtilities.centerFrameOnScreen( chart );
-      chart.setVisible( true );
+       GUItest chart = new GUItest(
+       "School Vs Years" ,
+       "Numer of Schools vs years");
+      
+       chart.pack( );
+       RefineryUtilities.centerFrameOnScreen( chart );
+       chart.setVisible( true );
    }
 }
