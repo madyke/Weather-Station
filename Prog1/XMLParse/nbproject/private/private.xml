@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/Prog1/XMLParse/src/xmlparse/WeatherReading.java</file>
-            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/Prog1/XMLParse/src/xmlparse/WeatherStats.java</file>
-            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/Prog1/XMLParse/src/xmlparse/YearlyStats.java</file>
-            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/Prog1/XMLParse/src/xmlparse/XMLParse.java</file>
-            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/Prog1/XMLParse/src/xmlparse/MonthlyStats.java</file>
-            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/Prog1/XMLParse/src/xmlparse/DailyStats.java</file>
+            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/WeatherStation/Prog1/XMLParse/src/xmlparse/DailyStats.java</file>
+            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/WeatherStation/Prog1/XMLParse/src/xmlparse/XMLParse.java</file>
+            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/WeatherStation/Prog1/XMLParse/src/xmlparse/WeatherReading.java</file>
+            <file>file:/C:/Users/7025592/Documents/Classes/GUI%20Programming/WeatherStation/Prog1/XMLParse/src/xmlparse/WeatherStats.java</file>
         </group>
     </open-files>
 </project-private>
