@@ -14,6 +14,9 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class GUItest extends JFrame
 {
@@ -27,9 +30,18 @@ public class GUItest extends JFrame
          PlotOrientation.VERTICAL,
          true,true,false);
          
-      ChartPanel chartPanel = new ChartPanel( lineChart );
-      chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
-      setContentPane( chartPanel );
+    ChartPanel chartPanel = new ChartPanel( lineChart );
+    chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+    setContentPane( chartPanel );
+
+    // another way to exit app when window is closed
+    addWindowListener( new WindowAdapter()
+    {
+        public void windowClosing( WindowEvent e )
+        {
+            System.exit( 0 );
+        }
+    } );
    }
 
    private DefaultCategoryDataset createDataset( )
