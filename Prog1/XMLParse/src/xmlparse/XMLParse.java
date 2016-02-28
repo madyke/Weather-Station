@@ -61,8 +61,8 @@ public abstract class XMLParse
                 //Read in data
                 currReading.ReadData( node, currDayStats , currMonthStats, currYearStats );
                 
-                //If current reading from a new day
-                if( currReading.day != currDay )
+                //If current reading from a new day (and not first reading)
+                if( currReading.day != currDay && i != 0 )
                 {
                     //Add previous day's readings to list of all readings
                     dailyReadings.add( currDayReadings );
