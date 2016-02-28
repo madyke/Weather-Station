@@ -31,6 +31,7 @@ public abstract class XMLParse
         SAXBuilder builder = new SAXBuilder();
         File xmlFile = new File( fileName );
         
+        //Initialize classes for current year and month
         YearlyStats currYearStats = new YearlyStats();
         MonthlyStats currMonthStats = new MonthlyStats();
         
@@ -43,8 +44,8 @@ public abstract class XMLParse
             Element rootNode = document.getRootElement();
             List list = rootNode.getChildren("weather");
             
-            //Create for new day
-            int currDay = 0;
+            //Initialize classes for current day
+            int currDay = -1;
             ArrayList<WeatherReading> currDayReadings = new ArrayList<WeatherReading>();
             DailyStats currDayStats = new DailyStats();
             
@@ -59,14 +60,12 @@ public abstract class XMLParse
 
                 //Read in data
                 currReading.ReadData( node, currDayStats , currMonthStats, currYearStats );
-                //currReading.PrintData();
                 
                 //If current reading from a new day
-                if( currReading.day != currDay && i != 0 )
+                if( currReading.day != currDay )
                 {
                     //Add previous day's readings to list of all readings
                     dailyReadings.add( currDayReadings );
-                    currDayStats.PrintStats();
                     
                     //Calculate daily averages and add to list of daily averages
                     currDayStats.CalculateAverages();
@@ -89,16 +88,15 @@ public abstract class XMLParse
             //Calculate daily averages and add to list of daily averages
             currDayStats.CalculateAverages();
             dailyAverages.add( currDayStats );
-            currDayStats.PrintStats();
             
             //Calculate monthly stats and add to list of monthly averages
             currMonthStats.CalculateAverages();
             monthlyAverages.add( currMonthStats );
-            currMonthStats.PrintStats();
+            
             //Calculate yearly stats and add to list of yearly averages
             currYearStats.CalculateAverages();
             yearlyAverages.add( currYearStats );
-            currYearStats.PrintStats();
+            
 	}
         catch (IOException io)
         {
