@@ -93,7 +93,7 @@ public class WeatherStats
                 this.highTemp = currReading.temperature;
             }
             //Check if current temperature is smaller than curr min
-            else if( currReading.temperature < this.lowTemp )
+            if( currReading.temperature < this.lowTemp )
             {
                 this.lowTemp = currReading.temperature;            
             }
