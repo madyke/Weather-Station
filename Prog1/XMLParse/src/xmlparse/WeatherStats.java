@@ -42,6 +42,42 @@ public class WeatherStats
     private int numRainFallReadings;
     private int INVALID_DATA = -10000;
     
+    public WeatherStats()
+    {
+        //Initialize variables
+        this.highTemp       = -10000;
+        this.lowTemp        = 10000;
+        this.avgTemp        = 0;
+        this.avgHumidity    = 0;
+        this.avgBarometer   = 0;
+        this.avgWindSpeed   = 0;
+        this.windDirection  = 0;
+        this.windGust       = 0;
+        this.avgWindChill   = 0;
+        this.avgHeatIndex   = 0;
+        this.avgUVIndex     = 0;
+        this.totalRainFall  = 0;
+        this.avgRainFall    = 0;
+
+        this.totalTemp              = 0;
+        this.numTempReadings        = 0;
+        this.totalHumidity          = 0;
+        this.numHumidityReadings    = 0;
+        this.totalBarometer         = 0;
+        this.numBarometerReadings   = 0;
+        this.totalWindSpeed         = 0;
+        this.numWindSpeedReadings   = 0;
+        this.totalWindChill         = 0;
+        this.numWindChillReadings   = 0;
+        this.totalHeatIndex         = 0;
+        this.numHeatIndexReadings   = 0;
+        this.totalUVIndex           = 0;
+        this.numUVIndexReadings     = 0;
+        this.numRainFallReadings    = 0;
+        
+        this.INVALID_DATA           = -10000;
+    }
+    
     public void AddToRunningTotals( WeatherReading currReading )
     {
         //If temperature not invalid
@@ -57,7 +93,7 @@ public class WeatherStats
                 this.highTemp = currReading.temperature;
             }
             //Check if current temperature is smaller than curr min
-            else if( currReading.temperature < this.lowTemp )
+            if( currReading.temperature < this.lowTemp )
             {
                 this.lowTemp = currReading.temperature;            
             }
