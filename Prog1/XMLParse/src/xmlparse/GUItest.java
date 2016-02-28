@@ -26,7 +26,7 @@ public class GUItest extends JFrame
       super(applicationTitle);
       JFreeChart lineChart = ChartFactory.createLineChart(
          chartTitle,
-         "Years","Number of Schools",
+         "Day","High Temperature",
          createDataset( XMLParse.dailyAverages ),
          PlotOrientation.VERTICAL,
          true,true,false);
@@ -51,7 +51,8 @@ public class GUItest extends JFrame
       
       for( Integer i = 0; i < stats.size(); i++ )
       {
-          dataset.addValue( stats.get( i ).highTemp, "High Temp", i.toString() );
+          Integer currDay = stats.get( i ).day;
+          dataset.addValue( stats.get( i ).highTemp, "High Temp", currDay.toString() );
       }
       
       return dataset;
@@ -62,8 +63,8 @@ public class GUItest extends JFrame
        XMLParse.parseFile( "XMLTest.xml" );
 
        GUItest chart = new GUItest(
-       "School Vs Years" ,
-       "Numer of Schools vs years");
+       "GUI Test" ,
+       "Daily High Temperatures");
       
        chart.pack( );
        RefineryUtilities.centerFrameOnScreen( chart );
