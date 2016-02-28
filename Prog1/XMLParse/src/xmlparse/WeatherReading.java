@@ -188,19 +188,6 @@ public class WeatherReading
             //If failure, set rainFall to invalid number
             this.rainFall = INVALID_DATA;
         }
-        
-        
-        //Add new readings to running totals for daily, monthly, yearly stats
-        currDayStats.AddToRunningTotals( this );
-        currMonthStats.AddToRunningTotals( this );
-        currYearStats.AddToRunningTotals( this );
-        
-        currDayStats.day = this.day;
-        currDayStats.month = this.month;
-        currDayStats.year = this.year;
-        currMonthStats.month = this.month;
-        currMonthStats.year = this.year;
-        currYearStats.year = this.year;
     }
     
     public void PrintData()

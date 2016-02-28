@@ -23,7 +23,7 @@ public abstract class XMLParse
     public static ArrayList<YearlyStats> yearlyAverages = new ArrayList<>();
     public static ArrayList<MonthlyStats> monthlyAverages = new ArrayList<>();
     public static ArrayList<DailyStats> dailyAverages = new ArrayList<>();
-    public static ArrayList<ArrayList<WeatherReading>> dailyReadings = new ArrayList<>();
+    public static ArrayList<ArrayList<WeatherReading>> weatherReadings = new ArrayList<>();
     
     public static void parseFile( String fileName )
     {
@@ -65,7 +65,7 @@ public abstract class XMLParse
                 if( currReading.day != currDay && i != 0 )
                 {
                     //Add previous day's readings to list of all readings
-                    dailyReadings.add( currDayReadings );
+                    weatherReadings.add( currDayReadings );
                     
                     //Calculate daily averages and add to list of daily averages
                     currDayStats.CalculateAverages();
@@ -77,13 +77,27 @@ public abstract class XMLParse
                     //Create new daily stats object for new day
                     currDayStats = new DailyStats();
                 }
+                //Else current reading from same day as previous
+                {
+                    //Add new readings to running totals for daily, monthly, yearly stats
+                    currDayStats.AddToRunningTotals( currReading );
+                    currMonthStats.AddToRunningTotals( currReading );
+                    currYearStats.AddToRunningTotals( currReading );
+
+                    currDayStats.day = currReading.day;
+                    currDayStats.month = currReading.month;
+                    currDayStats.year = currReading.year;
+                    currMonthStats.month = currReading.month;
+                    currMonthStats.year = currReading.year;
+                    currYearStats.year = currReading.year;
+                }
                 
                 //Add current reading to list of today's readings
                 currDayReadings.add( currReading );
             }
             
             //Add previous day's readings to list of all readings
-            dailyReadings.add( currDayReadings );
+            weatherReadings.add( currDayReadings );
 
             //Calculate daily averages and add to list of daily averages
             currDayStats.CalculateAverages();
