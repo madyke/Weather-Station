@@ -30,7 +30,29 @@ public class WeatherReading
     public double uvIndex;
     public double rainFall;
     
-    private int INVALID_DATA = -10000;
+    private int INVALID_DATA;
+    
+    public WeatherReading()
+    {
+        //Initialize all variables to 0
+        this.day    = 0;
+        this.month  = 0;
+        this.year   = 0;
+        this.time   = "";
+        this.temperature    = 0;
+        this.humidity       = 0;
+        this.barometer      = 0;
+        this.windSpeed      = 0;
+        this.windDirection  = "";
+        this.windGust       = 0;
+        this.windChill      = 0;
+        this.heatIndex      = 0;
+        this.uvIndex        = 0;
+        this.rainFall       = 0;
+        
+        //Set invalid data flag
+        this.INVALID_DATA   = -10000;
+    }
     
     public void ReadData( Element node, DailyStats currDayStats, MonthlyStats currMonthStats, YearlyStats currYearStats )
     {

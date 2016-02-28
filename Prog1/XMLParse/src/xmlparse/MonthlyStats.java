@@ -14,6 +14,16 @@ public class MonthlyStats extends WeatherStats
     public int month;
     public int year;
     
+    public MonthlyStats()
+    {
+        //Call parent constructor
+        super();
+        
+        //Initialize month to 0
+        this.month  = 0;
+        this.year   = 0;
+    }
+    
     @Override
     public void PrintStats()
     {

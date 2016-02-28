@@ -13,6 +13,15 @@ public class YearlyStats extends WeatherStats
 {
     public int year;
     
+    public YearlyStats()
+    {
+        //Call parent constructor
+        super();
+        
+        //Initialize year to zero
+        this.year   = 0;
+    }
+    
     @Override
     public void PrintStats()
     {

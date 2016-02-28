@@ -15,6 +15,17 @@ public class DailyStats extends WeatherStats
     public int month;
     public int year;
     
+    public DailyStats()
+    {
+        //Call parent constructor
+        super();
+        
+        //Initialize day to zero
+        this.day    = 0;
+        this.month  = 0;
+        this.year   = 0;
+    }
+    
     @Override
     public void PrintStats()
     {
