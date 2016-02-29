@@ -14,12 +14,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.ui.RefineryUtilities;
 import java.awt.*;
 import java.awt.event.*;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYDataset;
 
 public class GUItest extends JFrame
 {
@@ -28,16 +31,35 @@ public class GUItest extends JFrame
     public GUItest( String applicationTitle , String chartTitle )
     {
          super(applicationTitle);
-
-         final TimeSeriesCollection dataset1 = createHighTempDataset( XMLParse.dailyAverages, "High Temperatures" );
-         final TimeSeriesCollection dataset2 = createLowTempDataset( XMLParse.dailyAverages, "Low Temperatures" );
+         
          final JFreeChart chart = ChartFactory.createTimeSeriesChart(
-             "Multiple Dataset Demo 1", "Time", "Value", dataset1, true, true, false
+             "Weather Statistics", "Day", "Temperature", null, true, true, false
          );
          this.plot = chart.getXYPlot();
 
+         //Create high and low temperature datasets
+         final TimeSeriesCollection dataset1 = createHighTempDataset( XMLParse.dailyAverages, "High Temperatures" );
+         final TimeSeriesCollection dataset2 = createLowTempDataset( XMLParse.dailyAverages, "Low Temperatures" );
+         
+         //Plot high temperatures
+         this.plot.setDataset( 0, dataset1 );
+         this.plot.setRenderer( 0, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
+                 new StandardXYToolTipGenerator() {
+                    private static final long serialVersionUID = 1L;
+                    public String generateToolTip(XYDataset dataset, int series, int item) {
+                       String toolTipStr = "High Temperature: " + dataset.getYValue(series, item);
+                       return toolTipStr;
+                 }} ));
+         
+         //Plot low temperatures
          this.plot.setDataset( 1, dataset2 );
-         this.plot.setRenderer( 1, new StandardXYItemRenderer());
+         this.plot.setRenderer( 1, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
+                 new StandardXYToolTipGenerator() {
+                    private static final long serialVersionUID = 1L;
+                    public String generateToolTip(XYDataset dataset, int series, int item) {
+                       String toolTipStr = "Low Temperature: " + dataset.getYValue(series, item);
+                       return toolTipStr;
+                 }} ));
 
          final JPanel content = new JPanel(new BorderLayout());
 
