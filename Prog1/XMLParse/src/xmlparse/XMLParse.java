@@ -92,6 +92,9 @@ public abstract class XMLParse
                     currYearStats.year = currReading.year;
                 }
                 
+                //Save which day was just read from
+                currDay = currReading.day;
+                
                 //Add current reading to list of today's readings
                 currDayReadings.add( currReading );
             }
