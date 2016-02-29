@@ -38,11 +38,12 @@ public class GUItest extends JFrame
          this.plot = chart.getXYPlot();
 
          //Create high and low temperature datasets
-         final TimeSeriesCollection dataset1 = createHighTempDataset( XMLParse.dailyAverages, "High Temperatures" );
-         final TimeSeriesCollection dataset2 = createLowTempDataset( XMLParse.dailyAverages, "Low Temperatures" );
+         final TimeSeriesCollection highTempDataset = createHighTempDataset( XMLParse.dailyAverages, "High Temperatures" );
+         final TimeSeriesCollection lowTempDataset = createLowTempDataset( XMLParse.dailyAverages, "Low Temperatures" );
+         final TimeSeriesCollection avgTempDataset = createAvgTempDataset( XMLParse.dailyAverages, "Average Tempeartures" );
          
          //Plot high temperatures
-         this.plot.setDataset( 0, dataset1 );
+         this.plot.setDataset( 0, highTempDataset );
          this.plot.setRenderer( 0, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
                  new StandardXYToolTipGenerator() {
                     private static final long serialVersionUID = 1L;
@@ -52,12 +53,22 @@ public class GUItest extends JFrame
                  }} ));
          
          //Plot low temperatures
-         this.plot.setDataset( 1, dataset2 );
+         this.plot.setDataset( 1, lowTempDataset );
          this.plot.setRenderer( 1, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
                  new StandardXYToolTipGenerator() {
                     private static final long serialVersionUID = 1L;
                     public String generateToolTip(XYDataset dataset, int series, int item) {
                        String toolTipStr = "Low Temperature: " + dataset.getYValue(series, item);
+                       return toolTipStr;
+                 }} ));
+
+         //Plot average temperatures
+         this.plot.setDataset( 2, avgTempDataset );
+         this.plot.setRenderer( 2, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
+                 new StandardXYToolTipGenerator() {
+                    private static final long serialVersionUID = 1L;
+                    public String generateToolTip(XYDataset dataset, int series, int item) {
+                       String toolTipStr = "Average Temperature: " + dataset.getYValue(series, item);
                        return toolTipStr;
                  }} ));
 
@@ -103,15 +114,27 @@ public class GUItest extends JFrame
       
       return new TimeSeriesCollection(series);
    }
+   private TimeSeriesCollection createAvgTempDataset( ArrayList<DailyStats> stats, String name )
+   {
+        TimeSeries series = new TimeSeries( name );
+        
+        for( Integer i = 0; i < stats.size(); i++ )
+        {
+            RegularTimePeriod t = new Day(stats.get(i).day, 1, 2010);
+            series.add( t, stats.get( i ).avgTemp );
+        }
+      
+      return new TimeSeriesCollection(series);
+   }
 
    public static void main( String[ ] args ) 
    {    
        //Parse test file
-       XMLParse.parseFile( "XMLTest.xml" );
+       XMLParse.parseFile( "2010-01.xml" );
 
        GUItest chart = new GUItest(
        "GUI Test" ,
-       "Daily High Temperatures");
+       "Daily Temperatures");
       
        chart.pack( );
        RefineryUtilities.centerFrameOnScreen( chart );
