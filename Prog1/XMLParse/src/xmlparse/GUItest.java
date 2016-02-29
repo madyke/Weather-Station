@@ -18,6 +18,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
@@ -30,55 +31,61 @@ public class GUItest extends JFrame
     
     public GUItest( String applicationTitle , String chartTitle )
     {
-         super(applicationTitle);
-         
-         final JFreeChart chart = ChartFactory.createTimeSeriesChart(
-             "Weather Statistics", "Day", "Temperature", null, true, true, false
-         );
-         this.plot = chart.getXYPlot();
+        super(applicationTitle);
 
-         //Create high and low temperature datasets
-         final TimeSeriesCollection highTempDataset = createHighTempDataset( XMLParse.dailyAverages, "High Temperatures" );
-         final TimeSeriesCollection lowTempDataset = createLowTempDataset( XMLParse.dailyAverages, "Low Temperatures" );
-         final TimeSeriesCollection avgTempDataset = createAvgTempDataset( XMLParse.dailyAverages, "Average Tempeartures" );
-         
-         //Plot high temperatures
-         this.plot.setDataset( 0, highTempDataset );
-         this.plot.setRenderer( 0, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
-                 new StandardXYToolTipGenerator() {
-                    private static final long serialVersionUID = 1L;
-                    public String generateToolTip(XYDataset dataset, int series, int item) {
-                       String toolTipStr = "High Temperature: " + dataset.getYValue(series, item);
-                       return toolTipStr;
-                 }} ));
-         
-         //Plot low temperatures
-         this.plot.setDataset( 1, lowTempDataset );
-         this.plot.setRenderer( 1, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
-                 new StandardXYToolTipGenerator() {
-                    private static final long serialVersionUID = 1L;
-                    public String generateToolTip(XYDataset dataset, int series, int item) {
-                       String toolTipStr = "Low Temperature: " + dataset.getYValue(series, item);
-                       return toolTipStr;
-                 }} ));
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+            "Weather Statistics", "Day", "Temperature", null, true, true, false
+        );
+        this.plot = chart.getXYPlot();
 
-         //Plot average temperatures
-         this.plot.setDataset( 2, avgTempDataset );
-         this.plot.setRenderer( 2, new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
-                 new StandardXYToolTipGenerator() {
-                    private static final long serialVersionUID = 1L;
-                    public String generateToolTip(XYDataset dataset, int series, int item) {
-                       String toolTipStr = "Average Temperature: " + dataset.getYValue(series, item);
-                       return toolTipStr;
-                 }} ));
+        //Create high and low temperature datasets
+        final TimeSeriesCollection highTempDataset = createHighTempDataset( XMLParse.dailyAverages, "High Temperatures" );
+        final TimeSeriesCollection lowTempDataset = createLowTempDataset( XMLParse.dailyAverages, "Low Temperatures" );
+        final TimeSeriesCollection avgTempDataset = createAvgTempDataset( XMLParse.dailyAverages, "Average Tempeartures" );
 
-         final JPanel content = new JPanel(new BorderLayout());
+        //Plot high temperatures
+        XYItemRenderer highTempRenderer = new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
+                new StandardXYToolTipGenerator() {
+                   private static final long serialVersionUID = 1L;
+                   public String generateToolTip(XYDataset dataset, int series, int item) {
+                      String toolTipStr = "High Temperature: " + dataset.getYValue(series, item);
+                      return toolTipStr;
+                }} );
+        highTempRenderer.setSeriesPaint( 0, Color.RED );
+        this.plot.setDataset( 0, highTempDataset );
+        this.plot.setRenderer( 0, highTempRenderer );
 
-         final ChartPanel chartPanel = new ChartPanel(chart);
-         content.add(chartPanel);
+        //Plot low temperatures
+        XYItemRenderer lowTempRenderer = new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
+                new StandardXYToolTipGenerator() {
+                   private static final long serialVersionUID = 1L;
+                   public String generateToolTip(XYDataset dataset, int series, int item) {
+                      String toolTipStr = "Low Temperature: " + dataset.getYValue(series, item);
+                      return toolTipStr;
+                }} );
+        lowTempRenderer.setSeriesPaint( 0, Color.BLUE );
+        this.plot.setDataset( 1, lowTempDataset );
+        this.plot.setRenderer( 1, lowTempRenderer );
 
-         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-         setContentPane(content);
+        //Plot average temperatures
+        XYItemRenderer avgTempRenderer = new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
+                new StandardXYToolTipGenerator() {
+                   private static final long serialVersionUID = 1L;
+                   public String generateToolTip(XYDataset dataset, int series, int item) {
+                      String toolTipStr = "Average Temperature: " + dataset.getYValue(series, item);
+                      return toolTipStr;
+                }} );
+        avgTempRenderer.setSeriesPaint( 0, Color.GREEN );
+        this.plot.setDataset( 2, avgTempDataset );       
+        this.plot.setRenderer( 2, avgTempRenderer );
+
+        JPanel content = new JPanel(new BorderLayout());
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        content.add(chartPanel);
+
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        setContentPane(content);
 
         // another way to exit app when window is closed
         addWindowListener( new WindowAdapter()
