@@ -19,6 +19,7 @@ import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
@@ -44,38 +45,17 @@ public class GUItest extends JFrame
         final TimeSeriesCollection avgTempDataset = createAvgTempDataset( XMLParse.dailyAverages, "Average Tempeartures" );
 
         //Plot high temperatures
-        XYItemRenderer highTempRenderer = new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
-                new StandardXYToolTipGenerator() {
-                   private static final long serialVersionUID = 1L;
-                   public String generateToolTip(XYDataset dataset, int series, int item) {
-                      String toolTipStr = "High Temperature: " + dataset.getYValue(series, item);
-                      return toolTipStr;
-                }} );
-        highTempRenderer.setSeriesPaint( 0, Color.RED );
+        XYLineAndShapeRenderer highTempRenderer = createRenderer( 0, "High Temperature: ", Color.RED );
         this.plot.setDataset( 0, highTempDataset );
         this.plot.setRenderer( 0, highTempRenderer );
 
         //Plot low temperatures
-        XYItemRenderer lowTempRenderer = new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
-                new StandardXYToolTipGenerator() {
-                   private static final long serialVersionUID = 1L;
-                   public String generateToolTip(XYDataset dataset, int series, int item) {
-                      String toolTipStr = "Low Temperature: " + dataset.getYValue(series, item);
-                      return toolTipStr;
-                }} );
-        lowTempRenderer.setSeriesPaint( 0, Color.BLUE );
+        XYItemRenderer lowTempRenderer = createRenderer( 1, "Low Temperature: ", Color.BLUE );
         this.plot.setDataset( 1, lowTempDataset );
         this.plot.setRenderer( 1, lowTempRenderer );
 
         //Plot average temperatures
-        XYItemRenderer avgTempRenderer = new StandardXYItemRenderer( StandardXYItemRenderer.LINES,
-                new StandardXYToolTipGenerator() {
-                   private static final long serialVersionUID = 1L;
-                   public String generateToolTip(XYDataset dataset, int series, int item) {
-                      String toolTipStr = "Average Temperature: " + dataset.getYValue(series, item);
-                      return toolTipStr;
-                }} );
-        avgTempRenderer.setSeriesPaint( 0, Color.GREEN );
+        XYItemRenderer avgTempRenderer = createRenderer( 0, "Average Temperature: ", Color.GREEN );
         this.plot.setDataset( 2, avgTempDataset );       
         this.plot.setRenderer( 2, avgTempRenderer );
 
@@ -95,6 +75,24 @@ public class GUItest extends JFrame
                 System.exit( 0 );
             }
         } );
+    }
+    
+    private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
+   {
+        //Create new renderer
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        
+        //Set renderer properties
+        renderer.setSeriesPaint( 0, col );
+        renderer.setSeriesShape( 0, new Rectangle(-1, -1, 2, 2));
+        renderer.setSeriesToolTipGenerator( 0, new StandardXYToolTipGenerator() {
+                   private static final long serialVersionUID = 1L;
+                   public String generateToolTip(XYDataset dataset, int series, int item) {
+                      String toolTipStr = toolTip + dataset.getYValue(series, item);
+                      return toolTipStr;
+                }} );
+        
+        return renderer;
     }
    
    private TimeSeriesCollection createHighTempDataset( ArrayList<DailyStats> stats, String name )
