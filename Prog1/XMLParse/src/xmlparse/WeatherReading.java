@@ -192,7 +192,7 @@ public class WeatherReading
     
     public void PrintData()
     {
-        System.out.println( this.day + "/" + this.month + "/" + this.year );
+        System.out.println( this.month + "/" + this.day + "/" + this.year );
         System.out.println( this.time );
         System.out.println( this.temperature );
         System.out.println( this.humidity );
