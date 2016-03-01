@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xmlparse;
+package prog1;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,6 +91,9 @@ public abstract class XMLParse
                     currMonthStats.year = currReading.year;
                     currYearStats.year = currReading.year;
                 }
+                
+                //Save which day was just read from
+                currDay = currReading.day;
                 
                 //Add current reading to list of today's readings
                 currDayReadings.add( currReading );
