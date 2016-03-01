@@ -54,7 +54,7 @@ public class WeatherReading
         this.INVALID_DATA   = -10000;
     }
     
-    public void ReadData( Element node, DailyStats currDayStats, MonthlyStats currMonthStats, YearlyStats currYearStats )
+    public void ReadData( Element node, DailyStats currDayStats )
     {
         //Get date from current reading
         String date = node.getChildText( "date" );
