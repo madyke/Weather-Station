@@ -3,7 +3,7 @@
 // Author: John M. Weiss, Ph.D.
 // Class: CSC468 GUI Programming, Spring 2016
 
-package xmlparse;
+package prog1;
 
 // import statements
 import javax.swing.*;

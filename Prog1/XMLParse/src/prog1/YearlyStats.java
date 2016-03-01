@@ -3,31 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xmlparse;
+package prog1;
 
 /**
  *
  * @author 7025592
  */
-public class MonthlyStats extends WeatherStats
+public class YearlyStats extends WeatherStats
 {
-    public int month;
     public int year;
     
-    public MonthlyStats()
+    public YearlyStats()
     {
         //Call parent constructor
         super();
         
-        //Initialize month to 0
-        this.month  = 0;
+        //Initialize year to zero
         this.year   = 0;
     }
     
     @Override
     public void PrintStats()
     {
-        System.out.println( "\nMONTHLY : " + month + "/" + year );
+        System.out.println( "\nYEARLY : " + year );
         super.PrintStats();
     }
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package xmlparse;
+package prog1;
 
 import org.jdom2.Element;
 
