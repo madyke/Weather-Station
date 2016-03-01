@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.ui.RefineryUtilities;
 import java.awt.*;
-import java.awt.event.*;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -76,6 +74,35 @@ public class GraphPanel extends JPanel
                 }} );
         
         return renderer;
+    }
+    
+    private TimeSeriesCollection createDataset( ArrayList<DailyStats> stats )
+    {
+        //Create dataset to hold all the series
+        TimeSeriesCollection seriesCollection = new TimeSeriesCollection();
+        
+        TimeSeries highTemp = new TimeSeries( "High Temp" );
+        TimeSeries avgTemp  = new TimeSeries( "Avgerage Temp" );
+        TimeSeries lowTemp  = new TimeSeries( "Low Temp" );
+        
+        //Loop over each item in stats ArrayList
+        for( DailyStats item : stats )
+        {
+            //Build time object to track time of current entry
+            RegularTimePeriod t = new Day( item.day, item.month, item.year );
+            
+            //Add current entry's fields to series
+            highTemp.add( t, item.highTemp );
+            avgTemp.add( t, item.avgTemp );
+            lowTemp.add( t, item.lowTemp );
+        }
+        
+        //Add series to series collection
+        seriesCollection.addSeries( highTemp );
+        seriesCollection.addSeries( avgTemp );
+        seriesCollection.addSeries( lowTemp );        
+        
+        return seriesCollection;
     }
    
    private TimeSeriesCollection createHighTempDataset( ArrayList<DailyStats> stats, String name )
