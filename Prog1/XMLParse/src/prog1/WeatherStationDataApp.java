@@ -8,8 +8,13 @@ package prog1;
 import java.awt.Dimension;
 
 /**
- *
- * @author cparsons
+ * This class creates the GUI for a weather station application that charts
+ * data that has been collected and formatted into XML files of a certain 
+ * format. It allows the user to graph different data points over different
+ * date ranges. The different data types to choose from are: temperature,
+ * humidity, barometric pressure, wind speed, UV index, and rainfall.
+ * 
+ * @author Charles Parsons
  */
 public class WeatherStationDataApp extends javax.swing.JFrame {
 
@@ -356,11 +361,23 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * This method tells the application to shutdown when the Quit menu option
+     * is chosen from the File menu or when Ctrl + Q is pressed.
+     * 
+     * @param evt event triggered when the quit file menu option is clicked.
+     */
     private void quitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitMenuItemActionPerformed
         //exits the application
         System.exit(0);
     }//GEN-LAST:event_quitMenuItemActionPerformed
 
+    /**
+     * This method changes the date range for the graph to the entire month of
+     * the date entered into the text field.
+     * 
+     * @param evt event triggered when the Monthly radio button is selected.
+     */
     private void monthlyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlyRadioButtonActionPerformed
         int tempYear = dateEntered.getYear();
         //set the date ranges to the beginning and end of the month the entered
@@ -384,6 +401,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 beginDate.setYear(tempYear);
                 
                 endDate.setMonth(1);
+                //must account for leap years
                 if(tempYear % 400 == 0)
                 {
                    endDate.setDay(29); 
@@ -499,19 +517,31 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 endDate.setYear(tempYear);
                 break;
         }
+        //set the visible text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
     }//GEN-LAST:event_monthlyRadioButtonActionPerformed
 
+    /**
+     * This method changes the date range for the graph to only show the data
+     * for the date entered into the begin date text field.
+     * 
+     * @param evt event triggered when the Daily radio button is chosen.
+     */
     private void dailyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyRadioButtonActionPerformed
-        //set the end date to the same as the begin date
+        //set the begin date to the date that was entered by the user
         beginDate.setMonth(dateEntered.getMonth());
         beginDate.setDay(dateEntered.getDay());
         beginDate.setYear(dateEntered.getYear());
+        //set the end date to the date that was entered by the user
         endDate.setMonth(dateEntered.getMonth());
         endDate.setDay(dateEntered.getDay());
         endDate.setYear(dateEntered.getYear());
     }//GEN-LAST:event_dailyRadioButtonActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void chooseGraphComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphComboBoxActionPerformed
         //display graph for Temperature
         
@@ -527,11 +557,22 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
     }//GEN-LAST:event_chooseGraphComboBoxActionPerformed
 
+    /**
+     * This method is triggered when the user has entered a date into the text
+     * field on the GUI. It checks to make sure that a valid date has been
+     * entered, but does not check to see if there is data for this date. It 
+     * then sets the date entered variable to hold this date and has the new
+     * date visible in the text field.
+     * 
+     * @param evt event triggered when a user has entered a date into the text
+     * field on the GUI.
+     */
     private void beginDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginDateTextFieldActionPerformed
         //get the value entered into the beginDateTextField
         String textField = beginDateTextField.getText();
         int m, d, y; //month, day, year
         boolean isValid = false; //flag for date checking
+        
         //parse the textField string to get the month, day, and year components
         //save those components into the beginDate object
         String [] parsed = textField.split("/");
@@ -539,6 +580,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         m = Integer.parseInt(parsed[0]);
         d = Integer.parseInt(parsed[1]);
         y = Integer.parseInt(parsed[2]);
+        
         //checks for valid month and day
         switch(m)
         {
@@ -564,7 +606,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 }
                 break;
             case 2:
-                if(y % 400 != 0 && y % 4 !=0)
+                //check if year is not a leap year
+                if(y % 4 !=0 || (y % 400 != 0 && y % 100 == 0))
                 {
                     if(d > 0 && d <= 28)
                     {
@@ -580,6 +623,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 }
                 break;           
         }
+        //if a valid date has been entered, set the dateEntered variable
         if(isValid == true)
         {
             dateEntered.setMonth(m);
@@ -590,13 +634,21 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         beginDateTextField.setText(dateEntered.toString());
     }//GEN-LAST:event_beginDateTextFieldActionPerformed
 
+    /**
+     * This method sets the date range for the graph to a seven day range with
+     * the date entered as the start date.
+     * 
+     * @param evt event triggered when the Weekly radio button is chosen.
+     */
     private void weeklyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weeklyRadioButtonActionPerformed
         //set the end date to be 7 days after the begin date
         beginDate.setMonth(dateEntered.getMonth());
         beginDate.setDay(dateEntered.getDay());
         beginDate.setYear(dateEntered.getYear());
+        
         switch(beginDate.getMonth())
         {
+            //begin date is in a month with 31 days total, but is not December
             case 1:
             case 3:
             case 5:
@@ -615,6 +667,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 }
                 endDate.setYear(beginDate.getYear());
                 break;
+            //begin date is in a month with 30 days total
             case 4:
             case 6:
             case 9:
@@ -631,6 +684,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 }
                 endDate.setYear(beginDate.getYear());
                 break;
+            //begin date is in February, must account for leap years
             case 2:
                 if((beginDate.getDay() > 22) && ((beginDate.getYear() % 4 != 0)
                         || (beginDate.getYear() % 400 != 0 
@@ -651,6 +705,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 }
                 endDate.setYear(beginDate.getYear());
                 break;
+            //begin date is in December
             case 12:
                 if(beginDate.getDay() > 25)
                 {
@@ -666,19 +721,28 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 }
                 break;    
         }
+        //set the display text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
     }//GEN-LAST:event_weeklyRadioButtonActionPerformed
 
+    /**
+     * This method sets the date range for the graph to the calendar year that
+     * includes the date entered by the user.
+     * 
+     * @param evt event triggered when the Yearly radio button is chosen.
+     */
     private void yearlyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearlyRadioButtonActionPerformed
-        //set begin and end dates to the first and last days of the year
+        //set the begin date to the first day of the year
         beginDate.setMonth(1);
         beginDate.setDay(1);
         beginDate.setYear(dateEntered.getYear());
         
+        //set the end date to the last day of the year
         endDate.setMonth(12);
         endDate.setDay(31);
         endDate.setYear(dateEntered.getYear());
         
+        //set the display text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
     }//GEN-LAST:event_yearlyRadioButtonActionPerformed
 
@@ -759,9 +823,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     private javax.swing.JRadioButton yearlyRadioButton;
     // End of variables declaration//GEN-END:variables
     //Non-generated variable declation
-    private AppDate beginDate;
-    private AppDate endDate;
-    private AppDate dateEntered;
+    private AppDate beginDate; //used by the graph
+    private AppDate endDate; //used by the graph
+    private AppDate dateEntered; //entered by the user in the text field
+    
+    //used to show statistics visually
     private org.jfree.chart.plot.JThermometer meanTempTherm;
     private org.jfree.chart.plot.JThermometer highTempTherm;
     private org.jfree.chart.plot.JThermometer lowTempTherm;
