@@ -73,7 +73,7 @@ public abstract class XMLParse
 
             //Add month from previous file to list of monthly averages
             XMLParse.monthlyAverages.add( currMonthStats );
-        }        
+        }
         
         //Calculate statistics for year that ended with file
         currYearStats.CalculateAverages();
@@ -136,6 +136,7 @@ public abstract class XMLParse
                     currMonthStats.AddToRunningTotals( currReading );
                     currYearStats.AddToRunningTotals( currReading );
 
+                    //Save when current reading was
                     currDayStats.day = currReading.day;
                     currDayStats.month = currReading.month;
                     currDayStats.year = currReading.year;
@@ -151,10 +152,10 @@ public abstract class XMLParse
                 currDayReadings.add( currReading );
             }
             
-            //Add previous day's readings to list of all readings
+            //Add final day's readings to list of all readings
             weatherReadings.add( currDayReadings );
 
-            //Calculate daily averages and add to list of daily averages
+            //Calculate final daily averages and add to list of daily averages
             currDayStats.CalculateAverages();
             dailyAverages.add( currDayStats );
 	}
