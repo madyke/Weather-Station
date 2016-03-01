@@ -710,7 +710,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //</editor-fold>
         
         //Parse file
-        XMLParse.parseFile(  "2010-01.xml" );
+        XMLParse.parseFiles();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

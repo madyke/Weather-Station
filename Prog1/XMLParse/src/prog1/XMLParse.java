@@ -6,9 +6,11 @@
 package prog1;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -24,6 +26,23 @@ public abstract class XMLParse
     public static ArrayList<MonthlyStats> monthlyAverages = new ArrayList<>();
     public static ArrayList<DailyStats> dailyAverages = new ArrayList<>();
     public static ArrayList<ArrayList<WeatherReading>> weatherReadings = new ArrayList<>();
+    
+    private static File[] fileList;
+    
+    public static void parseFiles()
+    {
+        //Get current working directory
+        String dir = getWorkingDirectory();
+        
+        //Get list of files matching required format in current working dir
+        getFileList( dir );
+        
+        
+        //DEBUG
+        
+        
+        parseFile( "2010-01.xml" );
+    }
     
     public static void parseFile( String fileName )
     {
@@ -123,5 +142,33 @@ public abstract class XMLParse
         {
             System.out.println(jdomex.getMessage());
         }
+    }
+    
+    private static void getFileList( String dirPath )
+    {
+        //Regular Expression to match with weather data file names
+        Pattern p = Pattern.compile( "\\d{4}-\\d{2}\\.xml" );
+        
+        //Try to open given directory, make sure it is a directory
+        File dir = new File( dirPath );
+        if( !dir.isDirectory() )
+        {
+            throw new IllegalArgumentException( "ERROR: " + dir + " is not a valid directory." );
+        }
+        
+        fileList = dir.listFiles(new FileFilter(){
+        @Override
+        public boolean accept(File file) {
+            return p.matcher(file.getName()).matches();
+        }
+    });
+       
+        
+    }
+    
+    private static String getWorkingDirectory()
+    {
+        //Return directory string from where application launched
+        return System.getProperty("user.dir");
     }
 }
