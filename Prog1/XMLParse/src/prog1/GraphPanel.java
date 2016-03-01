@@ -56,7 +56,7 @@ public class GraphPanel extends JPanel
         this.plot.setRenderer( 2, avgTempRenderer );
          
         ChartPanel chartPanel = new ChartPanel( chart );
-        //chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+        chartPanel.setPreferredSize( new java.awt.Dimension( 1 , 1 ) );
         add( chartPanel );
     }
 
