@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="radioButtonGroup">
     </Component>
@@ -67,11 +67,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="graphDisplayPanel" min="-2" max="-2" attributes="0"/>
-                  <Component id="dialDisplayPanel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="graphDisplayPanel" max="32767" attributes="0"/>
+                  <Component id="dialDisplayPanel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -164,9 +164,9 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
                       <Component id="statisticsSectionLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="meanTempLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="meanTempValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -197,7 +197,7 @@
                           <Component id="rainfallValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="dialDisplayPanel" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -208,6 +208,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="graphDisplayPanel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new GraphPanel(&quot;Title&quot;)"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -380,19 +383,18 @@
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="dialDisplayPanel">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new java.awt.Dimension(500, 100)" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="meanThermDisplayPanel = new javax.swing.JPanel();&#xa;meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));&#xa;meanTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));&#xa;meanTempTherm.setUnits(1);&#xa;meanThermDisplayPanel.add(meanTempTherm);&#xa;highThermDisplayPanel = new javax.swing.JPanel();&#xa;highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));&#xa;highTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));&#xa;highTempTherm.setUnits(1);&#xa;highThermDisplayPanel.add(highTempTherm);&#xa;lowThermDisplayPanel = new javax.swing.JPanel();&#xa;lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));&#xa;lowTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));&#xa;lowTempTherm.setUnits(1);&#xa;lowThermDisplayPanel.add(lowTempTherm);&#xa;//dialDisplayPanel.add(highTempTherm);&#xa;//dialDisplayPanel.add(lowTempTherm);&#xa;//dialDisplayPanel.add(rainfallTherm);&#xa;//dialDisplayPanel.add(thermPanel);&#xa;dialDisplayPanel.add(meanThermDisplayPanel);&#xa;dialDisplayPanel.add(highThermDisplayPanel);&#xa;dialDisplayPanel.add(lowThermDisplayPanel);"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private javax.swing.JPanel meanThermDisplayPanel;&#xa;private javax.swing.JPanel highThermDisplayPanel;&#xa;private javax.swing.JPanel lowThermDisplayPanel;"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dialDisplayPanel.setPreferredSize(new java.awt.Dimension(500, 100));"/>
+      </AuxValues>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="379" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
     </Container>
   </SubComponents>
 </Form>
