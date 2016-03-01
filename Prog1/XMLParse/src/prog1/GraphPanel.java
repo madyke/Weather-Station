@@ -26,12 +26,8 @@ public class GraphPanel extends JPanel
            true,true,false);
          
         ChartPanel chartPanel = new ChartPanel( lineChart );
-        chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+        //chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
         add( chartPanel );
-        
-        System.out.println( "SHOW GRAPH" );
-        chartPanel.setVisible( true );
-        this.setVisible( true ); 
    }
 
    private DefaultCategoryDataset createDataset( ArrayList<DailyStats> stats )
@@ -52,9 +48,7 @@ public class GraphPanel extends JPanel
        XMLParse.parseFile( "XMLTest.xml" );
 
        GraphPanel chart = new GraphPanel( "Daily High Temperatures" );
-      
-       //chart.pack( );
-       //RefineryUtilities.centerFrameOnScreen( chart );
+       
        chart.setVisible( true );
    }
 }
