@@ -17,8 +17,9 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 /**
- *
- * @author 7025592
+ * This class is used to parse the XML data files using the jdom object.
+ * 
+ * @author Matt Dyke
  */
 public abstract class XMLParse
 {
@@ -29,6 +30,14 @@ public abstract class XMLParse
     
     private static File[] fileList;
     
+    /**
+     * This method parses the individual XML data files within a specified
+     * directory. The data is stored in the weatherReadings array list. The
+     * statistics for that data are stored in the corresponding daily, weekly,
+     * monthly, and yearly array lists.
+     * 
+     * @param dir The directory that the XML data files are in.
+     */
     public static void parseFiles( String dir )
     {        
         //Get list of files matching required format in current working dir
@@ -79,6 +88,15 @@ public abstract class XMLParse
         XMLParse.yearlyAverages.add( currYearStats );
     }
     
+    /**
+     * This method does the actual parsing of an individual XML data file.
+     * 
+     * @param xmlFile The XML data file to be parsed.
+     * @param currMonthStats Statistics for the month that pertains to the data
+     * file.
+     * @param currYearStats Statistics for the year that pertains to the data
+     * file.
+     */
     private static void parseFile( File xmlFile, MonthlyStats currMonthStats, YearlyStats currYearStats )
     {
         //Set-up for XML parsing
@@ -166,6 +184,13 @@ public abstract class XMLParse
         }
     }
     
+    /**
+     * This method gets the list of the XML data files using a regular 
+     * expression that represents the file naming scheme for those XML files.
+     * 
+     * @param dirPath The path to the directory in which to search for the XML
+     * files.
+     */
     private static void getFileList( String dirPath )
     {
         //Regular Expression to match with weather data file names
@@ -191,6 +216,13 @@ public abstract class XMLParse
         );        
     }
     
+    /**
+     * This method gets the path to the directory in which the application was
+     * run.
+     * 
+     * @return The path to the directory in which the application was
+     * run.
+     */
     public static String getWorkingDirectory()
     {
         //Return directory string from where application launched
