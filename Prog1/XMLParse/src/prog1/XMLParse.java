@@ -29,11 +29,8 @@ public abstract class XMLParse
     
     private static File[] fileList;
     
-    public static void parseInitialFiles()
-    {
-        //Get current working directory
-        String dir = getWorkingDirectory();
-        
+    public static void parseFiles( String dir )
+    {        
         //Get list of files matching required format in current working dir
         getFileList( dir );
         
@@ -194,7 +191,7 @@ public abstract class XMLParse
         );        
     }
     
-    private static String getWorkingDirectory()
+    public static String getWorkingDirectory()
     {
         //Return directory string from where application launched
         return System.getProperty("user.dir");

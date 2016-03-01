@@ -6,6 +6,10 @@
 package prog1;
 
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 
 /**
  * This class creates the GUI for a weather station application that charts
@@ -62,9 +66,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         radioButtonGroup = new javax.swing.ButtonGroup();
+        fileChooser = new javax.swing.JFileChooser();
         chooseDateRangeLabel = new javax.swing.JLabel();
         beginDateTextField = new javax.swing.JTextField();
         beginDateLabel = new javax.swing.JLabel();
@@ -93,9 +99,14 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         graphDisplayPanel = new GraphPanel("Title");
         appMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        openMenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         quitMenuItem = new javax.swing.JMenuItem();
         aboutMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
+
+        fileChooser.setDialogTitle("Directory Chooser");
+        fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(681, 469));
@@ -103,8 +114,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         chooseDateRangeLabel.setText("Choose Date:");
 
         beginDateTextField.setText(beginDate.toString());
-        beginDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        beginDateTextField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 beginDateTextFieldActionPerformed(evt);
             }
         });
@@ -114,39 +127,49 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         radioButtonGroup.add(dailyRadioButton);
         dailyRadioButton.setText("Daily");
         dailyRadioButton.setSelected(true);
-        dailyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        dailyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dailyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(weeklyRadioButton);
         weeklyRadioButton.setText("Weekly");
-        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 weeklyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(monthlyRadioButton);
         monthlyRadioButton.setText("Monthly");
-        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 monthlyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(yearlyRadioButton);
         yearlyRadioButton.setText("Yearly");
-        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 yearlyRadioButtonActionPerformed(evt);
             }
         });
 
         chooseGraphComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Humidity", "Barometric Pressure", "Wind Speed", "UV Index", "Rainfall" }));
-        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 chooseGraphComboBoxActionPerformed(evt);
             }
         });
@@ -181,7 +204,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         rainfallValueLabel.setText("0");
 
         dialDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
-        dialDisplayPanel.setLayout(new java.awt.GridLayout());
+        dialDisplayPanel.setLayout(new java.awt.GridLayout(1, 0));
         jScrollPane1.setViewportView(dialDisplayPanel);
         meanThermDisplayPanel = new javax.swing.JPanel();
         meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
@@ -212,7 +235,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //dialDisplayPanel.add(lowThermDisplayPanel);
         //dialDisplayPanel.add(rainfallDisplayPanel);
 
-        graphDisplayPanel.setLayout(new java.awt.GridLayout());
+        graphDisplayPanel.setLayout(new java.awt.GridLayout(1, 0));
         jScrollPane2.setViewportView(graphDisplayPanel);
         graphDisplayPanel.validate();
 
@@ -220,10 +243,24 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         fileMenu.setText("File");
 
+        openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        openMenuItem.setText("Open");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                openMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(openMenuItem);
+        fileMenu.add(jSeparator1);
+
         quitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         quitMenuItem.setText("Quit");
-        quitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        quitMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 quitMenuItemActionPerformed(evt);
             }
         });
@@ -746,6 +783,18 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         beginDateTextField.setText(dateEntered.toString());
     }//GEN-LAST:event_yearlyRadioButtonActionPerformed
 
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_openMenuItemActionPerformed
+    {//GEN-HEADEREND:event_openMenuItemActionPerformed
+        int returnVal = fileChooser.showOpenDialog(this);   //How chooser closed
+        
+        //If user selected a directory
+        if (returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            //Call XMLParse to parse data files in selected directory
+            XMLParse.parseFiles( fileChooser.getSelectedFile().getAbsolutePath() );
+        }
+    }//GEN-LAST:event_openMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -774,7 +823,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //</editor-fold>
         
         //Parse file
-        XMLParse.parseInitialFiles();
+        XMLParse.parseFiles( XMLParse.getWorkingDirectory() );
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -799,12 +848,14 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     private javax.swing.JPanel highThermDisplayPanel;
     private javax.swing.JPanel lowThermDisplayPanel;
     private javax.swing.JPanel rainfallDisplayPanel;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPanel graphDisplayPanel;
     private javax.swing.JLabel highTempLabel;
     private javax.swing.JLabel highTempValueLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lowTempLabel;
     private javax.swing.JLabel lowTempValueLabel;
     private javax.swing.JLabel meanTempLabel;
@@ -812,6 +863,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     private javax.swing.JLabel meanWindSpeedLabel;
     private javax.swing.JLabel meanWindSpeedValueLabel;
     private javax.swing.JRadioButton monthlyRadioButton;
+    private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JLabel prevailingWindDirectionLabel;
     private javax.swing.JLabel prevailingWindDirectionValueLabel;
     private javax.swing.JMenuItem quitMenuItem;
