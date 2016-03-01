@@ -58,7 +58,6 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     private void initComponents() {
 
         radioButtonGroup = new javax.swing.ButtonGroup();
-        graphDisplayPanel = new GraphPanel("Title");
         chooseDateRangeLabel = new javax.swing.JLabel();
         beginDateTextField = new javax.swing.JTextField();
         beginDateLabel = new javax.swing.JLabel();
@@ -81,7 +80,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         meanWindSpeedValueLabel = new javax.swing.JLabel();
         prevailingWindDirectionValueLabel = new javax.swing.JLabel();
         rainfallValueLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         dialDisplayPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        graphDisplayPanel = new GraphPanel("Title");
         appMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         quitMenuItem = new javax.swing.JMenuItem();
@@ -89,17 +91,6 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout graphDisplayPanelLayout = new javax.swing.GroupLayout(graphDisplayPanel);
-        graphDisplayPanel.setLayout(graphDisplayPanelLayout);
-        graphDisplayPanelLayout.setHorizontalGroup(
-            graphDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 364, Short.MAX_VALUE)
-        );
-        graphDisplayPanelLayout.setVerticalGroup(
-            graphDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 217, Short.MAX_VALUE)
-        );
 
         chooseDateRangeLabel.setText("Choose Date:");
 
@@ -181,8 +172,40 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         rainfallValueLabel.setText("0");
 
-        dialDisplayPanel.setMaximumSize(new java.awt.Dimension(500, 100));
-        dialDisplayPanel.setPreferredSize(new java.awt.Dimension(500, 100));
+        dialDisplayPanel.setMaximumSize(new java.awt.Dimension(700, 250));
+        dialDisplayPanel.setPreferredSize(new java.awt.Dimension(700, 250));
+        jScrollPane1.setViewportView(dialDisplayPanel);
+        meanThermDisplayPanel = new javax.swing.JPanel();
+        meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));
+        meanTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));
+        meanTempTherm.setUnits(1);
+        meanThermDisplayPanel.add(meanTempTherm);
+        highThermDisplayPanel = new javax.swing.JPanel();
+        highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));
+        highTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));
+        highTempTherm.setUnits(1);
+        highThermDisplayPanel.add(highTempTherm);
+        lowThermDisplayPanel = new javax.swing.JPanel();
+        lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));
+        lowTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));
+        lowTempTherm.setUnits(1);
+        lowThermDisplayPanel.add(lowTempTherm);
+        rainfallDisplayPanel = new javax.swing.JPanel();
+        rainfallDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));
+        rainfallTherm.setPreferredSize(new java.awt.Dimension(200, 250));
+        rainfallTherm.setUnits(0);
+        rainfallDisplayPanel.add(rainfallTherm);
+        //dialDisplayPanel.add(highTempTherm);
+        //dialDisplayPanel.add(lowTempTherm);
+        //dialDisplayPanel.add(rainfallTherm);
+        //dialDisplayPanel.add(thermPanel);
+        dialDisplayPanel.add(meanThermDisplayPanel);
+        dialDisplayPanel.add(highThermDisplayPanel);
+        dialDisplayPanel.add(lowThermDisplayPanel);
+        dialDisplayPanel.add(rainfallDisplayPanel);
+
+        jScrollPane2.setViewportView(graphDisplayPanel);
+        graphDisplayPanel.validate();
 
         appMenuBar.setName("appMenuBar"); // NOI18N
 
@@ -214,10 +237,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(graphDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dialDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +298,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(chooseGraphComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
@@ -284,7 +307,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(beginDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(beginDateLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(dailyRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(weeklyRadioButton)
@@ -294,11 +317,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                         .addComponent(yearlyRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(allDatesButton))
-                    .addComponent(graphDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 66, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(statisticsSectionLabel)
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -324,33 +346,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rainfallLabel)
                             .addComponent(rainfallValueLabel)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(dialDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)))
         );
-
-        meanThermDisplayPanel = new javax.swing.JPanel();
-        meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));
-        meanTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));
-        meanTempTherm.setUnits(1);
-        meanThermDisplayPanel.add(meanTempTherm);
-        highThermDisplayPanel = new javax.swing.JPanel();
-        highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));
-        highTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));
-        highTempTherm.setUnits(1);
-        highThermDisplayPanel.add(highTempTherm);
-        lowThermDisplayPanel = new javax.swing.JPanel();
-        lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(200, 250));
-        lowTempTherm.setPreferredSize(new java.awt.Dimension(200, 250));
-        lowTempTherm.setUnits(1);
-        lowThermDisplayPanel.add(lowTempTherm);
-        //dialDisplayPanel.add(highTempTherm);
-        //dialDisplayPanel.add(lowTempTherm);
-        //dialDisplayPanel.add(rainfallTherm);
-        //dialDisplayPanel.add(thermPanel);
-        dialDisplayPanel.add(meanThermDisplayPanel);
-        dialDisplayPanel.add(highThermDisplayPanel);
-        dialDisplayPanel.add(lowThermDisplayPanel);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -731,10 +728,13 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     private javax.swing.JPanel meanThermDisplayPanel;
     private javax.swing.JPanel highThermDisplayPanel;
     private javax.swing.JPanel lowThermDisplayPanel;
+    private javax.swing.JPanel rainfallDisplayPanel;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPanel graphDisplayPanel;
     private javax.swing.JLabel highTempLabel;
     private javax.swing.JLabel highTempValueLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lowTempLabel;
     private javax.swing.JLabel lowTempValueLabel;
     private javax.swing.JLabel meanTempLabel;
