@@ -66,7 +66,7 @@ public class WeatherReading
         int secondSlash = date.lastIndexOf( "/" );
         this.month = Integer.parseInt( date.substring( 0, firstSlash ) );
         this.day = Integer.parseInt( date.substring( firstSlash + 1, secondSlash ) );
-        this.year = Integer.parseInt( date.substring( secondSlash + 1 ) );       
+        this.year = Integer.parseInt( date.substring( secondSlash + 1 ) ) + 2000;       
 
         //Attempt to read in time value
         try
