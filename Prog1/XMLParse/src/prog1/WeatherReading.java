@@ -10,8 +10,10 @@ import org.jdom2.Element;
 
 
 /**
+ * This is a class that is used to hold the weather data read in from an XML
+ * file.
  *
- * @author 7025592
+ * @author Matt Dyke
  */
 public class WeatherReading
 {
@@ -32,6 +34,10 @@ public class WeatherReading
     
     private int INVALID_DATA;
     
+    /**
+     * The constructor for a WeatherReading object used to hold data.
+     * Initializes all data fields in case of missing values.
+     */
     public WeatherReading()
     {
         //Initialize all variables to 0
@@ -54,6 +60,14 @@ public class WeatherReading
         this.INVALID_DATA   = -10000;
     }
     
+    /**
+     * This method reads in the data from an intermediate node that was read
+     * into from an XML data file. If there are missing data elements then
+     * empty values are used.
+     * 
+     * @param node An XML element tree from a data file.
+     * @param currDayStats Stores the daily statistics.
+     */
     public void ReadData( Element node, DailyStats currDayStats )
     {
         //Get date from current reading
@@ -190,6 +204,9 @@ public class WeatherReading
         }
     }
     
+    /**
+     * This method outputs the data held in a WeatherReading object.
+     */
     public void PrintData()
     {
         System.out.println( this.month + "/" + this.day + "/" + this.year );

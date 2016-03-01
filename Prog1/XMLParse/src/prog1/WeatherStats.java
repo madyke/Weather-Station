@@ -6,8 +6,12 @@
 package prog1;
 
 /**
+ * The base class for all derived (monthly, daily, yearly) statistics classes.
+ * Used to track average temp, humidity, barometric pressure, wind speed, UV
+ * index, and rain fall, as well as max high temperature, min low temperature,
+ * max wind gust, and prevailing wind direction.
  *
- * @author 7025592
+ * @author Matt Dyke
  */
 public class WeatherStats
 {
@@ -42,6 +46,10 @@ public class WeatherStats
     private int numRainFallReadings;
     private int INVALID_DATA = -10000;
     
+    /**
+     * Constructor for the WeatherStats object. Sets all initial values in the
+     * data fields.
+     */
     public WeatherStats()
     {
         //Initialize variables
@@ -78,6 +86,12 @@ public class WeatherStats
         this.INVALID_DATA           = -10000;
     }
     
+    /**
+     * This method adds the data from an individual reading to the running 
+     * totals used for calculating averages and tracking max/min values.
+     * 
+     * @param currReading An individual data reading from the weather station.
+     */
     public void AddToRunningTotals( WeatherReading currReading )
     {
         //If temperature not invalid
@@ -166,6 +180,9 @@ public class WeatherStats
         }
     }
     
+    /**
+     * This method calculates the averages for different data.
+     */
     public void CalculateAverages()
     {
         //Check for division by zero
@@ -217,6 +234,10 @@ public class WeatherStats
         }
     }
     
+    /**
+     * This method outputs the statistics that have been calculated for a given
+     * dataset.
+     */
     public void PrintStats()
     {
         System.out.println( "High Temp : " + this.highTemp );

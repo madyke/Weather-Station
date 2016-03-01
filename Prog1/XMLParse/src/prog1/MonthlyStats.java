@@ -6,14 +6,18 @@
 package prog1;
 
 /**
- *
- * @author 7025592
+ * A class to track monthly statistics of weather data.
+ * 
+ * @author Matt Dyke
  */
 public class MonthlyStats extends WeatherStats
 {
     public int month;
     public int year;
     
+    /**
+     * Constructor of MonthlyStats object.
+     */
     public MonthlyStats()
     {
         //Call parent constructor
@@ -24,6 +28,9 @@ public class MonthlyStats extends WeatherStats
         this.year   = 0;
     }
     
+    /**
+     * This method prints the monthly statistics for a dataset.
+     */
     @Override
     public void PrintStats()
     {

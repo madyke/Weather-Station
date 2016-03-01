@@ -8,7 +8,7 @@ package prog1;
 /**
  * A date class for use in Java applications.
  * 
- * @author Charles Parsons
+ * @author Charles Parsons, based in part from MyDate.java by Dr. John Weiss
  */
 public class AppDate {
     
@@ -158,10 +158,10 @@ public class AppDate {
     }
     
     /**
-     * This method sets the value of the month private variable in an AppDate
+     * This method sets the value of the year private variable in an AppDate
      * object.
      * 
-     * @param m The month value for the date.
+     * @param y The year value for the date.
      */
     public void setYear(int y)
     {

@@ -6,8 +6,9 @@
 package prog1;
 
 /**
- *
- * @author 7025592
+ * A class to track daily statistics of weather data.
+ * 
+ * @author Matt Dyke
  */
 public class DailyStats extends WeatherStats
 {
@@ -15,6 +16,9 @@ public class DailyStats extends WeatherStats
     public int month;
     public int year;
     
+    /**
+     * Constructor of DailyStats object.
+     */
     public DailyStats()
     {
         //Call parent constructor
@@ -26,6 +30,9 @@ public class DailyStats extends WeatherStats
         this.year   = 0;
     }
     
+    /**
+     * This method prints the daily statistics for a dataset.
+     */
     @Override
     public void PrintStats()
     {
