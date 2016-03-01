@@ -29,7 +29,7 @@ public abstract class XMLParse
     
     private static File[] fileList;
     
-    public static void parseFiles()
+    public static void parseInitialFiles()
     {
         //Get current working directory
         String dir = getWorkingDirectory();
@@ -38,13 +38,16 @@ public abstract class XMLParse
         getFileList( dir );
         
         
-        //DEBUG
-        
+        //Loop over each file in the file list
+        for( File currFile : fileList )
+        {
+            System.out.println( currFile );
+        }
         
         parseFile( "2010-01.xml" );
     }
     
-    public static void parseFile( String fileName )
+    private static void parseFile( String fileName )
     {
         //Set-up for XML parsing
         SAXBuilder builder = new SAXBuilder();
@@ -156,14 +159,17 @@ public abstract class XMLParse
             throw new IllegalArgumentException( "ERROR: " + dir + " is not a valid directory." );
         }
         
-        fileList = dir.listFiles(new FileFilter(){
-        @Override
-        public boolean accept(File file) {
-            return p.matcher(file.getName()).matches();
-        }
-    });
-       
-        
+        //Get list of files that match regular expression
+        fileList = dir.listFiles(
+            new FileFilter()
+            {
+                @Override
+                public boolean accept(File file)
+                {
+                    return p.matcher(file.getName()).matches();
+                }
+            }
+        );        
     }
     
     private static String getWorkingDirectory()
