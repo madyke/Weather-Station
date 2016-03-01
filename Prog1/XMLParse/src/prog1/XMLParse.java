@@ -37,21 +37,18 @@ public abstract class XMLParse
         //Get list of files matching required format in current working dir
         getFileList( dir );
         
-        
         //Loop over each file in the file list
         for( File currFile : fileList )
         {
-            System.out.println( currFile );
+            //Parse XML data from current file
+            parseFile( currFile );
         }
-        
-        parseFile( "2010-01.xml" );
     }
     
-    private static void parseFile( String fileName )
+    private static void parseFile( File xmlFile )
     {
         //Set-up for XML parsing
         SAXBuilder builder = new SAXBuilder();
-        File xmlFile = new File( fileName );
         
         //Initialize classes for current year and month
         YearlyStats currYearStats = new YearlyStats();
