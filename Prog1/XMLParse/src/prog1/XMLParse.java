@@ -37,22 +37,55 @@ public abstract class XMLParse
         //Get list of files matching required format in current working dir
         getFileList( dir );
         
+        int loopYear = Integer.parseInt( fileList[0].getName().substring(  0, 4 ));
+        YearlyStats currYearStats = new YearlyStats();
+
         //Loop over each file in the file list
         for( File currFile : fileList )
         {
+            //Get year for current data file
+            int currYear = Integer.parseInt( currFile.getName().substring( 0, 4 ) );
+            
+            //If current data file is for a new year
+            if( currYear != loopYear )
+            {
+                //Calculate statistics for year that just finished
+                currYearStats.CalculateAverages();
+                
+                //Add year that just finished to list of yearly averages
+                XMLParse.yearlyAverages.add( currYearStats );
+                
+                //Get new yearly stats object
+                currYearStats = new YearlyStats();
+                
+                //Save new year
+                loopYear = currYear;
+            }
+            
+            //Initialize classes for current year and month
+            MonthlyStats currMonthStats = new MonthlyStats();
+            
             //Parse XML data from current file
-            parseFile( currFile );
+            parseFile( currFile, currMonthStats, currYearStats );
+            
+            //Calculate statistics for month from current file
+            currMonthStats.CalculateAverages();
+
+            //Add month from previous file to list of monthly averages
+            XMLParse.monthlyAverages.add( currMonthStats );
         }
+        
+        //Calculate statistics for year that ended with file
+        currYearStats.CalculateAverages();
+
+        //Add year that just finished to list of yearly averages
+        XMLParse.yearlyAverages.add( currYearStats );
     }
     
-    private static void parseFile( File xmlFile )
+    private static void parseFile( File xmlFile, MonthlyStats currMonthStats, YearlyStats currYearStats )
     {
         //Set-up for XML parsing
         SAXBuilder builder = new SAXBuilder();
-        
-        //Initialize classes for current year and month
-        YearlyStats currYearStats = new YearlyStats();
-        MonthlyStats currMonthStats = new MonthlyStats();
         
         try
         {
@@ -78,7 +111,7 @@ public abstract class XMLParse
                 WeatherReading currReading = new WeatherReading();
 
                 //Read in data
-                currReading.ReadData( node, currDayStats , currMonthStats, currYearStats );
+                currReading.ReadData( node, currDayStats );
                 
                 //If current reading from a new day (and not first reading)
                 if( currReading.day != currDay && i != 0 )
@@ -103,6 +136,7 @@ public abstract class XMLParse
                     currMonthStats.AddToRunningTotals( currReading );
                     currYearStats.AddToRunningTotals( currReading );
 
+                    //Save when current reading was
                     currDayStats.day = currReading.day;
                     currDayStats.month = currReading.month;
                     currDayStats.year = currReading.year;
@@ -118,21 +152,12 @@ public abstract class XMLParse
                 currDayReadings.add( currReading );
             }
             
-            //Add previous day's readings to list of all readings
+            //Add final day's readings to list of all readings
             weatherReadings.add( currDayReadings );
 
-            //Calculate daily averages and add to list of daily averages
+            //Calculate final daily averages and add to list of daily averages
             currDayStats.CalculateAverages();
             dailyAverages.add( currDayStats );
-            
-            //Calculate monthly stats and add to list of monthly averages
-            currMonthStats.CalculateAverages();
-            monthlyAverages.add( currMonthStats );
-            
-            //Calculate yearly stats and add to list of yearly averages
-            currYearStats.CalculateAverages();
-            yearlyAverages.add( currYearStats );
-            
 	}
         catch (IOException io)
         {
