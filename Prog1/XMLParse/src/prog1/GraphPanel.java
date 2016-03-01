@@ -84,7 +84,7 @@ public class GraphPanel extends JPanel
         
         for( Integer i = 0; i < stats.size(); i++ )
         {
-            RegularTimePeriod t = new Day(stats.get(i).day, 1, 2010);
+            RegularTimePeriod t = new Day(stats.get(i).day, stats.get(i).month, stats.get(i).year);
             series.add( t, stats.get( i ).highTemp );
         }
       
@@ -96,7 +96,7 @@ public class GraphPanel extends JPanel
         
         for( Integer i = 0; i < stats.size(); i++ )
         {
-            RegularTimePeriod t = new Day(stats.get(i).day, 1, 2010);
+            RegularTimePeriod t = new Day(stats.get(i).day, stats.get(i).month, stats.get(i).year);
             series.add( t, stats.get( i ).lowTemp );
         }
       
@@ -108,7 +108,7 @@ public class GraphPanel extends JPanel
         
         for( Integer i = 0; i < stats.size(); i++ )
         {
-            RegularTimePeriod t = new Day(stats.get(i).day, 1, 2010);
+            RegularTimePeriod t = new Day(stats.get(i).day, stats.get(i).month, stats.get(i).year);
             series.add( t, stats.get( i ).avgTemp );
         }
       
