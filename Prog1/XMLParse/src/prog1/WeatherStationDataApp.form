@@ -44,6 +44,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[681, 469]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="appMenuBar"/>
@@ -93,7 +96,7 @@
                               <Component id="yearlyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -128,7 +131,7 @@
                               <Component id="meanTempValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -366,7 +369,7 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="dialDisplayPanel">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="meanThermDisplayPanel = new javax.swing.JPanel();&#xa;meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;meanTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;meanTempTherm.setUnits(1);&#xa;meanThermDisplayPanel.add(meanTempTherm);&#xa;highThermDisplayPanel = new javax.swing.JPanel();&#xa;highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;highTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;highTempTherm.setUnits(1);&#xa;highThermDisplayPanel.add(highTempTherm);&#xa;lowThermDisplayPanel = new javax.swing.JPanel();&#xa;lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;lowTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;lowTempTherm.setUnits(1);&#xa;lowThermDisplayPanel.add(lowTempTherm);&#xa;rainfallDisplayPanel = new javax.swing.JPanel();&#xa;rainfallDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;rainfallTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;rainfallTherm.setUnits(0);&#xa;rainfallDisplayPanel.add(rainfallTherm);&#xa;//dialDisplayPanel.add(highTempTherm);&#xa;//dialDisplayPanel.add(lowTempTherm);&#xa;//dialDisplayPanel.add(rainfallTherm);&#xa;//dialDisplayPanel.add(thermPanel);&#xa;//dialDisplayPanel.add(meanThermDisplayPanel);&#xa;//dialDisplayPanel.add(highThermDisplayPanel);&#xa;//dialDisplayPanel.add(lowThermDisplayPanel);&#xa;//dialDisplayPanel.add(rainfallDisplayPanel);&#xa;dialDisplayPanel.add(meanTempTherm);&#xa;dialDisplayPanel.add(highTempTherm);&#xa;dialDisplayPanel.add(lowTempTherm);&#xa;dialDisplayPanel.add(rainfallTherm);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="meanThermDisplayPanel = new javax.swing.JPanel();&#xa;meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;meanTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;meanTempTherm.setUnits(1);&#xa;meanThermDisplayPanel.add(meanTempTherm);&#xa;highThermDisplayPanel = new javax.swing.JPanel();&#xa;highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;highTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;highTempTherm.setUnits(1);&#xa;highThermDisplayPanel.add(highTempTherm);&#xa;lowThermDisplayPanel = new javax.swing.JPanel();&#xa;lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;lowTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;lowTempTherm.setUnits(1);&#xa;lowThermDisplayPanel.add(lowTempTherm);&#xa;rainfallDisplayPanel = new javax.swing.JPanel();&#xa;rainfallDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;rainfallTherm.setPreferredSize(new java.awt.Dimension(1, 1));&#xa;rainfallTherm.setUnits(0);&#xa;rainfallDisplayPanel.add(rainfallTherm);&#xa;dialDisplayPanel.add(highTempTherm);&#xa;dialDisplayPanel.add(meanTempTherm);&#xa;dialDisplayPanel.add(lowTempTherm);&#xa;dialDisplayPanel.add(rainfallTherm);&#xa;//dialDisplayPanel.add(meanThermDisplayPanel);&#xa;//dialDisplayPanel.add(highThermDisplayPanel);&#xa;//dialDisplayPanel.add(lowThermDisplayPanel);&#xa;//dialDisplayPanel.add(rainfallDisplayPanel);"/>
             <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private javax.swing.JPanel meanThermDisplayPanel;&#xa;private javax.swing.JPanel highThermDisplayPanel;&#xa;private javax.swing.JPanel lowThermDisplayPanel;&#xa;private javax.swing.JPanel rainfallDisplayPanel;"/>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="dialDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));"/>
           </AuxValues>

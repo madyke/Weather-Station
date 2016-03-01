@@ -5,6 +5,8 @@
  */
 package prog1;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author cparsons
@@ -45,7 +47,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         rainfallTherm.setValue(25);
         
         initComponents();
-        
+
     }
 
     /**
@@ -91,6 +93,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(681, 469));
 
         chooseDateRangeLabel.setText("Choose Date:");
 
@@ -195,18 +198,14 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         rainfallTherm.setPreferredSize(new java.awt.Dimension(1, 1));
         rainfallTherm.setUnits(0);
         rainfallDisplayPanel.add(rainfallTherm);
-        //dialDisplayPanel.add(highTempTherm);
-        //dialDisplayPanel.add(lowTempTherm);
-        //dialDisplayPanel.add(rainfallTherm);
-        //dialDisplayPanel.add(thermPanel);
+        dialDisplayPanel.add(highTempTherm);
+        dialDisplayPanel.add(meanTempTherm);
+        dialDisplayPanel.add(lowTempTherm);
+        dialDisplayPanel.add(rainfallTherm);
         //dialDisplayPanel.add(meanThermDisplayPanel);
         //dialDisplayPanel.add(highThermDisplayPanel);
         //dialDisplayPanel.add(lowThermDisplayPanel);
         //dialDisplayPanel.add(rainfallDisplayPanel);
-        dialDisplayPanel.add(meanTempTherm);
-        dialDisplayPanel.add(highTempTherm);
-        dialDisplayPanel.add(lowTempTherm);
-        dialDisplayPanel.add(rainfallTherm);
 
         graphDisplayPanel.setLayout(new java.awt.GridLayout());
         jScrollPane2.setViewportView(graphDisplayPanel);
@@ -263,7 +262,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                                 .addComponent(weeklyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(monthlyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(yearlyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGap(117, 117, 117))
+                        .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -290,7 +289,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                                 .addComponent(meanTempLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(meanTempValueLabel)))
-                        .addGap(70, 70, 70))))
+                        .addGap(10, 10, 10))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dailyRadioButton, monthlyRadioButton, weeklyRadioButton, yearlyRadioButton});
