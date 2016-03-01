@@ -1,6 +1,6 @@
 // ImageDisplay.java
 // Java Swing program to display an image in a JLabel.
-// Author: John M. Weiss, Ph.D.
+// Author: John M. Weiss, Ph.D., adapted by Matt Dyke.
 // Class: CSC468 GUI Programming, Spring 2016
 
 package prog1;
@@ -22,10 +22,21 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
+/**
+ * This class creates a panel for displaying a graph in a swing GUI.
+ * 
+ * @author Dr. John Weiss & Matt Dyke
+ */
 public class GraphPanel extends JPanel
 {
-    private XYPlot plot;
+    private XYPlot plot; //the graph
     
+    /**
+     * The constructor for the graph panel. It takes a title string for use in 
+     * rendering the graph.
+     * 
+     * @param chartTitle A string the is the title of the graph.
+     */
     public GraphPanel( String chartTitle )
     {
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
@@ -58,6 +69,14 @@ public class GraphPanel extends JPanel
         add( chartPanel );
     }
 
+    /**
+     * Creates the renderer for the graph.
+     * 
+     * @param seriesIndex
+     * @param toolTip
+     * @param col
+     * @return renderer The renderer for the graph.
+     */
     private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
    {
         //Create new renderer
@@ -105,6 +124,14 @@ public class GraphPanel extends JPanel
         return seriesCollection;
     }
    
+    /**
+     * This method puts together the time series needed to create the graph. 
+     * This time series is of high temperatures.
+     * 
+     * @param stats The daily statistics.
+     * @param name The name of the time series.
+     * @return The time series of high temperatures used to create the graph.
+     */
    private TimeSeriesCollection createHighTempDataset( ArrayList<DailyStats> stats, String name )
    {
         TimeSeries series = new TimeSeries( name );
@@ -117,6 +144,15 @@ public class GraphPanel extends JPanel
       
       return new TimeSeriesCollection(series);
    }
+   
+   /**
+    * This method puts together the time series needed to create the graph. 
+     * This time series is of low temperatures.
+     * 
+    * @param stats The daily statistics.
+    * @param name The name of the time series.
+    * @return The time series of low temperatures used to create the graph.
+    */
    private TimeSeriesCollection createLowTempDataset( ArrayList<DailyStats> stats, String name )
    {
         TimeSeries series = new TimeSeries( name );
@@ -129,6 +165,15 @@ public class GraphPanel extends JPanel
       
       return new TimeSeriesCollection(series);
    }
+   
+   /**
+    * This method puts together the time series needed to create the graph. 
+     * This time series is of average temperatures.
+     * 
+    * @param stats The daily statistics.
+    * @param name The name of the time series.
+    * @return The time series of average temperatures used to create the graph.
+    */
    private TimeSeriesCollection createAvgTempDataset( ArrayList<DailyStats> stats, String name )
    {
         TimeSeries series = new TimeSeries( name );

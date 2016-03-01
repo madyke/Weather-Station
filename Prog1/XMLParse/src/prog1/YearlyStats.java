@@ -6,13 +6,17 @@
 package prog1;
 
 /**
- *
- * @author 7025592
+ * A class to track yearly statistics of weather data.
+ * 
+ * @author Matt Dyke
  */
 public class YearlyStats extends WeatherStats
 {
     public int year;
     
+    /**
+     * Constructor of YearlyStats object.
+     */
     public YearlyStats()
     {
         //Call parent constructor
@@ -22,6 +26,9 @@ public class YearlyStats extends WeatherStats
         this.year   = 0;
     }
     
+    /**
+     * This method prints the yearly statistics for a dataset.
+     */
     @Override
     public void PrintStats()
     {
