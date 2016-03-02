@@ -688,7 +688,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                   ((Integer)wStats.lowTempHour).toString() + ":" +
                    ((Integer)wStats.lowTempMinute).toString());
         meanWindSpeedValueLabel.setText(((Double)wStats.avgWindSpeed).toString());
-        prevailingWindDirectionValueLabel.setText(((Double)wStats.windDirection).toString());
+        prevailingWindDirectionValueLabel.setText(wStats.prevailingWindDirection);
         rainfallValueLabel.setText(((Double)wStats.totalRainFall).toString());
     }
     
