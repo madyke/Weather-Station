@@ -825,142 +825,72 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
     public void MonthlyButtonAction(java.awt.event.ActionEvent evt)
     {
-        int tempYear = dateEntered.getYear();
-        //set the date ranges to the beginning and end of the month the entered
-        //date is in.
+        //set the begin date to the date that was entered by the user
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
+        beginDate.setYear(dateEntered.getYear());
+        
+        endDate.setMonth(beginDate.getMonth() + 1);
+        endDate.setDay(beginDate.getDay() + 30);
+        endDate.setYear(beginDate.getYear());
+        
         switch(dateEntered.getMonth())
         {
             //January
             case 1:
-                beginDate.setMonth(1);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 31 );
                 
-                endDate.setMonth(1);
-                endDate.setDay(31);
-                endDate.setYear(tempYear);
+                if( endDate.getDay() > 28 )
+                {
+                    endDate.setDay( endDate.getDay() - 28 );
+                    endDate.setMonth( 3 );
+                }
                 break;
             //February
             case 2:
-                beginDate.setMonth(2);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(1);
-                //must account for leap years
-                if(tempYear % 400 == 0)
-                {
-                   endDate.setDay(29); 
-                }
-                else if((tempYear % 4 == 0) && (tempYear % 100 != 0))
-                {
-                    endDate.setDay(29);
-                }
-                else 
-                {
-                    endDate.setDay(28);
-                }
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 28 );
                 break;
             //March
             case 3:
-                beginDate.setMonth(3);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(3);
-                endDate.setDay(31);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 31 );
                 break;
             //April
             case 4:
-                beginDate.setMonth(4);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(4);
-                endDate.setDay(30);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 30 );
                 break;
             //May
             case 5:
-                beginDate.setMonth(5);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(5);
-                endDate.setDay(31);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 31 );
                 break;
             //June
             case 6:
-                beginDate.setMonth(6);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(6);
-                endDate.setDay(30);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 30 );
                 break;
             //July
             case 7:
-                beginDate.setMonth(7);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(7);
-                endDate.setDay(31);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 31 );
                 break;
             //August
             case 8:
-                beginDate.setMonth(8);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(8);
-                endDate.setDay(31);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 31 );
                 break;
             //September
             case 9:
-                beginDate.setMonth(9);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(9);
-                endDate.setDay(30);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 30 );
                 break;
             //October
             case 10:
-                beginDate.setMonth(10);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(10);
-                endDate.setDay(31);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 31 );
                 break;
             //November
             case 11:
-                beginDate.setMonth(11);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(11);
-                endDate.setDay(30);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 30 );
                 break;
             //December
             case 12:
-                beginDate.setMonth(12);
-                beginDate.setDay(1);
-                beginDate.setYear(tempYear);
-                
-                endDate.setMonth(12);
-                endDate.setDay(31);
-                endDate.setYear(tempYear);
+                endDate.setDay( endDate.getDay() - 31 );
+                endDate.setMonth( 1 );
+                endDate.setYear( endDate.getYear() + 1 );
                 break;
         }
         //set the visible text in the text field to the date entered by the user
@@ -970,6 +900,16 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         MonthlyStats mStats = StatisticsUpdate.getMonthlyStats(beginDate.getMonth(), 
                 beginDate.getYear());
         updateStatsShown(mStats);
+        
+        //Create datasets
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        
+        //Clear old graph
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
     public void YearlyButtonAction(java.awt.event.ActionEvent evt)
