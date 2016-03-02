@@ -616,6 +616,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         {
             //Clear existing graph and render pressure graph
             ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderPressure();
         }
 
         //display graph for Wind Speed
@@ -623,6 +624,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         {
             //Clear existing graph and render wind speed graph
             ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderWindSpeed();
         }
 
         //display graph for UV Index
@@ -630,6 +632,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         {
             //Clear existing graph and render UV index graph
             ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderUVIndex();
         }
 
         //display graph for Rainfall
@@ -637,6 +640,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         {
             //Clear existing graph and render rainfall graph
             ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderRainfall();
         }
     }//GEN-LAST:event_chooseGraphComboBoxActionPerformed
 

@@ -90,6 +90,30 @@ public class GraphPanel extends JPanel
         this.plot.setRenderer( 4, pressureRenderer );
     }
 
+    public void RenderWindSpeed()
+    {
+        //Plot pressure
+        XYLineAndShapeRenderer windSpeedRenderer = createRenderer(0, "Wind Speed: ", Color.RED );
+        this.plot.setDataset( 5, datasets.get( 5 ) );
+        this.plot.setRenderer( 5, windSpeedRenderer );
+    }
+
+    public void RenderUVIndex()
+    {
+        //Plot pressure
+        XYLineAndShapeRenderer uvIndexRenderer = createRenderer(0, "UV Index: ", Color.RED );
+        this.plot.setDataset( 6, datasets.get( 6 ) );
+        this.plot.setRenderer( 6, uvIndexRenderer );
+    }
+
+    public void RenderRainfall()
+    {
+        //Plot pressure
+        XYLineAndShapeRenderer rainfallRenderer = createRenderer(0, "Rainfall: ", Color.RED );
+        this.plot.setDataset( 7, datasets.get( 7 ) );
+        this.plot.setRenderer( 7, rainfallRenderer );
+    }
+
     private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
    {
         //Create new renderer
