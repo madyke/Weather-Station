@@ -160,8 +160,6 @@ public abstract class StatisticsUpdate {
         //calculate average statistics for the date range
         wStats.CalculateAverages();
         
-        wStats.PrintStats();
-        
         return wStats;
     }
 }
