@@ -411,6 +411,419 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      * @param evt event triggered when the Monthly radio button is selected.
      */
     private void monthlyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlyRadioButtonActionPerformed
+        MonthlyButtonAction( evt );
+    }//GEN-LAST:event_monthlyRadioButtonActionPerformed
+
+    /**
+     * This method changes the date range for the graph to only show the data
+     * for the date entered into the begin date text field.
+     * 
+     * @param evt event triggered when the Daily radio button is chosen.
+     */
+    private void dailyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyRadioButtonActionPerformed
+        DailyButtonAction( evt );
+    }//GEN-LAST:event_dailyRadioButtonActionPerformed
+
+    /**
+     * 
+     * @param evt 
+     */
+    private void chooseGraphComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphComboBoxActionPerformed
+        //Get string telling which item was selected
+        String selection = chooseGraphComboBox.getSelectedItem().toString();
+        
+        //display graph for Temperature
+        if( selection == "Temperature" )
+        {
+            //Clear existing graph and render temperature graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
+        }
+                
+        //display graph for Humidity
+        if( selection == "Humidity" )
+        {
+            //Clear existing graph and render humidity graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderHumidity();
+        }
+
+        //display graph for Barometric Pressure
+        if( selection == "Barometric Pressure" )
+        {
+            //Clear existing graph and render pressure graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderPressure();
+        }
+
+        //display graph for Wind Speed
+        if( selection == "Wind Speed" )
+        {
+            //Clear existing graph and render wind speed graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderWindSpeed();
+        }
+
+        //display graph for UV Index
+        if( selection == "UV Index" )
+        {
+            //Clear existing graph and render UV index graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderUVIndex();
+        }
+
+        //display graph for Rainfall
+        if( selection == "Rainfall" )
+        {
+            //Clear existing graph and render rainfall graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderRainfall();
+        }
+    }//GEN-LAST:event_chooseGraphComboBoxActionPerformed
+
+    /**
+     * This method is triggered when the user has entered a date into the text
+     * field on the GUI. It checks to make sure that a valid date has been
+     * entered, but does not check to see if there is data for this date. It 
+     * then sets the date entered variable to hold this date and has the new
+     * date visible in the text field.
+     * 
+     * @param evt event triggered when a user has entered a date into the text
+     * field on the GUI.
+     */
+    private void beginDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginDateTextFieldActionPerformed
+        //get the value entered into the beginDateTextField
+        String textField = beginDateTextField.getText();
+        int m, d, y; //month, day, year
+        boolean isValid = false; //flag for date checking
+        
+        //parse the textField string to get the month, day, and year components
+        //save those components into the beginDate object
+        String [] parsed = textField.split("/");
+        //store the values in a temporary variable while error checking
+        m = Integer.parseInt(parsed[0]);
+        d = Integer.parseInt(parsed[1]);
+        y = Integer.parseInt(parsed[2]);
+        
+        //checks for valid month and day
+        switch(m)
+        {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                if(d > 0 && d <= 31)
+                {
+                    isValid = true; 
+                }
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if(d > 0 && d <= 30)
+                {
+                    isValid = true;
+                }
+                break;
+            case 2:
+                //check if year is not a leap year
+                if(y % 4 !=0 || (y % 400 != 0 && y % 100 == 0))
+                {
+                    if(d > 0 && d <= 28)
+                    {
+                        isValid = true;
+                    }
+                }
+                else
+                {
+                    if(d > 0 && d <=29)
+                    {
+                        isValid = true;
+                    }
+                }
+                break;           
+        }
+        //if a valid date has been entered, set the dateEntered variable
+        if(isValid == true)
+        {
+            dateEntered.setMonth(m);
+            dateEntered.setDay(d);
+            dateEntered.setYear(y);
+        }
+        //display the date that was entered by the user
+        beginDateTextField.setText(dateEntered.toString());
+        
+        //If daily radio button is selected
+        if( dailyRadioButton.isSelected() )
+        {
+            //Call same code as if daily radio button was pushed
+            DailyButtonAction( null );
+        }
+        //If weekly radio button is selected
+        if( weeklyRadioButton.isSelected() )
+        {
+            //Call same code as if weekly radio button was pushed
+            WeeklyButtonAction( null );
+        }
+        //If montly radio button is selected
+        if( monthlyRadioButton.isSelected() )
+        {
+            //Call same code as if monthly radio button was pushed
+            MonthlyButtonAction( null );
+        }
+        //If yearly radio button is selected
+        if( yearlyRadioButton.isSelected() )
+        {
+            //Call same code as if yearly radio button was pushed
+            YearlyButtonAction( null );
+        }
+        //If all dates radio button is selected
+        if( allDatesButton.isSelected() )
+        {
+            //Call same code as if all dates radio button was pushed
+            AllDatesButtonAction( null );
+        }
+    }//GEN-LAST:event_beginDateTextFieldActionPerformed
+
+    /**
+     * This method sets the date range for the graph to a seven day range with
+     * the date entered as the start date.
+     * 
+     * @param evt event triggered when the Weekly radio button is chosen.
+     */
+    private void weeklyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weeklyRadioButtonActionPerformed
+
+        WeeklyButtonAction( evt );
+    }//GEN-LAST:event_weeklyRadioButtonActionPerformed
+
+    /**
+     * This method sets the date range for the graph to the calendar year that
+     * includes the date entered by the user.
+     * 
+     * @param evt event triggered when the Yearly radio button is chosen.
+     */
+    private void yearlyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearlyRadioButtonActionPerformed
+        YearlyButtonAction( evt );
+    }//GEN-LAST:event_yearlyRadioButtonActionPerformed
+
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_openMenuItemActionPerformed
+    {//GEN-HEADEREND:event_openMenuItemActionPerformed
+        int returnVal = fileChooser.showOpenDialog(this);   //How chooser closed
+        
+        //If user selected a directory
+        if (returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            //Call XMLParse to parse data files in selected directory
+            XMLParse.parseFiles( fileChooser.getSelectedFile().getAbsolutePath() );
+        }
+    }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void chooseGraphComboBoxItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_chooseGraphComboBoxItemStateChanged
+    {//GEN-HEADEREND:event_chooseGraphComboBoxItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
+
+    /**
+     * This method updates the statistics show in the labels and thermometers
+     * when given set of statistics.
+     * 
+     * @param wStats The statistics to be displayed.
+     */
+    private void updateStatsShown(WeatherStats wStats)
+    {
+        if(wStats.highTemp < -100)
+        {
+            resetStatLabels();
+            return;
+        }
+        //update the thermometers
+        meanTempTherm.setValue(wStats.avgTemp);
+        highTempTherm.setValue(wStats.highTemp);
+        lowTempTherm.setValue(wStats.lowTemp);
+        rainfallTherm.setValue(wStats.totalRainFall);
+        
+        //update the labels
+        meanTempValueLabel.setText(((Double)wStats.avgTemp).toString());
+        highTempValueLabel.setText(((Double)wStats.highTemp).toString());
+        lowTempValueLabel.setText(((Double)wStats.lowTemp).toString());
+        meanWindSpeedValueLabel.setText(((Double)wStats.avgWindSpeed).toString());
+        prevailingWindDirectionValueLabel.setText(((Double)wStats.windDirection).toString());
+        rainfallValueLabel.setText(((Double)wStats.totalRainFall).toString());
+    }
+    
+    
+    /**
+     * This method resets the statistics labels to their initial values.
+     * It is used when there is no statistics data for the desired date range.
+     */
+    public void resetStatLabels()
+    {
+        meanTempValueLabel.setText("N/A");
+        highTempValueLabel.setText("N/A");
+        lowTempValueLabel.setText("N/A");
+        meanWindSpeedValueLabel.setText("N/A");
+        prevailingWindDirectionValueLabel.setText("N/A");
+        rainfallValueLabel.setText("N/A");
+    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+        //Parse file
+        XMLParse.parseFiles( XMLParse.getWorkingDirectory() );
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new WeatherStationDataApp().setVisible(true);
+            }
+        });
+    }
+    
+    public void DailyButtonAction(java.awt.event.ActionEvent evt)
+    {
+        //set the begin date to the date that was entered by the user
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
+        beginDate.setYear(dateEntered.getYear());
+        //set the end date to the date that was entered by the user
+        endDate.setMonth(dateEntered.getMonth());
+        endDate.setDay(dateEntered.getDay());
+        endDate.setYear(dateEntered.getYear());
+        
+                //update the statistics shown on the GUI
+        DailyStats dStats = StatisticsUpdate.getDailyStats(beginDate.getMonth(), 
+                beginDate.getDay(), beginDate.getYear());
+        updateStatsShown(dStats);
+    }
+    
+    public void WeeklyButtonAction(java.awt.event.ActionEvent evt)
+    {
+        //set the end date to be 7 days after the begin date
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
+        beginDate.setYear(dateEntered.getYear());
+        
+        switch(beginDate.getMonth())
+        {
+            //begin date is in a month with 31 days total, but is not December
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+                if(beginDate.getDay() > 25)
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (31 - beginDate.getDay()));
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                }
+                endDate.setYear(beginDate.getYear());
+                break;
+            //begin date is in a month with 30 days total
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if(beginDate.getDay() > 24)
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (30 - beginDate.getDay()));
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                }
+                endDate.setYear(beginDate.getYear());
+                break;
+            //begin date is in February, must account for leap years
+            case 2:
+                if((beginDate.getDay() > 22) && ((beginDate.getYear() % 4 != 0)
+                        || (beginDate.getYear() % 400 != 0 
+                        &&  beginDate.getYear() % 100 == 0)))
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (28 - beginDate.getDay()));
+                }
+                else if(beginDate.getDay() > 23)
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (29 - beginDate.getDay()));
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                }
+                endDate.setYear(beginDate.getYear());
+                break;
+            //begin date is in December
+            case 12:
+                if(beginDate.getDay() > 25)
+                {
+                    endDate.setMonth(1);
+                    endDate.setDay(6 - (31 - beginDate.getDay()));
+                    endDate.setYear(beginDate.getYear() + 1);
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                    endDate.setYear(beginDate.getYear());
+                }
+                break;    
+        }
+        //set the display text in the text field to the date entered by the user
+        beginDateTextField.setText(dateEntered.toString());
+        
+        //update weekly stats
+        WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
+        updateStatsShown(wStats);
+        
+        //Create datasets
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        
+        //Rebuild graph        
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
+    }
+
+    public void MonthlyButtonAction(java.awt.event.ActionEvent evt)
+    {
         int tempYear = dateEntered.getYear();
         //set the date ranges to the beginning and end of the month the entered
         //date is in.
@@ -556,182 +969,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         MonthlyStats mStats = StatisticsUpdate.getMonthlyStats(beginDate.getMonth(), 
                 beginDate.getYear());
         updateStatsShown(mStats);
-    }//GEN-LAST:event_monthlyRadioButtonActionPerformed
-
-    /**
-     * This method changes the date range for the graph to only show the data
-     * for the date entered into the begin date text field.
-     * 
-     * @param evt event triggered when the Daily radio button is chosen.
-     */
-    private void dailyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyRadioButtonActionPerformed
-        //set the begin date to the date that was entered by the user
-        beginDate.setMonth(dateEntered.getMonth());
-        beginDate.setDay(dateEntered.getDay());
-        beginDate.setYear(dateEntered.getYear());
-        //set the end date to the date that was entered by the user
-        endDate.setMonth(dateEntered.getMonth());
-        endDate.setDay(dateEntered.getDay());
-        endDate.setYear(dateEntered.getYear());
-        
-                //update the statistics shown on the GUI
-        DailyStats dStats = StatisticsUpdate.getDailyStats(beginDate.getMonth(), 
-                beginDate.getDay(), beginDate.getYear());
-        updateStatsShown(dStats);
-    }//GEN-LAST:event_dailyRadioButtonActionPerformed
-
-    /**
-     * 
-     * @param evt 
-     */
-    private void chooseGraphComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphComboBoxActionPerformed
-        //Get string telling which item was selected
-        String selection = chooseGraphComboBox.getSelectedItem().toString();
-        
-        //display graph for Temperature
-        if( selection == "Temperature" )
-        {
-            //Clear existing graph and render temperature graph
-            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-            ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
-        }
-                
-        //display graph for Humidity
-        if( selection == "Humidity" )
-        {
-            //Clear existing graph and render humidity graph
-            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-            ((GraphPanel)(graphDisplayPanel)).RenderHumidity();
-        }
-
-        //display graph for Barometric Pressure
-        if( selection == "Barometric Pressure" )
-        {
-            //Clear existing graph and render pressure graph
-            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-            ((GraphPanel)(graphDisplayPanel)).RenderPressure();
-        }
-
-        //display graph for Wind Speed
-        if( selection == "Wind Speed" )
-        {
-            //Clear existing graph and render wind speed graph
-            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-            ((GraphPanel)(graphDisplayPanel)).RenderWindSpeed();
-        }
-
-        //display graph for UV Index
-        if( selection == "UV Index" )
-        {
-            //Clear existing graph and render UV index graph
-            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-            ((GraphPanel)(graphDisplayPanel)).RenderUVIndex();
-        }
-
-        //display graph for Rainfall
-        if( selection == "Rainfall" )
-        {
-            //Clear existing graph and render rainfall graph
-            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-            ((GraphPanel)(graphDisplayPanel)).RenderRainfall();
-        }
-    }//GEN-LAST:event_chooseGraphComboBoxActionPerformed
-
-    /**
-     * This method is triggered when the user has entered a date into the text
-     * field on the GUI. It checks to make sure that a valid date has been
-     * entered, but does not check to see if there is data for this date. It 
-     * then sets the date entered variable to hold this date and has the new
-     * date visible in the text field.
-     * 
-     * @param evt event triggered when a user has entered a date into the text
-     * field on the GUI.
-     */
-    private void beginDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginDateTextFieldActionPerformed
-        //get the value entered into the beginDateTextField
-        String textField = beginDateTextField.getText();
-        int m, d, y; //month, day, year
-        boolean isValid = false; //flag for date checking
-        
-        //parse the textField string to get the month, day, and year components
-        //save those components into the beginDate object
-        String [] parsed = textField.split("/");
-        //store the values in a temporary variable while error checking
-        m = Integer.parseInt(parsed[0]);
-        d = Integer.parseInt(parsed[1]);
-        y = Integer.parseInt(parsed[2]);
-        
-        //checks for valid month and day
-        switch(m)
-        {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if(d > 0 && d <= 31)
-                {
-                    isValid = true; 
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if(d > 0 && d <= 30)
-                {
-                    isValid = true;
-                }
-                break;
-            case 2:
-                //check if year is not a leap year
-                if(y % 4 !=0 || (y % 400 != 0 && y % 100 == 0))
-                {
-                    if(d > 0 && d <= 28)
-                    {
-                        isValid = true;
-                    }
-                }
-                else
-                {
-                    if(d > 0 && d <=29)
-                    {
-                        isValid = true;
-                    }
-                }
-                break;           
-        }
-        //if a valid date has been entered, set the dateEntered variable
-        if(isValid == true)
-        {
-            dateEntered.setMonth(m);
-            dateEntered.setDay(d);
-            dateEntered.setYear(y);
-        }
-        //display the date that was entered by the user
-        beginDateTextField.setText(dateEntered.toString());
-    }//GEN-LAST:event_beginDateTextFieldActionPerformed
-
-    /**
-     * This method sets the date range for the graph to a seven day range with
-     * the date entered as the start date.
-     * 
-     * @param evt event triggered when the Weekly radio button is chosen.
-     */
-    private void weeklyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weeklyRadioButtonActionPerformed
-
-        WeeklyButtonAction( evt );
-    }//GEN-LAST:event_weeklyRadioButtonActionPerformed
-
-    /**
-     * This method sets the date range for the graph to the calendar year that
-     * includes the date entered by the user.
-     * 
-     * @param evt event triggered when the Yearly radio button is chosen.
-     */
-    private void yearlyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearlyRadioButtonActionPerformed
+    }
+    
+    public void YearlyButtonAction(java.awt.event.ActionEvent evt)
+    {
         //set the begin date to the first day of the year
         beginDate.setMonth(1);
         beginDate.setDay(1);
@@ -748,205 +989,15 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //update the statistics shown on the GUI
         YearlyStats yStats = StatisticsUpdate.getYearlyStats(beginDate.getYear());
         updateStatsShown(yStats);
-        
-        
-        
-    }//GEN-LAST:event_yearlyRadioButtonActionPerformed
-
-    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_openMenuItemActionPerformed
-    {//GEN-HEADEREND:event_openMenuItemActionPerformed
-        int returnVal = fileChooser.showOpenDialog(this);   //How chooser closed
-        
-        //If user selected a directory
-        if (returnVal == JFileChooser.APPROVE_OPTION)
-        {
-            //Call XMLParse to parse data files in selected directory
-            XMLParse.parseFiles( fileChooser.getSelectedFile().getAbsolutePath() );
-        }
-    }//GEN-LAST:event_openMenuItemActionPerformed
-
-    private void chooseGraphComboBoxItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_chooseGraphComboBoxItemStateChanged
-    {//GEN-HEADEREND:event_chooseGraphComboBoxItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
-
-    /**
-     * This method updates the statistics show in the labels and thermometers
-     * when given set of statistics.
-     * 
-     * @param wStats The statistics to be displayed.
-     */
-    private void updateStatsShown(WeatherStats wStats)
-    {
-        if(wStats.highTemp < -100)
-        {
-            resetStatLabels();
-            return;
-        }
-        //update the thermometers
-        meanTempTherm.setValue(wStats.avgTemp);
-        highTempTherm.setValue(wStats.highTemp);
-        lowTempTherm.setValue(wStats.lowTemp);
-        rainfallTherm.setValue(wStats.totalRainFall);
-        
-        //update the labels
-        meanTempValueLabel.setText(((Double)wStats.avgTemp).toString());
-        highTempValueLabel.setText(((Double)wStats.highTemp).toString());
-        lowTempValueLabel.setText(((Double)wStats.lowTemp).toString());
-        meanWindSpeedValueLabel.setText(((Double)wStats.avgWindSpeed).toString());
-        prevailingWindDirectionValueLabel.setText(((Double)wStats.windDirection).toString());
-        rainfallValueLabel.setText(((Double)wStats.totalRainFall).toString());
     }
     
-    
-    /**
-     * This method resets the statistics labels to their initial values.
-     * It is used when there is no statistics data for the desired date range.
-     */
-    public void resetStatLabels()
+    public void AllDatesButtonAction(java.awt.event.ActionEvent evt)
     {
-        meanTempValueLabel.setText("N/A");
-        highTempValueLabel.setText("N/A");
-        lowTempValueLabel.setText("N/A");
-        meanWindSpeedValueLabel.setText("N/A");
-        prevailingWindDirectionValueLabel.setText("N/A");
-        rainfallValueLabel.setText("N/A");
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WeatherStationDataApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
         
-        //Parse file
-        XMLParse.parseFiles( XMLParse.getWorkingDirectory() );
+    }
+    
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WeatherStationDataApp().setVisible(true);
-            }
-        });
-    }
     
-    public void WeeklyButtonAction(java.awt.event.ActionEvent evt)
-    {
-        //set the end date to be 7 days after the begin date
-        beginDate.setMonth(dateEntered.getMonth());
-        beginDate.setDay(dateEntered.getDay());
-        beginDate.setYear(dateEntered.getYear());
-        
-        switch(beginDate.getMonth())
-        {
-            //begin date is in a month with 31 days total, but is not December
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-                if(beginDate.getDay() > 25)
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (31 - beginDate.getDay()));
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                }
-                endDate.setYear(beginDate.getYear());
-                break;
-            //begin date is in a month with 30 days total
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if(beginDate.getDay() > 24)
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (30 - beginDate.getDay()));
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                }
-                endDate.setYear(beginDate.getYear());
-                break;
-            //begin date is in February, must account for leap years
-            case 2:
-                if((beginDate.getDay() > 22) && ((beginDate.getYear() % 4 != 0)
-                        || (beginDate.getYear() % 400 != 0 
-                        &&  beginDate.getYear() % 100 == 0)))
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (28 - beginDate.getDay()));
-                }
-                else if(beginDate.getDay() > 23)
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (29 - beginDate.getDay()));
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                }
-                endDate.setYear(beginDate.getYear());
-                break;
-            //begin date is in December
-            case 12:
-                if(beginDate.getDay() > 25)
-                {
-                    endDate.setMonth(1);
-                    endDate.setDay(6 - (31 - beginDate.getDay()));
-                    endDate.setYear(beginDate.getYear() + 1);
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                    endDate.setYear(beginDate.getYear());
-                }
-                break;    
-        }
-        //set the display text in the text field to the date entered by the user
-        beginDateTextField.setText(dateEntered.toString());
-        
-        //update weekly stats
-        WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
-        updateStatsShown(wStats);
-        
-        //Create datasets
-        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
-        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
-        
-        //Rebuild graph        
-        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-        ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu aboutMenu;
