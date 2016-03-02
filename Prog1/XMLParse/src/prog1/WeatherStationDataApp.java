@@ -568,7 +568,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //display graph for Temperature
         
         //display graph for Humidity
-        
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
         //display graph for Barometric Pressure
         
         //display graph for Wind Speed

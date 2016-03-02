@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.ui.RefineryUtilities;
 import java.awt.*;
-import java.awt.event.*;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -32,6 +30,7 @@ import org.jfree.data.xy.XYDataset;
 public class GraphPanel extends JPanel
 {
     private XYPlot plot; //the graph
+    private ArrayList<TimeSeriesCollection> datasets = new ArrayList<>();
     
     /**
      * The constructor for the graph panel. It takes a title string for use in 
@@ -41,31 +40,33 @@ public class GraphPanel extends JPanel
      */
     public GraphPanel( String chartTitle )
     {
+        //Create datasets
+        createDailyDatasets( XMLParse.dailyAverages );
+        
+        //Build empty chart
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
             "Weather Statistics", "Day", "Temperature", null, true, true, false
         );
+        
+        //Get chart plot object
         this.plot = chart.getXYPlot();
-
-        //Create high and low temperature datasets
-        final TimeSeriesCollection highTempDataset = createHighTempDataset( XMLParse.dailyAverages, "High Temperatures" );
-        final TimeSeriesCollection lowTempDataset = createLowTempDataset( XMLParse.dailyAverages, "Low Temperatures" );
-        final TimeSeriesCollection avgTempDataset = createAvgTempDataset( XMLParse.dailyAverages, "Average Tempeartures" );
+        this.plot.setNoDataMessage( "No data for this period." );
 
         //Plot high temperatures
-        XYLineAndShapeRenderer highTempRenderer = createRenderer( 0, "High Temperature: ", Color.RED );
-        this.plot.setDataset( 0, highTempDataset );
+        XYLineAndShapeRenderer highTempRenderer = createRenderer(0, "High Temperature: ", Color.RED );
+        this.plot.setDataset( 0, datasets.get( 0 ) );
         this.plot.setRenderer( 0, highTempRenderer );
-
-        //Plot low temperatures
-        XYItemRenderer lowTempRenderer = createRenderer( 1, "Low Temperature: ", Color.BLUE );
-        this.plot.setDataset( 1, lowTempDataset );
-        this.plot.setRenderer( 1, lowTempRenderer );
 
         //Plot average temperatures
         XYItemRenderer avgTempRenderer = createRenderer( 0, "Average Temperature: ", Color.GREEN );
-        this.plot.setDataset( 2, avgTempDataset );       
-        this.plot.setRenderer( 2, avgTempRenderer );
+        this.plot.setDataset( 1, datasets.get( 1 ) );       
+        this.plot.setRenderer( 1, avgTempRenderer );
          
+        //Plot low temperatures
+        XYItemRenderer lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
+        this.plot.setDataset( 2, datasets.get( 2 ) );
+        this.plot.setRenderer( 2, lowTempRenderer );
+
         ChartPanel chartPanel = new ChartPanel( chart );
         chartPanel.setPreferredSize( new java.awt.Dimension( 1 , 1 ) );
         add( chartPanel );
@@ -85,9 +86,9 @@ public class GraphPanel extends JPanel
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         
         //Set renderer properties
-        renderer.setSeriesPaint( 0, col );
-        renderer.setSeriesShape( 0, new Rectangle(-1, -1, 2, 2));
-        renderer.setSeriesToolTipGenerator( 0, new StandardXYToolTipGenerator() {
+        renderer.setSeriesPaint( seriesIndex, col );
+        //renderer.setSeriesShape( seriesIndex, new Rectangle(-1, -1, 2, 2));
+        renderer.setSeriesToolTipGenerator( seriesIndex, new StandardXYToolTipGenerator() {
                    private static final long serialVersionUID = 1L;
                    public String generateToolTip(XYDataset dataset, int series, int item) {
                       String toolTipStr = toolTip + dataset.getYValue(series, item);
@@ -96,67 +97,51 @@ public class GraphPanel extends JPanel
         
         return renderer;
     }
-   
-    /**
-     * This method puts together the time series needed to create the graph. 
-     * This time series is of high temperatures.
-     * 
-     * @param stats The daily statistics.
-     * @param name The name of the time series.
-     * @return The time series of high temperatures used to create the graph.
-     */
-   private TimeSeriesCollection createHighTempDataset( ArrayList<DailyStats> stats, String name )
-   {
-        TimeSeries series = new TimeSeries( name );
+    
+    private void createDailyDatasets( ArrayList<DailyStats> stats )
+    {
+        TimeSeries highTemp  = new TimeSeries( "High Temp" );
+        TimeSeries avgTemp   = new TimeSeries( "Avgerage Temp" );
+        TimeSeries lowTemp   = new TimeSeries( "Low Temp" );
+        TimeSeries humidity  = new TimeSeries( "Humidity" );
+        TimeSeries pressure  = new TimeSeries( "Pressue" );
+        TimeSeries windSpeed = new TimeSeries( "Wind Speed" );
+        TimeSeries UVIndex   = new TimeSeries( "UV Index" );
+        TimeSeries rainfall  = new TimeSeries( "Rainfall" );
         
-        for( Integer i = 0; i < stats.size(); i++ )
+        //Loop over each item in stats ArrayList
+        for( DailyStats item : stats )
         {
-            RegularTimePeriod t = new Day(stats.get(i).day, stats.get(i).month, stats.get(i).year);
-            series.add( t, stats.get( i ).highTemp );
+            //Build time object to track time of current entry
+            RegularTimePeriod t = new Day( item.day, item.month, item.year );
+            
+            //Add current entry's fields to series
+            highTemp.add( t, item.highTemp );
+            avgTemp.add( t, item.avgTemp );
+            lowTemp.add( t, item.lowTemp );
+            humidity.add( t, item.avgHumidity );
+            pressure.add( t, item.avgBarometer );
+            windSpeed.add( t, item.avgWindSpeed );
+            UVIndex.add( t, item.avgUVIndex );
+            rainfall.add( t, item.avgRainFall );
         }
-      
-      return new TimeSeriesCollection(series);
-   }
-   
-   /**
-    * This method puts together the time series needed to create the graph. 
-     * This time series is of low temperatures.
-     * 
-    * @param stats The daily statistics.
-    * @param name The name of the time series.
-    * @return The time series of low temperatures used to create the graph.
-    */
-   private TimeSeriesCollection createLowTempDataset( ArrayList<DailyStats> stats, String name )
-   {
-        TimeSeries series = new TimeSeries( name );
         
-        for( Integer i = 0; i < stats.size(); i++ )
+        //Add series to datasets
+        this.datasets.add( new TimeSeriesCollection( highTemp ) );
+        this.datasets.add( new TimeSeriesCollection( avgTemp ) );
+        this.datasets.add( new TimeSeriesCollection( lowTemp ) );
+        this.datasets.add( new TimeSeriesCollection( humidity ) );
+        this.datasets.add( new TimeSeriesCollection( pressure ) );
+        this.datasets.add( new TimeSeriesCollection( windSpeed ) );
+        this.datasets.add( new TimeSeriesCollection( UVIndex ) );
+        this.datasets.add( new TimeSeriesCollection( rainfall ) );
+    }
+    
+    public void ClearGraph()
+    {
+        for( int i = 0; i < this.plot.getRendererCount(); i++ )
         {
-            RegularTimePeriod t = new Day(stats.get(i).day, stats.get(i).month, stats.get(i).year);
-            series.add( t, stats.get( i ).lowTemp );
+            this.plot.setRenderer( i, null );
         }
-      
-      return new TimeSeriesCollection(series);
-   }
-   
-   /**
-    * This method puts together the time series needed to create the graph. 
-     * This time series is of average temperatures.
-     * 
-    * @param stats The daily statistics.
-    * @param name The name of the time series.
-    * @return The time series of average temperatures used to create the graph.
-    */
-   private TimeSeriesCollection createAvgTempDataset( ArrayList<DailyStats> stats, String name )
-   {
-        TimeSeries series = new TimeSeries( name );
-        
-        for( Integer i = 0; i < stats.size(); i++ )
-        {
-            RegularTimePeriod t = new Day(stats.get(i).day, stats.get(i).month, stats.get(i).year);
-            series.add( t, stats.get( i ).avgTemp );
-        }
-      
-      return new TimeSeriesCollection(series);
-   }
+    }
 }

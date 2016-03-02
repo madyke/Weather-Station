@@ -40,10 +40,18 @@ public abstract class XMLParse
      */
     public static void parseFiles( String dir )
     {        
+        int loopYear = -1;  //Year to loop over
+        
         //Get list of files matching required format in current working dir
         getFileList( dir );
         
-        int loopYear = Integer.parseInt( fileList[0].getName().substring(  0, 4 ));
+        //If there was at least one data file, get year from first one
+        if( fileList.length != 0 )
+        {
+            loopYear = Integer.parseInt( fileList[0].getName().substring(  0, 4 ));
+        }
+        
+        //Create new yearly stats object
         YearlyStats currYearStats = new YearlyStats();
 
         //Loop over each file in the file list
