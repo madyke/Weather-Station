@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFileChooser;
 
 /**
@@ -51,7 +53,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         radioButtonGroup = new javax.swing.ButtonGroup();
         fileChooser = new javax.swing.JFileChooser();
@@ -100,8 +103,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         chooseDateRangeLabel.setText("Choose Date:");
 
         beginDateTextField.setText(beginDate.toString());
-        beginDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        beginDateTextField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 beginDateTextFieldActionPerformed(evt);
             }
         });
@@ -110,44 +115,56 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         radioButtonGroup.add(dailyRadioButton);
         dailyRadioButton.setText("Daily");
-        dailyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        dailyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dailyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(weeklyRadioButton);
         weeklyRadioButton.setText("Weekly");
-        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 weeklyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(monthlyRadioButton);
         monthlyRadioButton.setText("Monthly");
-        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 monthlyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(yearlyRadioButton);
         yearlyRadioButton.setText("Yearly");
-        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 yearlyRadioButtonActionPerformed(evt);
             }
         });
 
         chooseGraphComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Humidity", "Barometric Pressure", "Wind Speed", "UV Index", "Rainfall" }));
-        chooseGraphComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        chooseGraphComboBox.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 chooseGraphComboBoxItemStateChanged(evt);
             }
         });
-        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 chooseGraphComboBoxActionPerformed(evt);
             }
         });
@@ -155,8 +172,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         radioButtonGroup.add(allDatesButton);
         allDatesButton.setText("All Dates");
         allDatesButton.setSelected(true);
-        allDatesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        allDatesButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 allDatesButtonActionPerformed(evt);
             }
         });
@@ -200,8 +219,22 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         graphDisplayPanel.validate();
 
         prevButton.setText("Prev");
+        prevButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                prevButtonActionPerformed(evt);
+            }
+        });
 
         nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                nextButtonActionPerformed(evt);
+            }
+        });
 
         appMenuBar.setName("appMenuBar"); // NOI18N
 
@@ -209,8 +242,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenuItem.setText("Open");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        openMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 openMenuItemActionPerformed(evt);
             }
         });
@@ -219,8 +254,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         quitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         quitMenuItem.setText("Quit");
-        quitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        quitMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 quitMenuItemActionPerformed(evt);
             }
         });
@@ -231,8 +268,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         aboutMenu.setText("About");
 
         aboutMenuItem.setText("About");
-        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 aboutMenuItemActionPerformed(evt);
             }
         });
@@ -681,6 +720,92 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         AllDatesButtonAction( evt );
     }//GEN-LAST:event_allDatesButtonActionPerformed
 
+    private void prevButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_prevButtonActionPerformed
+    {//GEN-HEADEREND:event_prevButtonActionPerformed
+        //Set up calendar with selected date
+        Calendar cal = Calendar.getInstance();
+        cal.set( dateEntered.getYear(), dateEntered.getMonth(), dateEntered.getDay() );        
+        
+        //If daily radio button is selected
+        if( dailyRadioButton.isSelected() )
+        {            
+            //Set calendar back one day
+            cal.add( Calendar.DATE, -1 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }
+            
+            //Call same code as if daily radio button was pushed
+            DailyButtonAction( null );
+        }
+        //If weekly radio button is selected
+        if( weeklyRadioButton.isSelected() )
+        {            
+            //Set calendar back one week
+            cal.add( Calendar.DATE, -7 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }
+            
+            //Call same code as if weekly radio button was pushed
+            WeeklyButtonAction( null );
+        }
+        //If montly radio button is selected
+        if( monthlyRadioButton.isSelected() )
+        {            
+            //Set calendar back one month
+            cal.add( Calendar.DATE, -30 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }
+            
+            //Call same code as if monthly radio button was pushed
+            MonthlyButtonAction( null );
+        }
+        //If yearly radio button is selected
+        if( yearlyRadioButton.isSelected() )
+        {            
+            //Set calendar back one year
+            cal.add( Calendar.DATE, -365 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );    
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }        
+            
+            //Call same code as if yearly radio button was pushed
+            YearlyButtonAction( null );
+        }
+        
+        cal.clear();
+    }//GEN-LAST:event_prevButtonActionPerformed
+
     /**
      * This method opens a message dialog when the About menu item is chosen.
      * 
@@ -689,6 +814,92 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         javax.swing.JOptionPane.showMessageDialog(rootPane, "Created by Matt Dyke and Charles Parsons.");
     }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_nextButtonActionPerformed
+    {//GEN-HEADEREND:event_nextButtonActionPerformed
+        //Set up calendar with selected date
+        Calendar cal = Calendar.getInstance();
+        cal.set( dateEntered.getYear(), dateEntered.getMonth(), dateEntered.getDay() );        
+        
+        //If daily radio button is selected
+        if( dailyRadioButton.isSelected() )
+        {            
+            //Set calendar back one day
+            cal.add( Calendar.DATE, 1 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }
+            
+            //Call same code as if daily radio button was pushed
+            DailyButtonAction( null );
+        }
+        //If weekly radio button is selected
+        if( weeklyRadioButton.isSelected() )
+        {            
+            //Set calendar back one week
+            cal.add( Calendar.DATE, 7 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }
+            
+            //Call same code as if weekly radio button was pushed
+            WeeklyButtonAction( null );
+        }
+        //If montly radio button is selected
+        if( monthlyRadioButton.isSelected() )
+        {            
+            //Set calendar back one month
+            cal.add( Calendar.DATE, 30 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }
+            
+            //Call same code as if monthly radio button was pushed
+            MonthlyButtonAction( null );
+        }
+        //If yearly radio button is selected
+        if( yearlyRadioButton.isSelected() )
+        {            
+            //Set calendar back one year
+            cal.add( Calendar.DATE, 365 );
+            
+            //Save new date as user input
+            dateEntered.setDay( cal.get( cal.DATE ) );
+            dateEntered.setMonth( cal.get( cal.MONTH ) );
+            dateEntered.setYear( cal.get( cal.YEAR ) );    
+            if( dateEntered.getMonth() == 0 )
+            {
+                dateEntered.setMonth( 12 );
+                dateEntered.setYear(  dateEntered.getYear() - 1 );
+            }        
+            
+            //Call same code as if yearly radio button was pushed
+            YearlyButtonAction( null );
+        }
+        
+        cal.clear();
+    }//GEN-LAST:event_nextButtonActionPerformed
 
     /**
      * This method updates the statistics show in the labels and thermometers
@@ -790,6 +1001,9 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         endDate.setMonth(dateEntered.getMonth());
         endDate.setDay(dateEntered.getDay());
         endDate.setYear(dateEntered.getYear());
+        
+        //set the display text in the text field to the date entered by the user
+        beginDateTextField.setText(dateEntered.toString());
         
                 //update the statistics shown on the GUI
         DailyStats dStats = StatisticsUpdate.getDailyStats(beginDate.getMonth(), 
