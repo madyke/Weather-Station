@@ -21,6 +21,8 @@ public class WeatherReading
     public int month;
     public int year;
     public String time;
+    public int hour;
+    public int minute;
     public double temperature;
     public double humidity;
     public double barometer;
@@ -45,6 +47,8 @@ public class WeatherReading
         this.month  = 0;
         this.year   = 0;
         this.time   = "";
+        this.hour   = 0;
+        this.minute = 0;
         this.temperature    = 0;
         this.humidity       = 0;
         this.barometer      = 0;
@@ -85,7 +89,17 @@ public class WeatherReading
         //Attempt to read in time value
         try
         {
-            this.time = node.getChildText( "time" ).trim();        
+            this.time = node.getChildText( "time" ).trim(); 
+            
+            int colon = this.time.indexOf( ":" );
+            this.minute = Integer.parseInt( this.time.substring( colon + 1, colon + 3 ) );
+            this.hour = Integer.parseInt( this.time.substring( 0, colon ) );
+            
+            //Adjust for 12 o'clock
+            if( this.time.charAt( colon + 3 ) == 'P' && hour != 12 )
+                this.hour += 12;
+            if( this.time.charAt( colon + 3 ) == 'A' && hour == 12 )
+                this.hour -= 12;
         }
         catch( Exception e)
         {

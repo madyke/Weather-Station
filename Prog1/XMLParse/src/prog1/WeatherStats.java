@@ -16,7 +16,11 @@ package prog1;
 public class WeatherStats
 {
     public double highTemp;
+    public int    highTempHour;
+    public int    highTempMinute;
     public double lowTemp;
+    public int    lowTempHour;
+    public int    lowTempMinute;
     public double avgTemp;
     public double avgHumidity;
     public double avgBarometer;
@@ -105,11 +109,15 @@ public class WeatherStats
             if( currReading.temperature > this.highTemp )
             {
                 this.highTemp = currReading.temperature;
+                this.highTempHour = currReading.hour;
+                this.highTempMinute = currReading.minute;
             }
             //Check if current temperature is smaller than curr min
             if( currReading.temperature < this.lowTemp )
             {
-                this.lowTemp = currReading.temperature;            
+                this.lowTemp = currReading.temperature;  
+                this.lowTempHour = currReading.hour;
+                this.lowTempMinute = currReading.minute;          
             }
         }
         
