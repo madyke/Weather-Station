@@ -945,15 +945,15 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     
     public void YearlyButtonAction(java.awt.event.ActionEvent evt)
     {
-        //set the begin date to the first day of the year
-        beginDate.setMonth(1);
-        beginDate.setDay(1);
+        //set the begin date to the date that was entered by the user
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
         beginDate.setYear(dateEntered.getYear());
         
-        //set the end date to the last day of the year
-        endDate.setMonth(12);
-        endDate.setDay(31);
-        endDate.setYear(dateEntered.getYear());
+        //Set end date one year later
+        endDate.setDay( dateEntered.getDay() );
+        endDate.setMonth( dateEntered.getMonth() );
+        endDate.setYear( dateEntered.getYear() + 1 );
         
         //set the display text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
@@ -961,6 +961,16 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //update the statistics shown on the GUI
         YearlyStats yStats = StatisticsUpdate.getYearlyStats(beginDate.getYear());
         updateStatsShown(yStats);
+        
+        //Create datasets
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        
+        //Clear old graph
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
     public void AllDatesButtonAction(java.awt.event.ActionEvent evt)
@@ -973,7 +983,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //Set end date beyond feasible date
         endDate.setDay( 10000 );
         endDate.setMonth( 10000 );
-        endDate.setMonth( 10000 );
+        endDate.setYear( 10000 );
         
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
