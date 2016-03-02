@@ -596,7 +596,6 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      * @param evt event triggered when the Weekly radio button is chosen.
      */
     private void weeklyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weeklyRadioButtonActionPerformed
-
         WeeklyButtonAction( evt );
     }//GEN-LAST:event_weeklyRadioButtonActionPerformed
 
@@ -817,9 +816,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
         ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
         
-        //Rebuild graph        
+        //Clear old graph
         ((GraphPanel)(graphDisplayPanel)).ClearGraph();
-        ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
 
     public void MonthlyButtonAction(java.awt.event.ActionEvent evt)
@@ -994,6 +995,15 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     public void AllDatesButtonAction(java.awt.event.ActionEvent evt)
     {
         
+    }
+    
+    public void RenderGraph( String graphType )
+    {
+        //If graph type is temperature
+        if( graphType == "Temperature" )
+        {
+            ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
+        }
     }
     
 

@@ -40,6 +40,11 @@ public abstract class XMLParse
      */
     public static void parseFiles( String dir )
     {        
+        yearlyAverages = new ArrayList<>();
+        monthlyAverages = new ArrayList<>();
+        dailyAverages = new ArrayList<>();
+        weatherReadings = new ArrayList<>();
+        
         int loopYear = -1;  //Year to loop over
         
         //Get list of files matching required format in current working dir
@@ -238,9 +243,6 @@ public abstract class XMLParse
     
     public static ArrayList<DailyStats> GetDailyAggregatePeriod( AppDate begin, AppDate end )
     {
-        System.out.println( begin );
-        System.out.println( end );
-        System.out.println("START COLLECTING");
         //Create new Arraylist
         ArrayList<DailyStats> period = new ArrayList<>();
         
@@ -273,7 +275,7 @@ public abstract class XMLParse
             }
         }
         catch( IndexOutOfBoundsException e )
-        {System.out.println("DATA NOT FOUND");
+        {
             //Data did not go up to beginning date return no data
             return period;
         }
@@ -303,12 +305,11 @@ public abstract class XMLParse
             }
         }
         catch( IndexOutOfBoundsException e )
-        {System.out.println("NOT ENOUGH DATA FOUND");
+        {
             //Data did not cover entire period, return data so far
             return period;
         }
         
-        System.out.println("STOP COLLECTING: " + period.size());
         //Return period of daily averages
         return period;
     }
