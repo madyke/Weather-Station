@@ -167,6 +167,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         radioButtonGroup.add(allDatesButton);
         allDatesButton.setText("All Dates");
+
         allDatesButton.setSelected(true);
         allDatesButton.addActionListener(new java.awt.event.ActionListener()
         {
@@ -652,6 +653,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
 
+
     private void allDatesButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_allDatesButtonActionPerformed
     {//GEN-HEADEREND:event_allDatesButtonActionPerformed
         AllDatesButtonAction( evt );
@@ -995,6 +997,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         endDate.setMonth( 10000 );
         endDate.setYear( 10000 );
         
+        //update the statistics shown on the GUI
+        WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
+        updateStatsShown(wStats);
+        
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
         ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
@@ -1004,6 +1010,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //Build new graph
         RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
+        
     }
     
     public void RenderGraph( String graphType )

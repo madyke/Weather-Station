@@ -147,7 +147,7 @@ public abstract class StatisticsUpdate {
                     {
                         wStats.AddToRunningTotals(reading);
                     }
-                    else if(end.getYear() <= reading.year || (end.getMonth() <=
+                    else if(end.getYear() < reading.year || (end.getMonth() <
                             reading.month & end.getYear() == reading.year))
                     {
                         isDone = true;
