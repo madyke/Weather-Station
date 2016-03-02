@@ -608,6 +608,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         {
             //Clear existing graph and render humidity graph
             ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderHumidity();
         }
 
         //display graph for Barometric Pressure

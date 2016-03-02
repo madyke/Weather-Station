@@ -72,8 +72,22 @@ public class GraphPanel extends JPanel
         XYItemRenderer lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
         this.plot.setDataset( 2, datasets.get( 2 ) );
         this.plot.setRenderer( 2, lowTempRenderer );
-        
-        this.graph.fireChartChanged(); System.out.println("RT");
+    }
+
+    public void RenderHumidity()
+    {
+        //Plot humidity
+        XYLineAndShapeRenderer humidityRenderer = createRenderer(0, "Humidity: ", Color.RED );
+        this.plot.setDataset( 3, datasets.get( 3 ) );
+        this.plot.setRenderer( 3, humidityRenderer );
+    }
+
+    public void RenderPressure()
+    {
+        //Plot pressure
+        XYLineAndShapeRenderer pressureRenderer = createRenderer(0, "Pressure: ", Color.RED );
+        this.plot.setDataset( 4, datasets.get( 4 ) );
+        this.plot.setRenderer( 4, pressureRenderer );
     }
 
     private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
@@ -138,6 +152,7 @@ public class GraphPanel extends JPanel
         for( int i = 0; i < this.plot.getRendererCount(); i++ )
         {
             this.plot.setRenderer( i, null );
+            this.plot.setDataset( i, null );
         }
     }
 }
