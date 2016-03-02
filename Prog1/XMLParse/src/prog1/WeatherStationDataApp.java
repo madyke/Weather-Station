@@ -50,7 +50,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         radioButtonGroup = new javax.swing.ButtonGroup();
         fileChooser = new javax.swing.JFileChooser();
@@ -97,8 +98,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         chooseDateRangeLabel.setText("Choose Date:");
 
         beginDateTextField.setText(beginDate.toString());
-        beginDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        beginDateTextField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 beginDateTextFieldActionPerformed(evt);
             }
         });
@@ -108,39 +111,56 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         radioButtonGroup.add(dailyRadioButton);
         dailyRadioButton.setText("Daily");
         dailyRadioButton.setSelected(true);
-        dailyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        dailyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dailyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(weeklyRadioButton);
         weeklyRadioButton.setText("Weekly");
-        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 weeklyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(monthlyRadioButton);
         monthlyRadioButton.setText("Monthly");
-        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 monthlyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(yearlyRadioButton);
         yearlyRadioButton.setText("Yearly");
-        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 yearlyRadioButtonActionPerformed(evt);
             }
         });
 
         chooseGraphComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Humidity", "Barometric Pressure", "Wind Speed", "UV Index", "Rainfall" }));
-        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        chooseGraphComboBox.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
+                chooseGraphComboBoxItemStateChanged(evt);
+            }
+        });
+        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 chooseGraphComboBoxActionPerformed(evt);
             }
         });
@@ -192,8 +212,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenuItem.setText("Open");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        openMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 openMenuItemActionPerformed(evt);
             }
         });
@@ -202,8 +224,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         quitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         quitMenuItem.setText("Quit");
-        quitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        quitMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 quitMenuItemActionPerformed(evt);
             }
         });
@@ -579,18 +603,56 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      * @param evt 
      */
     private void chooseGraphComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphComboBoxActionPerformed
+        //Get string telling which item was selected
+        String selection = chooseGraphComboBox.getSelectedItem().toString();
+        
         //display graph for Temperature
-        
+        if( selection == "Temperature" )
+        {
+            //Clear existing graph and render temperature graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
+        }
+                
         //display graph for Humidity
-        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        if( selection == "Humidity" )
+        {
+            //Clear existing graph and render humidity graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderHumidity();
+        }
+
         //display graph for Barometric Pressure
-        
+        if( selection == "Barometric Pressure" )
+        {
+            //Clear existing graph and render pressure graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderPressure();
+        }
+
         //display graph for Wind Speed
-        
+        if( selection == "Wind Speed" )
+        {
+            //Clear existing graph and render wind speed graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderWindSpeed();
+        }
+
         //display graph for UV Index
-        
+        if( selection == "UV Index" )
+        {
+            //Clear existing graph and render UV index graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderUVIndex();
+        }
+
         //display graph for Rainfall
-        
+        if( selection == "Rainfall" )
+        {
+            //Clear existing graph and render rainfall graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+            ((GraphPanel)(graphDisplayPanel)).RenderRainfall();
+        }
     }//GEN-LAST:event_chooseGraphComboBoxActionPerformed
 
     /**
@@ -804,6 +866,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
             XMLParse.parseFiles( fileChooser.getSelectedFile().getAbsolutePath() );
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void chooseGraphComboBoxItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_chooseGraphComboBoxItemStateChanged
+    {//GEN-HEADEREND:event_chooseGraphComboBoxItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
 
     /**
      * This method updates the statistics show in the labels and thermometers

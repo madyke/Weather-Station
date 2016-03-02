@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.XYPlot.*;
 import java.awt.*;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -22,15 +24,20 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
-/**
- * This class creates a panel for displaying a graph in a swing GUI.
- * 
- * @author Dr. John Weiss & Matt Dyke
- */
 public class GraphPanel extends JPanel
 {
+    private JFreeChart graph;
     private XYPlot plot; //the graph
     private ArrayList<TimeSeriesCollection> datasets = new ArrayList<>();
+    
+    private XYLineAndShapeRenderer highTempRenderer;
+    private XYLineAndShapeRenderer avgTempRenderer;
+    private XYLineAndShapeRenderer lowTempRenderer;
+    private XYLineAndShapeRenderer humidityRenderer;
+    private XYLineAndShapeRenderer pressureRenderer;
+    private XYLineAndShapeRenderer windSpeedRenderer;
+    private XYLineAndShapeRenderer uvIndexRenderer;
+    private XYLineAndShapeRenderer rainfallRenderer;
     
     /**
      * The constructor for the graph panel. It takes a title string for use in 
@@ -44,42 +51,120 @@ public class GraphPanel extends JPanel
         createDailyDatasets( XMLParse.dailyAverages );
         
         //Build empty chart
-        JFreeChart chart = ChartFactory.createTimeSeriesChart(
-            "Weather Statistics", "Day", "Temperature", null, true, true, false
+        this.graph = ChartFactory.createTimeSeriesChart(
+            "Weather Statistics", "Day", null, null, true, true, false
         );
         
         //Get chart plot object
-        this.plot = chart.getXYPlot();
+        this.plot = this.graph.getXYPlot();
         this.plot.setNoDataMessage( "No data for this period." );
+        
+        //Create and set all renderers
+        CreateAndSetAllRenderers();
 
-        //Plot high temperatures
-        XYLineAndShapeRenderer highTempRenderer = createRenderer(0, "High Temperature: ", Color.RED );
-        this.plot.setDataset( 0, datasets.get( 0 ) );
-        this.plot.setRenderer( 0, highTempRenderer );
+        //Render temperature graphs initially
+        RenderTemperature();
 
-        //Plot average temperatures
-        XYItemRenderer avgTempRenderer = createRenderer( 0, "Average Temperature: ", Color.GREEN );
-        this.plot.setDataset( 1, datasets.get( 1 ) );       
-        this.plot.setRenderer( 1, avgTempRenderer );
-         
-        //Plot low temperatures
-        XYItemRenderer lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
-        this.plot.setDataset( 2, datasets.get( 2 ) );
-        this.plot.setRenderer( 2, lowTempRenderer );
-
-        ChartPanel chartPanel = new ChartPanel( chart );
+        ChartPanel chartPanel = new ChartPanel( this.graph );
         chartPanel.setPreferredSize( new java.awt.Dimension( 1 , 1 ) );
         add( chartPanel );
     }
+    
+    private void CreateAndSetAllRenderers()
+    {
+        //Create and set high temperature renderer
+        this.highTempRenderer = createRenderer(0, "High Temperature: ", Color.RED );
+        this.plot.setRenderer( 0, this.highTempRenderer );
 
-    /**
-     * Creates the renderer for the graph.
-     * 
-     * @param seriesIndex
-     * @param toolTip
-     * @param col
-     * @return renderer The renderer for the graph.
-     */
+        //Create and set average temperature renderer
+        this.avgTempRenderer = createRenderer( 0, "Average Temperature: ", Color.GREEN );
+        this.plot.setRenderer( 1, this.avgTempRenderer );
+         
+        //Create and set low temperature renderer
+        this.lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
+        this.plot.setRenderer( 2, this.lowTempRenderer );
+
+        //Create and set humidity renderer
+        this.humidityRenderer = createRenderer(0, "Humidity: ", Color.RED );
+        this.plot.setRenderer( 3, this.humidityRenderer );
+
+        //Create and set pressure renderer
+        this.pressureRenderer = createRenderer(0, "Pressure: ", Color.RED );
+        this.plot.setRenderer( 4, this.pressureRenderer );
+
+        //Create and set wind speed renderer
+        this.windSpeedRenderer = createRenderer(0, "Wind Speed: ", Color.RED );
+        this.plot.setRenderer( 5, this.windSpeedRenderer );
+
+        //Create and set UV Index renderer
+        this.uvIndexRenderer = createRenderer(0, "UV Index: ", Color.RED );
+        this.plot.setRenderer( 6, this.uvIndexRenderer );
+
+        //Create and set rainfall renderer
+        this.rainfallRenderer = createRenderer(0, "Rainfall: ", Color.RED );
+        this.plot.setRenderer( 7, this.rainfallRenderer );
+ }
+    
+    public void RenderTemperature()
+    {
+        //Plot high temperatures
+        this.plot.setDataset( 0, datasets.get( 0 ) );
+
+        //Plot average temperatures
+        this.plot.setDataset( 1, datasets.get( 1 ) );
+         
+        //Plot low temperatures
+        this.plot.setDataset( 2, datasets.get( 2 ) );
+        
+        //Set axis label
+        this.plot.getRangeAxis().setLabel( "Temperature (\u00b0F)" );
+    }
+
+    public void RenderHumidity()
+    {
+        //Plot humidity
+        this.plot.setDataset( 3, datasets.get( 3 ) );
+        
+        //Set axis label
+        this.plot.getRangeAxis().setLabel( "Humidity (%)" );
+    }
+
+    public void RenderPressure()
+    {
+        //Plot pressure
+        this.plot.setDataset( 4, datasets.get( 4 ) );
+        
+        //Set axis label
+        this.plot.getRangeAxis().setLabel( "Pressure (in. Hg.)" );
+    }
+
+    public void RenderWindSpeed()
+    {
+        //Plot wind speed
+        this.plot.setDataset( 5, datasets.get( 5 ) );
+        
+        //Set axis label
+        this.plot.getRangeAxis().setLabel( "Wind Speed (mph)" );
+    }
+
+    public void RenderUVIndex()
+    {
+        //Plot pressure
+        this.plot.setDataset( 6, datasets.get( 6 ) );
+        
+        //Set axis label
+        this.plot.getRangeAxis().setLabel( "UV Index" );
+    }
+
+    public void RenderRainfall()
+    {
+        //Plot pressure
+        this.plot.setDataset( 7, datasets.get( 7 ) );
+        
+        //Set axis label
+        this.plot.getRangeAxis().setLabel( "Rainfall (in)" );
+    }
+
     private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
    {
         //Create new renderer
@@ -141,7 +226,7 @@ public class GraphPanel extends JPanel
     {
         for( int i = 0; i < this.plot.getRendererCount(); i++ )
         {
-            this.plot.setRenderer( i, null );
+            this.plot.setDataset( i, null );
         }
     }
 }
