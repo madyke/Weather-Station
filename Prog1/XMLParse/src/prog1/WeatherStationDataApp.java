@@ -752,6 +752,16 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         DailyStats dStats = StatisticsUpdate.getDailyStats(beginDate.getMonth(), 
                 beginDate.getDay(), beginDate.getYear());
         updateStatsShown(dStats);
+        
+        //Create datasets
+        ArrayList<WeatherReading> day = XMLParse.GetDailyReadings( beginDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( day );
+        
+        //Clear old graph
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
     public void WeeklyButtonAction(java.awt.event.ActionEvent evt)
@@ -845,7 +855,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
-        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
         
         //Clear old graph
         ((GraphPanel)(graphDisplayPanel)).ClearGraph();
@@ -934,7 +944,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
-        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
         
         //Clear old graph
         ((GraphPanel)(graphDisplayPanel)).ClearGraph();
@@ -964,7 +974,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
-        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
         
         //Clear old graph
         ((GraphPanel)(graphDisplayPanel)).ClearGraph();
@@ -987,7 +997,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
-        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
         
         //Clear old graph
         ((GraphPanel)(graphDisplayPanel)).ClearGraph();
