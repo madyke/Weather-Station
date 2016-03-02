@@ -22,13 +22,9 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
-/**
- * This class creates a panel for displaying a graph in a swing GUI.
- * 
- * @author Dr. John Weiss & Matt Dyke
- */
 public class GraphPanel extends JPanel
 {
+    private JFreeChart graph;
     private XYPlot plot; //the graph
     private ArrayList<TimeSeriesCollection> datasets = new ArrayList<>();
     
@@ -44,14 +40,24 @@ public class GraphPanel extends JPanel
         createDailyDatasets( XMLParse.dailyAverages );
         
         //Build empty chart
-        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+        this.graph = ChartFactory.createTimeSeriesChart(
             "Weather Statistics", "Day", "Temperature", null, true, true, false
         );
         
         //Get chart plot object
-        this.plot = chart.getXYPlot();
+        this.plot = this.graph.getXYPlot();
         this.plot.setNoDataMessage( "No data for this period." );
 
+        //Render temperature graphs initially
+        RenderTemperature();
+
+        ChartPanel chartPanel = new ChartPanel( this.graph );
+        chartPanel.setPreferredSize( new java.awt.Dimension( 1 , 1 ) );
+        add( chartPanel );
+    }
+    
+    public void RenderTemperature()
+    {
         //Plot high temperatures
         XYLineAndShapeRenderer highTempRenderer = createRenderer(0, "High Temperature: ", Color.RED );
         this.plot.setDataset( 0, datasets.get( 0 ) );
@@ -66,20 +72,10 @@ public class GraphPanel extends JPanel
         XYItemRenderer lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
         this.plot.setDataset( 2, datasets.get( 2 ) );
         this.plot.setRenderer( 2, lowTempRenderer );
-
-        ChartPanel chartPanel = new ChartPanel( chart );
-        chartPanel.setPreferredSize( new java.awt.Dimension( 1 , 1 ) );
-        add( chartPanel );
+        
+        this.graph.fireChartChanged(); System.out.println("RT");
     }
 
-    /**
-     * Creates the renderer for the graph.
-     * 
-     * @param seriesIndex
-     * @param toolTip
-     * @param col
-     * @return renderer The renderer for the graph.
-     */
     private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
    {
         //Create new renderer
