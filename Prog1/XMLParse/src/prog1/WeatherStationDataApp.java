@@ -99,7 +99,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(681, 469));
+        setMinimumSize(new java.awt.Dimension(1000, 600));
 
         chooseDateRangeLabel.setText("Choose Date:");
 
