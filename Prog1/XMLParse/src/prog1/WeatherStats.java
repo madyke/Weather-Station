@@ -16,9 +16,15 @@ package prog1;
 public class WeatherStats
 {
     public double highTemp;
+    public int    highTempYear;
+    public int    highTempMonth;
+    public int    highTempDay;
     public int    highTempHour;
     public int    highTempMinute;
     public double lowTemp;
+    public int    lowTempYear;
+    public int    lowTempMonth;
+    public int    lowTempDay;
     public int    lowTempHour;
     public int    lowTempMinute;
     public double avgTemp;
@@ -28,6 +34,11 @@ public class WeatherStats
     public double windDirection;
     public String prevailingWindDirection;
     public double windGust;
+    public int    windGustYear;
+    public int    windGustMonth;
+    public int    windGustDay;
+    public int    windGustHour;
+    public int    windGustMinute;
     public double avgWindChill;
     public double avgHeatIndex;
     public double avgUVIndex;
@@ -113,13 +124,19 @@ public class WeatherStats
                 this.highTemp = currReading.temperature;
                 this.highTempHour = currReading.hour;
                 this.highTempMinute = currReading.minute;
+                this.highTempYear = currReading.year;
+                this.highTempMonth = currReading.month;
+                this.highTempDay = currReading.day;
             }
             //Check if current temperature is smaller than curr min
             if( currReading.temperature < this.lowTemp )
             {
                 this.lowTemp = currReading.temperature;  
                 this.lowTempHour = currReading.hour;
-                this.lowTempMinute = currReading.minute;          
+                this.lowTempMinute = currReading.minute; 
+                this.lowTempYear = currReading.year;
+                this.lowTempMonth = currReading.month;
+                this.lowTempDay = currReading.day;         
             }
         }
         
@@ -163,6 +180,12 @@ public class WeatherStats
             {
                 this.windGust = currReading.windGust;
                 this.prevailingWindDirection = currReading.windDirection;
+                this.windGustHour = currReading.hour;
+                this.windGustMinute = currReading.minute; 
+                this.windGustYear = currReading.year;
+                this.windGustMonth = currReading.month;
+                this.windGustDay = currReading.day; 
+                
             }
         }
         
