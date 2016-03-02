@@ -136,4 +136,12 @@ public class GraphPanel extends JPanel
         this.datasets.add( new TimeSeriesCollection( UVIndex ) );
         this.datasets.add( new TimeSeriesCollection( rainfall ) );
     }
+    
+    public void ClearGraph()
+    {
+        for( int i = 0; i < this.plot.getRendererCount(); i++ )
+        {
+            this.plot.setRenderer( i, null );
+        }
+    }
 }
