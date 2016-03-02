@@ -58,6 +58,9 @@ public class GraphPanel extends JPanel
         //Get chart plot object
         this.plot = this.graph.getXYPlot();
         this.plot.setNoDataMessage( "No data for this period." );
+        
+        //Create and set all renderers
+        CreateAndSetAllRenderers();
 
         //Render temperature graphs initially
         RenderTemperature();
@@ -67,73 +70,98 @@ public class GraphPanel extends JPanel
         add( chartPanel );
     }
     
+    private void CreateAndSetAllRenderers()
+    {
+        //Create and set high temperature renderer
+        this.highTempRenderer = createRenderer(0, "High Temperature: ", Color.RED );
+        this.plot.setRenderer( 0, this.highTempRenderer );
+
+        //Create and set average temperature renderer
+        this.avgTempRenderer = createRenderer( 0, "Average Temperature: ", Color.GREEN );
+        this.plot.setRenderer( 1, this.avgTempRenderer );
+         
+        //Create and set low temperature renderer
+        this.lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
+        this.plot.setRenderer( 2, this.lowTempRenderer );
+
+        //Create and set humidity renderer
+        this.humidityRenderer = createRenderer(0, "Humidity: ", Color.RED );
+        this.plot.setRenderer( 3, this.humidityRenderer );
+
+        //Create and set pressure renderer
+        this.pressureRenderer = createRenderer(0, "Pressure: ", Color.RED );
+        this.plot.setRenderer( 4, this.pressureRenderer );
+
+        //Create and set wind speed renderer
+        this.windSpeedRenderer = createRenderer(0, "Wind Speed: ", Color.RED );
+        this.plot.setRenderer( 5, this.windSpeedRenderer );
+
+        //Create and set UV Index renderer
+        this.uvIndexRenderer = createRenderer(0, "UV Index: ", Color.RED );
+        this.plot.setRenderer( 6, this.uvIndexRenderer );
+
+        //Create and set rainfall renderer
+        this.rainfallRenderer = createRenderer(0, "Rainfall: ", Color.RED );
+        this.plot.setRenderer( 7, this.rainfallRenderer );
+ }
+    
     public void RenderTemperature()
     {
         //Plot high temperatures
-        this.highTempRenderer = createRenderer(0, "High Temperature: ", Color.RED );
         this.plot.setDataset( 0, datasets.get( 0 ) );
-        this.plot.setRenderer( 0, this.highTempRenderer );
 
         //Plot average temperatures
-        this.avgTempRenderer = createRenderer( 0, "Average Temperature: ", Color.GREEN );
-        this.plot.setDataset( 1, datasets.get( 1 ) );       
-        this.plot.setRenderer( 1, this.avgTempRenderer );
+        this.plot.setDataset( 1, datasets.get( 1 ) );
          
         //Plot low temperatures
-        this.lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
         this.plot.setDataset( 2, datasets.get( 2 ) );
-        this.plot.setRenderer( 2, this.lowTempRenderer );
         
+        //Set axis label
         this.plot.getRangeAxis().setLabel( "Temperature (\u00b0F)" );
     }
 
     public void RenderHumidity()
     {
         //Plot humidity
-        this.humidityRenderer = createRenderer(0, "Humidity: ", Color.RED );
         this.plot.setDataset( 3, datasets.get( 3 ) );
-        this.plot.setRenderer( 3, this.humidityRenderer );
         
+        //Set axis label
         this.plot.getRangeAxis().setLabel( "Humidity (%)" );
     }
 
     public void RenderPressure()
     {
         //Plot pressure
-        this.pressureRenderer = createRenderer(0, "Pressure: ", Color.RED );
         this.plot.setDataset( 4, datasets.get( 4 ) );
-        this.plot.setRenderer( 4, this.pressureRenderer );
         
+        //Set axis label
         this.plot.getRangeAxis().setLabel( "Pressure (in. Hg.)" );
     }
 
     public void RenderWindSpeed()
     {
         //Plot wind speed
-        this.windSpeedRenderer = createRenderer(0, "Wind Speed: ", Color.RED );
         this.plot.setDataset( 5, datasets.get( 5 ) );
-        this.plot.setRenderer( 5, this.windSpeedRenderer );
         
+        //Set axis label
         this.plot.getRangeAxis().setLabel( "Wind Speed (mph)" );
     }
 
     public void RenderUVIndex()
     {
         //Plot pressure
-        this.uvIndexRenderer = createRenderer(0, "UV Index: ", Color.RED );
         this.plot.setDataset( 6, datasets.get( 6 ) );
-        this.plot.setRenderer( 6, this.uvIndexRenderer );
         
+        //Set axis label
         this.plot.getRangeAxis().setLabel( "UV Index" );
     }
 
     public void RenderRainfall()
     {
         //Plot pressure
-        this.rainfallRenderer = createRenderer(0, "Rainfall: ", Color.RED );
         this.plot.setDataset( 7, datasets.get( 7 ) );
-        this.plot.setRenderer( 7, this.rainfallRenderer );
         
+        //Set axis label
         this.plot.getRangeAxis().setLabel( "Rainfall (in)" );
     }
 
