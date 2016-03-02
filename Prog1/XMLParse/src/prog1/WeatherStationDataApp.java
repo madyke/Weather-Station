@@ -579,27 +579,32 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //If daily radio button is selected
         if( dailyRadioButton.isSelected() )
         {
-            
+            //Call same code as if daily radio button was pushed
+            DailyButtonAction( null );
         }
         //If weekly radio button is selected
         if( weeklyRadioButton.isSelected() )
         {
-            weeklyRadioButtonActionPerformed( null );
+            //Call same code as if weekly radio button was pushed
+            WeeklyButtonAction( null );
         }
         //If montly radio button is selected
         if( monthlyRadioButton.isSelected() )
         {
-            
+            //Call same code as if monthly radio button was pushed
+            MonthlyButtonAction( null );
         }
         //If yearly radio button is selected
         if( yearlyRadioButton.isSelected() )
         {
-            
+            //Call same code as if yearly radio button was pushed
+            YearlyButtonAction( null );
         }
         //If all dates radio button is selected
         if( allDatesButton.isSelected() )
         {
-            
+            //Call same code as if all dates radio button was pushed
+            AllDatesButtonAction( null );
         }
     }//GEN-LAST:event_beginDateTextFieldActionPerformed
 
