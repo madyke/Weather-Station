@@ -40,6 +40,11 @@ public abstract class XMLParse
      */
     public static void parseFiles( String dir )
     {        
+        yearlyAverages = new ArrayList<>();
+        monthlyAverages = new ArrayList<>();
+        dailyAverages = new ArrayList<>();
+        weatherReadings = new ArrayList<>();
+        
         int loopYear = -1;  //Year to loop over
         
         //Get list of files matching required format in current working dir
