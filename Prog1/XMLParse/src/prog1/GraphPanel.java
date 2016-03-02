@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.XYPlot.*;
 import java.awt.*;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -41,7 +43,7 @@ public class GraphPanel extends JPanel
         
         //Build empty chart
         this.graph = ChartFactory.createTimeSeriesChart(
-            "Weather Statistics", "Day", "Temperature", null, true, true, false
+            "Weather Statistics", "Day", null, null, true, true, false
         );
         
         //Get chart plot object
@@ -72,6 +74,8 @@ public class GraphPanel extends JPanel
         XYItemRenderer lowTempRenderer = createRenderer( 0, "Low Temperature: ", Color.BLUE );
         this.plot.setDataset( 2, datasets.get( 2 ) );
         this.plot.setRenderer( 2, lowTempRenderer );
+        
+        this.plot.getRangeAxis().setLabel( "Temperature (\u00b0F)" );
     }
 
     public void RenderHumidity()
@@ -80,6 +84,8 @@ public class GraphPanel extends JPanel
         XYLineAndShapeRenderer humidityRenderer = createRenderer(0, "Humidity: ", Color.RED );
         this.plot.setDataset( 3, datasets.get( 3 ) );
         this.plot.setRenderer( 3, humidityRenderer );
+        
+        this.plot.getRangeAxis().setLabel( "Humidity (%)" );
     }
 
     public void RenderPressure()
@@ -88,6 +94,8 @@ public class GraphPanel extends JPanel
         XYLineAndShapeRenderer pressureRenderer = createRenderer(0, "Pressure: ", Color.RED );
         this.plot.setDataset( 4, datasets.get( 4 ) );
         this.plot.setRenderer( 4, pressureRenderer );
+        
+        this.plot.getRangeAxis().setLabel( "Pressure (in. Hg.)" );
     }
 
     public void RenderWindSpeed()
@@ -96,6 +104,8 @@ public class GraphPanel extends JPanel
         XYLineAndShapeRenderer windSpeedRenderer = createRenderer(0, "Wind Speed: ", Color.RED );
         this.plot.setDataset( 5, datasets.get( 5 ) );
         this.plot.setRenderer( 5, windSpeedRenderer );
+        
+        this.plot.getRangeAxis().setLabel( "Wind Speed (mph)" );
     }
 
     public void RenderUVIndex()
@@ -104,6 +114,8 @@ public class GraphPanel extends JPanel
         XYLineAndShapeRenderer uvIndexRenderer = createRenderer(0, "UV Index: ", Color.RED );
         this.plot.setDataset( 6, datasets.get( 6 ) );
         this.plot.setRenderer( 6, uvIndexRenderer );
+        
+        this.plot.getRangeAxis().setLabel( "UV Index" );
     }
 
     public void RenderRainfall()
@@ -112,6 +124,8 @@ public class GraphPanel extends JPanel
         XYLineAndShapeRenderer rainfallRenderer = createRenderer(0, "Rainfall: ", Color.RED );
         this.plot.setDataset( 7, datasets.get( 7 ) );
         this.plot.setRenderer( 7, rainfallRenderer );
+        
+        this.plot.getRangeAxis().setLabel( "Rainfall (in)" );
     }
 
     private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
