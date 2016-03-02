@@ -183,7 +183,7 @@ public class GraphPanel extends JPanel
         return renderer;
     }
     
-    private void createDailyDatasets( ArrayList<DailyStats> stats )
+    public void createDailyDatasets( ArrayList<DailyStats> stats )
     {
         TimeSeries highTemp  = new TimeSeries( "High Temp" );
         TimeSeries avgTemp   = new TimeSeries( "Avgerage Temp" );

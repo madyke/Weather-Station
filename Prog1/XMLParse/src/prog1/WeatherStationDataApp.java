@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
 /**
@@ -827,7 +828,12 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         updateStatsShown(wStats);
         
         //Create datasets
-        XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        
+        //Rebuild graph        
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
     }//GEN-LAST:event_weeklyRadioButtonActionPerformed
 
     /**
