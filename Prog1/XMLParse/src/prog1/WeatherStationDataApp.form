@@ -90,7 +90,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="426" max="32767" attributes="0"/>
@@ -110,23 +110,18 @@
                                   </Group>
                               </Group>
                               <Component id="chooseGraphComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="allDatesButton" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                          <Component id="dailyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="weeklyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="monthlyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="yearlyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="statisticsSectionLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="allDatesButton" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Component id="dailyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="weeklyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="monthlyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="yearlyRadioButton" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="rainfallLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -137,25 +132,38 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="prevailingWindDirectionValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="meanWindSpeedLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="meanWindSpeedValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="lowTempLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="lowTempValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="highTempLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="highTempValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="meanTempLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="meanTempValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="statisticsSectionLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="meanWindSpeedLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="meanWindSpeedValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lowTempLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="lowTempValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="highTempLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="highTempValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="meanTempLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="meanTempValueLabel" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="windGustLabel" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="windGustValueLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -191,7 +199,7 @@
                           <Component id="prevButton" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="nextButton" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace pref="40" max="32767" attributes="0"/>
                       <Component id="dailyRadioButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="weeklyRadioButton" min="-2" max="-2" attributes="0"/>
@@ -206,7 +214,7 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="statisticsSectionLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -230,6 +238,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="windGustLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="windGustValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="prevailingWindDirectionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="prevailingWindDirectionValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -239,7 +252,7 @@
                           <Component id="rainfallValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane1" alignment="1" pref="183" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="1" pref="204" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -460,6 +473,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="windGustLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Wind Gust"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="windGustValueLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N/A"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
