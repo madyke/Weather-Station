@@ -153,6 +153,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         radioButtonGroup.add(allDatesButton);
         allDatesButton.setText("All Dates");
+        allDatesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allDatesButtonActionPerformed(evt);
+            }
+        });
 
         statisticsSectionLabel.setText("Statistics:");
 
@@ -625,6 +630,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_chooseGraphComboBoxItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
+
+    private void allDatesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allDatesButtonActionPerformed
+        AllDatesButtonAction(evt);
+    }//GEN-LAST:event_allDatesButtonActionPerformed
 
     /**
      * This method updates the statistics show in the labels and thermometers
