@@ -10,6 +10,7 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -29,6 +30,7 @@ public abstract class XMLParse
     public static ArrayList<ArrayList<WeatherReading>> weatherReadings = new ArrayList<>();
     
     private static File[] fileList;
+
     
     /**
      * This method parses the individual XML data files within a specified
@@ -46,6 +48,9 @@ public abstract class XMLParse
         weatherReadings = new ArrayList<>();
         
         int loopYear = -1;  //Year to loop over
+        
+        //Get the directory whose path is in the string dir
+
         
         //Get list of files matching required format in current working dir
         getFileList( dir );
@@ -225,7 +230,8 @@ public abstract class XMLParse
                     return p.matcher(file.getName()).matches();
                 }
             }
-        );        
+        );
+        Arrays.sort(fileList);
     }
     
     /**
