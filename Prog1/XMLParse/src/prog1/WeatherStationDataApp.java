@@ -634,7 +634,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      */
     private void updateStatsShown(WeatherStats wStats)
     {
-        if(wStats.highTemp < -100)
+        if(wStats.highTemp < -500)
         {
             resetStatLabels();
             return;

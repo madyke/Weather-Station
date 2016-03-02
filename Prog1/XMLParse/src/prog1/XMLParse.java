@@ -157,21 +157,20 @@ public abstract class XMLParse
                     //Create new daily stats object for new day
                     currDayStats = new DailyStats();
                 }
-                //Else current reading from same day as previous
-                {
-                    //Add new readings to running totals for daily, monthly, yearly stats
-                    currDayStats.AddToRunningTotals( currReading );
-                    currMonthStats.AddToRunningTotals( currReading );
-                    currYearStats.AddToRunningTotals( currReading );
 
-                    //Save when current reading was
-                    currDayStats.day = currReading.day;
-                    currDayStats.month = currReading.month;
-                    currDayStats.year = currReading.year;
-                    currMonthStats.month = currReading.month;
-                    currMonthStats.year = currReading.year;
-                    currYearStats.year = currReading.year;
-                }
+                //Add new readings to running totals for daily, monthly, yearly stats
+                currDayStats.AddToRunningTotals( currReading );
+                currMonthStats.AddToRunningTotals( currReading );
+                currYearStats.AddToRunningTotals( currReading );
+
+                //Save when current reading was
+                currDayStats.day = currReading.day;
+                currDayStats.month = currReading.month;
+                currDayStats.year = currReading.year;
+                currMonthStats.month = currReading.month;
+                currMonthStats.year = currReading.year;
+                currYearStats.year = currReading.year;
+
                 
                 //Save which day was just read from
                 currDay = currReading.day;
