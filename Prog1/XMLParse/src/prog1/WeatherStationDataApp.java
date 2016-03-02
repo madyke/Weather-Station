@@ -1237,9 +1237,9 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         beginDate.setYear(dateEntered.getYear());
         
         //Set end date beyond feasible date
-        endDate.setDay( XMLParse.weatherReadings.get(XMLParse.weatherReadings.size() - 1).get(0).day );
-        endDate.setMonth( XMLParse.weatherReadings.get(XMLParse.weatherReadings.size() - 1).get(0).month );
-        endDate.setYear( XMLParse.weatherReadings.get(XMLParse.weatherReadings.size() - 1).get(0).year );
+        endDate.setDay( 1 );
+        endDate.setMonth( 1 );
+        endDate.setYear( 10000 );
         
         //update the statistics shown on the GUI
         WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
