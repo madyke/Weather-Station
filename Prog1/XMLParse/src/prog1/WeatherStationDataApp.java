@@ -592,11 +592,13 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      * @param evt 
      */
     private void chooseGraphComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphComboBoxActionPerformed
+        //Get string telling which item was selected
         String selection = chooseGraphComboBox.getSelectedItem().toString();
         
         //display graph for Temperature
         if( selection == "Temperature" )
-        { System.out.println("HERE");
+        {
+            //Clear existing graph and render temperature graph
             ((GraphPanel)(graphDisplayPanel)).ClearGraph();
             ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
         }
@@ -604,17 +606,37 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //display graph for Humidity
         if( selection == "Humidity" )
         {
+            //Clear existing graph and render humidity graph
             ((GraphPanel)(graphDisplayPanel)).ClearGraph();
         }
 
         //display graph for Barometric Pressure
-        
+        if( selection == "Barometric Pressure" )
+        {
+            //Clear existing graph and render pressure graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        }
+
         //display graph for Wind Speed
-        
+        if( selection == "Wind Speed" )
+        {
+            //Clear existing graph and render wind speed graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        }
+
         //display graph for UV Index
-        
+        if( selection == "UV Index" )
+        {
+            //Clear existing graph and render UV index graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        }
+
         //display graph for Rainfall
-        
+        if( selection == "Rainfall" )
+        {
+            //Clear existing graph and render rainfall graph
+            ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        }
     }//GEN-LAST:event_chooseGraphComboBoxActionPerformed
 
     /**
