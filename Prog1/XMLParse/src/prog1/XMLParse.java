@@ -236,4 +236,81 @@ public abstract class XMLParse
         //Return directory string from where application launched
         return System.getProperty("user.dir");
     }
+    
+    public static ArrayList<DailyStats> GetDailyAggregatePeriod( AppDate begin, AppDate end )
+    {
+        System.out.println( begin );
+        System.out.println( end );
+        System.out.println("START COLLECTING");
+        //Create new Arraylist
+        ArrayList<DailyStats> period = new ArrayList<>();
+        
+        //Get begin and end times
+        int beginDay   = begin.getDay();
+        int beginMonth = begin.getMonth();
+        int beginYear  = begin.getYear();
+        int endDay     = end.getDay();
+        int endMonth   = end.getMonth();
+        int endYear    = end.getYear();
+        
+        int i = 0;
+        
+        try
+        {
+            //Get to beginning year
+            while( XMLParse.dailyAverages.get( i ).year < beginYear )
+            {
+                i++;
+            }
+            //Get to beginning month
+            while( XMLParse.dailyAverages.get( i ).month < beginMonth )
+            {
+                i++;
+            }
+            //Get to beginning day
+            while( XMLParse.dailyAverages.get( i ).day < beginDay )
+            {
+                i++;
+            }
+        }
+        catch( IndexOutOfBoundsException e )
+        {System.out.println("DATA NOT FOUND");
+            //Data did not go up to beginning date return no data
+            return period;
+        }
+
+        try
+        {
+            //Get to ending year
+            while( XMLParse.dailyAverages.get( i ).year < endYear )
+            {
+                //Add record
+                period.add( XMLParse.dailyAverages.get( i ) );
+                i++;
+            }
+            //Get to ending month
+            while( XMLParse.dailyAverages.get( i ).month < endMonth )
+            {
+                //Add record
+                period.add( XMLParse.dailyAverages.get( i ) );
+                i++;
+            }
+            //Get to ending day
+            while( XMLParse.dailyAverages.get( i ).day <= endDay )
+            {
+                //Add record
+                period.add( XMLParse.dailyAverages.get( i ) );
+                i++;
+            }
+        }
+        catch( IndexOutOfBoundsException e )
+        {System.out.println("NOT ENOUGH DATA FOUND");
+            //Data did not cover entire period, return data so far
+            return period;
+        }
+        
+        System.out.println("STOP COLLECTING: " + period.size());
+        //Return period of daily averages
+        return period;
+    }
 }

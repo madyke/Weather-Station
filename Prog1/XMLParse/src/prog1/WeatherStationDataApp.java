@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 
 /**
@@ -739,92 +740,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      * @param evt event triggered when the Weekly radio button is chosen.
      */
     private void weeklyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weeklyRadioButtonActionPerformed
-        //set the end date to be 7 days after the begin date
-        beginDate.setMonth(dateEntered.getMonth());
-        beginDate.setDay(dateEntered.getDay());
-        beginDate.setYear(dateEntered.getYear());
-        
-        switch(beginDate.getMonth())
-        {
-            //begin date is in a month with 31 days total, but is not December
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-                if(beginDate.getDay() > 25)
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (31 - beginDate.getDay()));
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                }
-                endDate.setYear(beginDate.getYear());
-                break;
-            //begin date is in a month with 30 days total
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if(beginDate.getDay() > 24)
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (30 - beginDate.getDay()));
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                }
-                endDate.setYear(beginDate.getYear());
-                break;
-            //begin date is in February, must account for leap years
-            case 2:
-                if((beginDate.getDay() > 22) && ((beginDate.getYear() % 4 != 0)
-                        || (beginDate.getYear() % 400 != 0 
-                        &&  beginDate.getYear() % 100 == 0)))
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (28 - beginDate.getDay()));
-                }
-                else if(beginDate.getDay() > 23)
-                {
-                    endDate.setMonth(beginDate.getMonth() + 1);
-                    endDate.setDay(6 - (29 - beginDate.getDay()));
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                }
-                endDate.setYear(beginDate.getYear());
-                break;
-            //begin date is in December
-            case 12:
-                if(beginDate.getDay() > 25)
-                {
-                    endDate.setMonth(1);
-                    endDate.setDay(6 - (31 - beginDate.getDay()));
-                    endDate.setYear(beginDate.getYear() + 1);
-                }
-                else
-                {
-                    endDate.setMonth(beginDate.getMonth());
-                    endDate.setDay(beginDate.getDay() + 6);
-                    endDate.setYear(beginDate.getYear());
-                }
-                break;    
-        }
-        //set the display text in the text field to the date entered by the user
-        beginDateTextField.setText(dateEntered.toString());
-        
-        //update weekly stats
-        WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
-        updateStatsShown(wStats);
+
+        WeeklyButtonAction( evt );
     }//GEN-LAST:event_weeklyRadioButtonActionPerformed
 
     /**
@@ -930,6 +847,104 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                 new WeatherStationDataApp().setVisible(true);
             }
         });
+    }
+    
+    public void WeeklyButtonAction(java.awt.event.ActionEvent evt)
+    {
+        //set the end date to be 7 days after the begin date
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
+        beginDate.setYear(dateEntered.getYear());
+        
+        switch(beginDate.getMonth())
+        {
+            //begin date is in a month with 31 days total, but is not December
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+                if(beginDate.getDay() > 25)
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (31 - beginDate.getDay()));
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                }
+                endDate.setYear(beginDate.getYear());
+                break;
+            //begin date is in a month with 30 days total
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if(beginDate.getDay() > 24)
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (30 - beginDate.getDay()));
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                }
+                endDate.setYear(beginDate.getYear());
+                break;
+            //begin date is in February, must account for leap years
+            case 2:
+                if((beginDate.getDay() > 22) && ((beginDate.getYear() % 4 != 0)
+                        || (beginDate.getYear() % 400 != 0 
+                        &&  beginDate.getYear() % 100 == 0)))
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (28 - beginDate.getDay()));
+                }
+                else if(beginDate.getDay() > 23)
+                {
+                    endDate.setMonth(beginDate.getMonth() + 1);
+                    endDate.setDay(6 - (29 - beginDate.getDay()));
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                }
+                endDate.setYear(beginDate.getYear());
+                break;
+            //begin date is in December
+            case 12:
+                if(beginDate.getDay() > 25)
+                {
+                    endDate.setMonth(1);
+                    endDate.setDay(6 - (31 - beginDate.getDay()));
+                    endDate.setYear(beginDate.getYear() + 1);
+                }
+                else
+                {
+                    endDate.setMonth(beginDate.getMonth());
+                    endDate.setDay(beginDate.getDay() + 6);
+                    endDate.setYear(beginDate.getYear());
+                }
+                break;    
+        }
+        //set the display text in the text field to the date entered by the user
+        beginDateTextField.setText(dateEntered.toString());
+        
+        //update weekly stats
+        WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
+        updateStatsShown(wStats);
+        
+        //Create datasets
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        
+        //Rebuild graph        
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
