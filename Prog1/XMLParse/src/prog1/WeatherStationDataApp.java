@@ -168,6 +168,13 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         radioButtonGroup.add(allDatesButton);
         allDatesButton.setText("All Dates");
         allDatesButton.setSelected(true);
+        allDatesButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                allDatesButtonActionPerformed(evt);
+            }
+        });
 
         statisticsSectionLabel.setText("Statistics:");
 
@@ -645,6 +652,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
 
+    private void allDatesButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_allDatesButtonActionPerformed
+    {//GEN-HEADEREND:event_allDatesButtonActionPerformed
+        AllDatesButtonAction( evt );
+    }//GEN-LAST:event_allDatesButtonActionPerformed
+
     /**
      * This method updates the statistics show in the labels and thermometers
      * when given set of statistics.
@@ -953,7 +965,25 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     
     public void AllDatesButtonAction(java.awt.event.ActionEvent evt)
     {
+        //set the begin date to the date that was entered by the user
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
+        beginDate.setYear(dateEntered.getYear());
         
+        //Set end date beyond feasible date
+        endDate.setDay( 10000 );
+        endDate.setMonth( 10000 );
+        endDate.setMonth( 10000 );
+        
+        //Create datasets
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        
+        //Clear old graph
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
     public void RenderGraph( String graphType )
