@@ -825,6 +825,9 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //update weekly stats
         WeatherStats wStats = StatisticsUpdate.getWeeklyStats(beginDate, endDate);
         updateStatsShown(wStats);
+        
+        //Create datasets
+        XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
     }//GEN-LAST:event_weeklyRadioButtonActionPerformed
 
     /**
