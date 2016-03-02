@@ -50,13 +50,14 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         lowTempTherm.addSubtitle("Low Temp");
         rainfallTherm.addSubtitle("Rainfall");
         
-        //set the thermometer color values
+        //set the thermometer color value for the mean temp value
         meanThermDisplayPanel = new javax.swing.JPanel();
         meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         meanTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
         meanTempTherm.setUnits(1);
         meanThermDisplayPanel.add(meanTempTherm);
         
+        //set the thermometer color value for the high temp value
         highThermDisplayPanel = new javax.swing.JPanel();
         highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         highTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
@@ -64,6 +65,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         highTempTherm.setValuePaint(Color.red);
         highThermDisplayPanel.add(highTempTherm);
         
+        //set the thermometer color value for the low temp value
         lowThermDisplayPanel = new javax.swing.JPanel();
         lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         lowTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
@@ -71,18 +73,13 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         lowTempTherm.setValuePaint(Color.blue);
         lowThermDisplayPanel.add(lowTempTherm);
         
+        //set the thermometer color value for the rainfall value
         rainfallDisplayPanel = new javax.swing.JPanel();
         rainfallDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         rainfallTherm.setPreferredSize(new java.awt.Dimension(1, 1));
         rainfallTherm.setUnits(0);
         rainfallTherm.setValuePaint(Color.gray);
         rainfallDisplayPanel.add(rainfallTherm);
-        
-        //this is for testing purposes
-        meanTempTherm.setValue(25);
-        highTempTherm.setValue(25);
-        lowTempTherm.setValue(25);
-        rainfallTherm.setValue(25);
         
         initComponents();
 
