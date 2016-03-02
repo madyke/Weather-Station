@@ -51,8 +51,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         radioButtonGroup = new javax.swing.ButtonGroup();
         fileChooser = new javax.swing.JFileChooser();
@@ -82,6 +81,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         dialDisplayPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         graphDisplayPanel = new GraphPanel("Title");
+        prevButton = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
         appMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -99,10 +100,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         chooseDateRangeLabel.setText("Choose Date:");
 
         beginDateTextField.setText(beginDate.toString());
-        beginDateTextField.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        beginDateTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 beginDateTextFieldActionPerformed(evt);
             }
         });
@@ -111,68 +110,53 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         radioButtonGroup.add(dailyRadioButton);
         dailyRadioButton.setText("Daily");
-        dailyRadioButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        dailyRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dailyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(weeklyRadioButton);
         weeklyRadioButton.setText("Weekly");
-        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 weeklyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(monthlyRadioButton);
         monthlyRadioButton.setText("Monthly");
-        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 monthlyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(yearlyRadioButton);
         yearlyRadioButton.setText("Yearly");
-        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 yearlyRadioButtonActionPerformed(evt);
             }
         });
 
         chooseGraphComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Humidity", "Barometric Pressure", "Wind Speed", "UV Index", "Rainfall" }));
-        chooseGraphComboBox.addItemListener(new java.awt.event.ItemListener()
-        {
-            public void itemStateChanged(java.awt.event.ItemEvent evt)
-            {
+        chooseGraphComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chooseGraphComboBoxItemStateChanged(evt);
             }
         });
-        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chooseGraphComboBoxActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(allDatesButton);
         allDatesButton.setText("All Dates");
-
         allDatesButton.setSelected(true);
-        allDatesButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        allDatesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 allDatesButtonActionPerformed(evt);
             }
         });
@@ -215,16 +199,18 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         jScrollPane2.setViewportView(graphDisplayPanel);
         graphDisplayPanel.validate();
 
+        prevButton.setText("Prev");
+
+        nextButton.setText("Next");
+
         appMenuBar.setName("appMenuBar"); // NOI18N
 
         fileMenu.setText("File");
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenuItem.setText("Open");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
             }
         });
@@ -233,10 +219,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         quitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         quitMenuItem.setText("Quit");
-        quitMenuItem.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        quitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quitMenuItemActionPerformed(evt);
             }
         });
@@ -264,50 +248,58 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(chooseDateRangeLabel)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(beginDateLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(beginDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(chooseGraphComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(statisticsSectionLabel)
-                            .addComponent(allDatesButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(dailyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(weeklyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(monthlyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(yearlyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGap(20, 20, 20))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(chooseDateRangeLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(beginDateLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(beginDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(chooseGraphComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(allDatesButton)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dailyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(weeklyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(monthlyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(yearlyRadioButton, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(statisticsSectionLabel)))
+                            .addGap(20, 20, 20))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(rainfallLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rainfallValueLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(prevailingWindDirectionLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(prevailingWindDirectionValueLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(meanWindSpeedLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(meanWindSpeedValueLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lowTempLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lowTempValueLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(highTempLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(highTempValueLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(meanTempLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(meanTempValueLabel)))
+                            .addGap(10, 10, 10)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rainfallLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(rainfallValueLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(prevailingWindDirectionLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(prevailingWindDirectionValueLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(meanWindSpeedLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(meanWindSpeedValueLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lowTempLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(lowTempValueLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(highTempLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(highTempValueLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(meanTempLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(meanTempValueLabel)))
-                        .addGap(10, 10, 10))))
+                        .addComponent(prevButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nextButton)
+                        .addGap(39, 39, 39))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dailyRadioButton, monthlyRadioButton, weeklyRadioButton, yearlyRadioButton});
@@ -316,11 +308,14 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {highTempValueLabel, lowTempValueLabel, meanTempValueLabel, meanWindSpeedValueLabel, prevailingWindDirectionValueLabel, rainfallValueLabel});
 
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {nextButton, prevButton});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(chooseGraphComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
@@ -329,7 +324,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(beginDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(beginDateLabel))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(prevButton)
+                            .addComponent(nextButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addComponent(dailyRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(weeklyRadioButton)
@@ -338,11 +337,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(yearlyRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(allDatesButton))
-                    .addComponent(jScrollPane2))
+                        .addComponent(allDatesButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 35, Short.MAX_VALUE)
                         .addComponent(statisticsSectionLabel)
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -368,8 +367,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rainfallLabel)
                             .addComponent(rainfallValueLabel)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {nextButton, prevButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1080,7 +1081,9 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     private javax.swing.JLabel meanWindSpeedLabel;
     private javax.swing.JLabel meanWindSpeedValueLabel;
     private javax.swing.JRadioButton monthlyRadioButton;
+    private javax.swing.JButton nextButton;
     private javax.swing.JMenuItem openMenuItem;
+    private javax.swing.JButton prevButton;
     private javax.swing.JLabel prevailingWindDirectionLabel;
     private javax.swing.JLabel prevailingWindDirectionValueLabel;
     private javax.swing.JMenuItem quitMenuItem;
