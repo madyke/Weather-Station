@@ -24,6 +24,11 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
+/**
+ * This class is used to create the graph objects for use in the GUI.
+ * 
+ * @author Matt Dyke
+ */
 public class GraphPanel extends JPanel
 {
     private JFreeChart graph;
@@ -70,6 +75,9 @@ public class GraphPanel extends JPanel
         add( chartPanel );
     }
     
+    /**
+     * This method creates the renderers and sets their default values.
+     */
     private void CreateAndSetAllRenderers()
     {
         //Create and set high temperature renderer
@@ -105,6 +113,9 @@ public class GraphPanel extends JPanel
         this.plot.setRenderer( 7, this.rainfallRenderer );
  }
     
+    /**
+     * This method renders the temperature graph.
+     */
     public void RenderTemperature()
     {
         //Plot high temperatures
@@ -120,6 +131,9 @@ public class GraphPanel extends JPanel
         this.plot.getRangeAxis().setLabel( "Temperature (\u00b0F)" );
     }
 
+    /**
+     * This method renders the humidity graph.
+     */
     public void RenderHumidity()
     {
         //Plot humidity
@@ -129,6 +143,9 @@ public class GraphPanel extends JPanel
         this.plot.getRangeAxis().setLabel( "Humidity (%)" );
     }
 
+    /**
+     * This method renders the barometric pressure graph.
+     */
     public void RenderPressure()
     {
         //Plot pressure
@@ -138,6 +155,9 @@ public class GraphPanel extends JPanel
         this.plot.getRangeAxis().setLabel( "Pressure (in. Hg.)" );
     }
 
+    /**
+     * This method renders the wind speed graph.
+     */
     public void RenderWindSpeed()
     {
         //Plot wind speed
@@ -147,6 +167,9 @@ public class GraphPanel extends JPanel
         this.plot.getRangeAxis().setLabel( "Wind Speed (mph)" );
     }
 
+    /**
+     * This method renders the UV Index graph.
+     */
     public void RenderUVIndex()
     {
         //Plot pressure
@@ -156,6 +179,9 @@ public class GraphPanel extends JPanel
         this.plot.getRangeAxis().setLabel( "UV Index" );
     }
 
+    /**
+     * This method renders the rain fall graph.
+     */
     public void RenderRainfall()
     {
         //Plot pressure
@@ -165,6 +191,14 @@ public class GraphPanel extends JPanel
         this.plot.getRangeAxis().setLabel( "Rainfall (in)" );
     }
 
+    /**
+     * This method creates the renderer for a graph.
+     * 
+     * @param seriesIndex Where in the series it is.
+     * @param toolTip The tool tip for a point.
+     * @param col Color to be used for graph.
+     * @return renderer The renderer for a graph.
+     */
     private XYLineAndShapeRenderer createRenderer( int seriesIndex, String toolTip, Color col ) 
    {
         //Create new renderer
@@ -183,6 +217,11 @@ public class GraphPanel extends JPanel
         return renderer;
     }
     
+    /**
+     * This method creates data sets.
+     * 
+     * @param stats A list of daily aggregate statistics.
+     */
     public void createNonDailyDatasets( ArrayList<DailyStats> stats )
     {
         TimeSeries highTemp  = new TimeSeries( "High Temp" );
@@ -225,6 +264,11 @@ public class GraphPanel extends JPanel
         this.datasets.add( new TimeSeriesCollection( rainfall ) );
     }
     
+    /**
+     * This method creates data sets.
+     * 
+     * @param stats An array list of weather readings.
+     */
     public void createDailyDatasets( ArrayList<WeatherReading> stats )
     {
         TimeSeries Temp      = new TimeSeries( "Temp" );
@@ -279,6 +323,11 @@ public class GraphPanel extends JPanel
         this.datasets.add( new TimeSeriesCollection( rainfall ) );
     }
     
+    /**
+     * This method creates monthly datasets.
+     * 
+     * @param stats An array list of monthly statistics.
+     */
     private void createMonthlyDatasets( ArrayList<MonthlyStats> stats )
     {
         TimeSeries highTemp  = new TimeSeries( "High Temp" );
@@ -321,6 +370,11 @@ public class GraphPanel extends JPanel
         this.datasets.add( new TimeSeriesCollection( rainfall ) );
     }
     
+    /**
+     * This method creates yearly datasets.
+     * 
+     * @param stats An array list of yearly statistics.
+     */
     private void createYearlyDatasets( ArrayList<YearlyStats> stats )
     {
         TimeSeries highTemp  = new TimeSeries( "High Temp" );
@@ -363,6 +417,9 @@ public class GraphPanel extends JPanel
         this.datasets.add( new TimeSeriesCollection( rainfall ) );
     }
     
+    /**
+     * This method clears the graph.
+     */
     public void ClearGraph()
     {
         for( int i = 0; i < this.plot.getRendererCount(); i++ )

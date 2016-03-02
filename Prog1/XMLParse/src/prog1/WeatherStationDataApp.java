@@ -458,8 +458,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     }//GEN-LAST:event_dailyRadioButtonActionPerformed
 
     /**
+     * This method changes the graph that is rendered based on the combo box
+     * choice.
      * 
-     * @param evt 
+     * @param evt An event that is triggered when a combo box choice has been
+     * made.
      */
     private void chooseGraphComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphComboBoxActionPerformed
         //Get string telling which item was selected
@@ -642,6 +645,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         YearlyButtonAction( evt );
     }//GEN-LAST:event_yearlyRadioButtonActionPerformed
 
+    /**
+     * This method calls the file chooser when the open menu item is chosen.
+     * 
+     * @param evt Event triggered when the open menu item is chosen.
+     */
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_openMenuItemActionPerformed
     {//GEN-HEADEREND:event_openMenuItemActionPerformed
         int returnVal = fileChooser.showOpenDialog(this);   //How chooser closed
@@ -654,17 +662,30 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void chooseGraphComboBoxItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_chooseGraphComboBoxItemStateChanged
     {//GEN-HEADEREND:event_chooseGraphComboBoxItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
 
-
+    /**
+     * This method performs an action when the all dates radio button is chosen.
+     * 
+     * @param evt Event triggered when the all dates radio button is chosen.
+     */
     private void allDatesButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_allDatesButtonActionPerformed
     {//GEN-HEADEREND:event_allDatesButtonActionPerformed
         AllDatesButtonAction( evt );
     }//GEN-LAST:event_allDatesButtonActionPerformed
 
+    /**
+     * This method opens a message dialog when the About menu item is chosen.
+     * 
+     * @param evt Event triggered by about menu item being chosen.
+     */
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         javax.swing.JOptionPane.showMessageDialog(rootPane, "Created by Matt Dyke and Charles Parsons.");
     }//GEN-LAST:event_aboutMenuItemActionPerformed
@@ -753,6 +774,12 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * This method updates the statistics and graph when the daily radio
+     * button is chosen.
+     * 
+     * @param evt Event triggered when the daily radio button is chosen.
+     */
     public void DailyButtonAction(java.awt.event.ActionEvent evt)
     {
         //set the begin date to the date that was entered by the user
@@ -780,6 +807,12 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
+    /**
+     * This method updates the statistics and graph when the weekly radio
+     * button is chosen.
+     * 
+     * @param evt Event triggered when the weekly radio button is chosen.
+     */
     public void WeeklyButtonAction(java.awt.event.ActionEvent evt)
     {
         //set the end date to be 7 days after the begin date
@@ -880,6 +913,12 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
 
+    /**
+     * This method updates the statistics and graph when the monthly radio
+     * button is chosen.
+     * 
+     * @param evt Event triggered when the monthly radio button is chosen.
+     */
     public void MonthlyButtonAction(java.awt.event.ActionEvent evt)
     {
         //set the begin date to the date that was entered by the user
@@ -969,6 +1008,12 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
+    /**
+     * This method updates the statistics and graph when the yearly radio
+     * button is chosen.
+     * 
+     * @param evt Event triggered when the yearly radio button is chosen.
+     */
     public void YearlyButtonAction(java.awt.event.ActionEvent evt)
     {
         //set the begin date to the date that was entered by the user
@@ -999,6 +1044,12 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
+    /**
+     * This method updates the statistics and graph when the all dates radio
+     * button is chosen.
+     * 
+     * @param evt Event triggered when the all dates radio button is chosen.
+     */
     public void AllDatesButtonAction(java.awt.event.ActionEvent evt)
     {
         //set the begin date to the date that was entered by the user
@@ -1027,6 +1078,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
     }
     
+    /**
+     * This method renders the graph after a combo box item is chosen.
+     * 
+     * @param graphType The string representing the combo box choice.
+     */
     public void RenderGraph( String graphType )
     {
         //If graph type is temperature

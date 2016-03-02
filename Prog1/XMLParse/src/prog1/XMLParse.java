@@ -247,6 +247,13 @@ public abstract class XMLParse
         return System.getProperty("user.dir");
     }
     
+    /**
+     * This method gets the daily readings for a specific date.
+     * 
+     * @param date The date desired.
+     * @return day An array list containing all of the readings for a 
+     * specified day.
+     */
     public static ArrayList<WeatherReading> GetDailyReadings( AppDate date )
     {
         //Create new Arraylist
@@ -286,6 +293,13 @@ public abstract class XMLParse
         return XMLParse.weatherReadings.get( i );
     }
         
+    /**
+     * This method gets the daily statistics over a date range.
+     * 
+     * @param begin The starting date of the date range.
+     * @param end The ending date of the date range.
+     * @return period The array list containing the aggregated daily statistics.
+     */
     public static ArrayList<DailyStats> GetDailyAggregatePeriod( AppDate begin, AppDate end )
     {
         //Create new Arraylist

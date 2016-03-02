@@ -87,6 +87,15 @@ public abstract class StatisticsUpdate {
         return new DailyStats();
     }
     
+    /**
+     * This method iterates through the original weather readings looking for
+     * dates that fall between start and end, inclusive. It calculates the
+     * statistics for that date range and returns them.
+     * 
+     * @param start The beginning date in the date range.
+     * @param end The ending date in the date range.
+     * @return wStats The statistics calculated for this date range.
+     */
     public static WeatherStats getCustomStats(AppDate start, AppDate end)
     {
         WeatherStats wStats = new WeatherStats();
