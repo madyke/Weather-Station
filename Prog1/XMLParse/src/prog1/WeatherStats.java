@@ -26,6 +26,7 @@ public class WeatherStats
     public double avgBarometer;
     public double avgWindSpeed;
     public double windDirection;
+    public String prevailingWindDirection;
     public double windGust;
     public double avgWindChill;
     public double avgHeatIndex;
@@ -64,6 +65,7 @@ public class WeatherStats
         this.avgBarometer   = 0;
         this.avgWindSpeed   = 0;
         this.windDirection  = 0;
+        this.prevailingWindDirection = "";
         this.windGust       = 0;
         this.avgWindChill   = 0;
         this.avgHeatIndex   = 0;
@@ -160,6 +162,7 @@ public class WeatherStats
             if( currReading.windGust > this.windGust )
             {
                 this.windGust = currReading.windGust;
+                this.prevailingWindDirection = currReading.windDirection;
             }
         }
         
