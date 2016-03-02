@@ -247,6 +247,45 @@ public abstract class XMLParse
         return System.getProperty("user.dir");
     }
     
+    public static ArrayList<WeatherReading> GetDailyReadings( AppDate date )
+    {
+        //Create new Arraylist
+        ArrayList<WeatherReading> day = new ArrayList<>();
+        
+        //Get begin and end times
+        int beginDay   = date.getDay();
+        int beginMonth = date.getMonth();
+        int beginYear  = date.getYear();
+        
+        int i = 0;  //Loop counter
+        
+        try
+        {
+            //Get to beginning year
+            while( XMLParse.weatherReadings.get( i ).get( 0 ).year < beginYear )
+            {
+                i++;
+            }
+            //Get to beginning month
+            while( XMLParse.weatherReadings.get( i ).get( 0 ).month < beginMonth )
+            {
+                i++;
+            }
+            //Get to beginning day
+            while( XMLParse.weatherReadings.get( i ).get( 0 ).day < beginDay )
+            {
+                i++;
+            }
+        }
+        catch( IndexOutOfBoundsException e )
+        {
+            //Data did not go up to beginning date return no data
+            return day;
+        }
+        
+        return XMLParse.weatherReadings.get( i );
+    }
+        
     public static ArrayList<DailyStats> GetDailyAggregatePeriod( AppDate begin, AppDate end )
     {
         //Create new Arraylist
@@ -260,7 +299,7 @@ public abstract class XMLParse
         int endMonth   = end.getMonth();
         int endYear    = end.getYear();
         
-        int i = 0;
+        int i = 0;  //Loop counter
         
         try
         {

@@ -250,7 +250,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="radioButtonGroup"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Daily" postCode="dailyRadioButton.setSelected(true);"/>
+        <Property name="text" type="java.lang.String" value="Daily"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dailyRadioButtonActionPerformed"/>
@@ -320,6 +320,12 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="allDatesButtonActionPerformed"/>
       </Events>
+<<<<<<< HEAD
+=======
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="allDatesButton.setSelected(true);"/>
+      </AuxValues>
+>>>>>>> 199b79503813c18984ca5525f8bab20daeaa7688
     </Component>
     <Component class="javax.swing.JLabel" name="statisticsSectionLabel">
       <Properties>

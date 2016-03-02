@@ -48,7 +48,7 @@ public class GraphPanel extends JPanel
     public GraphPanel( String chartTitle )
     {
         //Create datasets
-        createDailyDatasets( XMLParse.dailyAverages );
+        createNonDailyDatasets( XMLParse.dailyAverages );
         
         //Build empty chart
         this.graph = ChartFactory.createTimeSeriesChart(
@@ -183,7 +183,7 @@ public class GraphPanel extends JPanel
         return renderer;
     }
     
-    public void createDailyDatasets( ArrayList<DailyStats> stats )
+    public void createNonDailyDatasets( ArrayList<DailyStats> stats )
     {
         TimeSeries highTemp  = new TimeSeries( "High Temp" );
         TimeSeries avgTemp   = new TimeSeries( "Avgerage Temp" );
@@ -218,6 +218,51 @@ public class GraphPanel extends JPanel
         this.datasets.add( new TimeSeriesCollection( highTemp ) );
         this.datasets.add( new TimeSeriesCollection( avgTemp ) );
         this.datasets.add( new TimeSeriesCollection( lowTemp ) );
+        this.datasets.add( new TimeSeriesCollection( humidity ) );
+        this.datasets.add( new TimeSeriesCollection( pressure ) );
+        this.datasets.add( new TimeSeriesCollection( windSpeed ) );
+        this.datasets.add( new TimeSeriesCollection( UVIndex ) );
+        this.datasets.add( new TimeSeriesCollection( rainfall ) );
+    }
+    
+    public void createDailyDatasets( ArrayList<WeatherReading> stats )
+    {
+        TimeSeries Temp      = new TimeSeries( "Temp" );
+        TimeSeries humidity  = new TimeSeries( "Humidity" );
+        TimeSeries pressure  = new TimeSeries( "Pressue" );
+        TimeSeries windSpeed = new TimeSeries( "Wind Speed" );
+        TimeSeries UVIndex   = new TimeSeries( "UV Index" );
+        TimeSeries rainfall  = new TimeSeries( "Rainfall" );
+        
+        //Loop over each item in stats ArrayList
+        for( WeatherReading item : stats )
+        {
+            //Build time object to track time of current entry
+            int minute = 0;
+            int hour = 0;            
+            minute = Integer.parseInt( item.time.substring( 3, 5 ) );
+            hour = Integer.parseInt( item.time.substring( 0, 2 ) );
+            if( item.time.charAt( 5 ) == 'P' )
+            {
+                hour += 12;
+            }
+            
+            RegularTimePeriod t = new Minute( minute, hour, item.day, item.month, item.year );
+            System.out.println( t.toString() );
+            //Add current entry's fields to series
+            Temp.add( t, item.temperature );
+            humidity.add( t, item.humidity );
+            pressure.add( t, item.barometer );
+            windSpeed.add( t, item.windSpeed );
+            UVIndex.add( t, item.uvIndex );
+            rainfall.add( t, item.rainFall );
+        }
+        
+        //Remove old datasets
+        this.datasets.clear();
+        
+        //Add series to datasets
+        this.datasets.add( new TimeSeriesCollection( Temp ) );
         this.datasets.add( new TimeSeriesCollection( humidity ) );
         this.datasets.add( new TimeSeriesCollection( pressure ) );
         this.datasets.add( new TimeSeriesCollection( windSpeed ) );

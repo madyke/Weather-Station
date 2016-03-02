@@ -51,7 +51,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         radioButtonGroup = new javax.swing.ButtonGroup();
         fileChooser = new javax.swing.JFileChooser();
@@ -98,8 +99,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         chooseDateRangeLabel.setText("Choose Date:");
 
         beginDateTextField.setText(beginDate.toString());
-        beginDateTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        beginDateTextField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 beginDateTextFieldActionPerformed(evt);
             }
         });
@@ -108,53 +111,68 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         radioButtonGroup.add(dailyRadioButton);
         dailyRadioButton.setText("Daily");
-        dailyRadioButton.setSelected(true);
-        dailyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        dailyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dailyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(weeklyRadioButton);
         weeklyRadioButton.setText("Weekly");
-        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        weeklyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 weeklyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(monthlyRadioButton);
         monthlyRadioButton.setText("Monthly");
-        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        monthlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 monthlyRadioButtonActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(yearlyRadioButton);
         yearlyRadioButton.setText("Yearly");
-        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        yearlyRadioButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 yearlyRadioButtonActionPerformed(evt);
             }
         });
 
         chooseGraphComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Humidity", "Barometric Pressure", "Wind Speed", "UV Index", "Rainfall" }));
-        chooseGraphComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        chooseGraphComboBox.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 chooseGraphComboBoxItemStateChanged(evt);
             }
         });
-        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        chooseGraphComboBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 chooseGraphComboBoxActionPerformed(evt);
             }
         });
 
         radioButtonGroup.add(allDatesButton);
         allDatesButton.setText("All Dates");
-        allDatesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+        allDatesButton.setSelected(true);
+        allDatesButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 allDatesButtonActionPerformed(evt);
             }
         });
@@ -203,8 +221,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenuItem.setText("Open");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        openMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 openMenuItemActionPerformed(evt);
             }
         });
@@ -213,8 +233,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         quitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         quitMenuItem.setText("Quit");
-        quitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        quitMenuItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 quitMenuItemActionPerformed(evt);
             }
         });
@@ -631,8 +653,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chooseGraphComboBoxItemStateChanged
 
-    private void allDatesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allDatesButtonActionPerformed
-        AllDatesButtonAction(evt);
+
+    private void allDatesButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_allDatesButtonActionPerformed
+    {//GEN-HEADEREND:event_allDatesButtonActionPerformed
+        AllDatesButtonAction( evt );
     }//GEN-LAST:event_allDatesButtonActionPerformed
 
     /**
@@ -730,6 +754,16 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         DailyStats dStats = StatisticsUpdate.getDailyStats(beginDate.getMonth(), 
                 beginDate.getDay(), beginDate.getYear());
         updateStatsShown(dStats);
+        
+        //Create datasets
+        ArrayList<WeatherReading> day = XMLParse.GetDailyReadings( beginDate );
+        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( day );
+        
+        //Clear old graph
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
     public void WeeklyButtonAction(java.awt.event.ActionEvent evt)
@@ -823,7 +857,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
-        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
         
         //Clear old graph
         ((GraphPanel)(graphDisplayPanel)).ClearGraph();
@@ -912,7 +946,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //Create datasets
         ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
-        ((GraphPanel)(graphDisplayPanel)).createDailyDatasets( period );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
         
         //Clear old graph
         ((GraphPanel)(graphDisplayPanel)).ClearGraph();
@@ -923,15 +957,15 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     
     public void YearlyButtonAction(java.awt.event.ActionEvent evt)
     {
-        //set the begin date to the first day of the year
-        beginDate.setMonth(1);
-        beginDate.setDay(1);
+        //set the begin date to the date that was entered by the user
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
         beginDate.setYear(dateEntered.getYear());
         
-        //set the end date to the last day of the year
-        endDate.setMonth(12);
-        endDate.setDay(31);
-        endDate.setYear(dateEntered.getYear());
+        //Set end date one year later
+        endDate.setDay( dateEntered.getDay() );
+        endDate.setMonth( dateEntered.getMonth() );
+        endDate.setYear( dateEntered.getYear() + 1 );
         
         //set the display text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
@@ -939,10 +973,43 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         //update the statistics shown on the GUI
         YearlyStats yStats = StatisticsUpdate.getYearlyStats(beginDate.getYear());
         updateStatsShown(yStats);
+        
+        //Create datasets
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
+        
+        //Clear old graph
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
     }
     
     public void AllDatesButtonAction(java.awt.event.ActionEvent evt)
     {
+        //set the begin date to the date that was entered by the user
+        beginDate.setMonth(dateEntered.getMonth());
+        beginDate.setDay(dateEntered.getDay());
+        beginDate.setYear(dateEntered.getYear());
+        
+        //Set end date beyond feasible date
+        endDate.setDay( 10000 );
+        endDate.setMonth( 10000 );
+        endDate.setYear( 10000 );
+        
+        //update the statistics shown on the GUI
+        WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
+        updateStatsShown(wStats);
+        
+        //Create datasets
+        ArrayList<DailyStats> period = XMLParse.GetDailyAggregatePeriod( beginDate, endDate );
+        ((GraphPanel)(graphDisplayPanel)).createNonDailyDatasets( period );
+        
+        //Clear old graph
+        ((GraphPanel)(graphDisplayPanel)).ClearGraph();
+        
+        //Build new graph
+        RenderGraph( chooseGraphComboBox.getSelectedItem().toString() );
         
     }
     
