@@ -62,7 +62,6 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         highTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
         highTempTherm.setUnits(1);
-        highTempTherm.setValuePaint(Color.red);
         highThermDisplayPanel.add(highTempTherm);
         
         //set the thermometer color value for the low temp value
@@ -70,7 +69,6 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         lowTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
         lowTempTherm.setUnits(1);
-        lowTempTherm.setValuePaint(Color.blue);
         lowThermDisplayPanel.add(lowTempTherm);
         
         //set the thermometer color value for the rainfall value
@@ -78,7 +76,6 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         rainfallDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
         rainfallTherm.setPreferredSize(new java.awt.Dimension(1, 1));
         rainfallTherm.setUnits(0);
-        rainfallTherm.setValuePaint(Color.gray);
         rainfallDisplayPanel.add(rainfallTherm);
         
         initComponents();
@@ -541,6 +538,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         }
         //set the visible text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
+        
+        //update the statistics shown on the GUI
+        MonthlyStats mStats = StatisticsUpdate.getMonthlyStats(beginDate.getMonth(), 
+                beginDate.getYear());
+        updateStatsShown(mStats);
     }//GEN-LAST:event_monthlyRadioButtonActionPerformed
 
     /**
@@ -558,6 +560,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         endDate.setMonth(dateEntered.getMonth());
         endDate.setDay(dateEntered.getDay());
         endDate.setYear(dateEntered.getYear());
+        
+                //update the statistics shown on the GUI
+        DailyStats dStats = StatisticsUpdate.getDailyStats(beginDate.getMonth(), 
+                beginDate.getDay(), beginDate.getYear());
+        updateStatsShown(dStats);
     }//GEN-LAST:event_dailyRadioButtonActionPerformed
 
     /**
@@ -766,6 +773,13 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //set the display text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
+        
+        //update the statistics shown on the GUI
+        YearlyStats yStats = StatisticsUpdate.getYearlyStats(beginDate.getYear());
+        updateStatsShown(yStats);
+        
+        
+        
     }//GEN-LAST:event_yearlyRadioButtonActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_openMenuItemActionPerformed
@@ -780,6 +794,28 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
 
+    /**
+     * This method updates the statistics show in the labels and thermometers
+     * when given set of statistics.
+     * 
+     * @param wStats The statistics to be displayed.
+     */
+    private void updateStatsShown(WeatherStats wStats)
+    {
+        //update the thermometers
+        meanTempTherm.setValue(wStats.avgTemp);
+        highTempTherm.setValue(wStats.highTemp);
+        lowTempTherm.setValue(wStats.lowTemp);
+        rainfallTherm.setValue(wStats.totalRainFall);
+        
+        //update the labels
+        meanTempValueLabel.setText(((Double)wStats.avgTemp).toString());
+        highTempValueLabel.setText(((Double)wStats.highTemp).toString());
+        lowTempValueLabel.setText(((Double)wStats.lowTemp).toString());
+        meanWindSpeedValueLabel.setText(((Double)wStats.avgWindSpeed).toString());
+        prevailingWindDirectionValueLabel.setText(((Double)wStats.windDirection).toString());
+        rainfallValueLabel.setText(((Double)wStats.totalRainFall).toString());
+    }
     /**
      * @param args the command line arguments
      */
