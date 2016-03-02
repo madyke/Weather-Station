@@ -416,6 +416,8 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {nextButton, prevButton});
 
+        AllDatesButtonAction(null);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
