@@ -231,6 +231,11 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         aboutMenu.setText("About");
 
         aboutMenuItem.setText("About");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
         aboutMenu.add(aboutMenuItem);
 
         appMenuBar.add(aboutMenu);
@@ -659,6 +664,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_allDatesButtonActionPerformed
         AllDatesButtonAction( evt );
     }//GEN-LAST:event_allDatesButtonActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        javax.swing.JOptionPane.showMessageDialog(rootPane, "Created by Matt Dyke and Charles Parsons.");
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
 
     /**
      * This method updates the statistics show in the labels and thermometers
