@@ -297,7 +297,9 @@ public abstract class XMLParse
                 i++;
             }
             //Get to ending day
-            while( XMLParse.dailyAverages.get( i ).day <= endDay )
+            while( XMLParse.dailyAverages.get( i ).day <= endDay
+                && XMLParse.dailyAverages.get( i ).month <= endMonth
+                && XMLParse.dailyAverages.get( i ).year <= endYear )
             {
                 //Add record
                 period.add( XMLParse.dailyAverages.get( i ) );
