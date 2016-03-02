@@ -1004,6 +1004,31 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         {
             ((GraphPanel)(graphDisplayPanel)).RenderTemperature();
         }
+        //If graph type is humidity
+        if( graphType == "Humidity" )
+        {
+            ((GraphPanel)(graphDisplayPanel)).RenderHumidity();
+        }
+        //If graph type is pressure
+        if( graphType == "Barometric Pressure" )
+        {
+            ((GraphPanel)(graphDisplayPanel)).RenderPressure();
+        }
+        //If graph type is wind speed
+        if( graphType == "Wind Speed" )
+        {
+            ((GraphPanel)(graphDisplayPanel)).RenderWindSpeed();
+        }
+        //If graph type is UV Index
+        if( graphType == "UV Index" )
+        {
+            ((GraphPanel)(graphDisplayPanel)).RenderUVIndex();
+        }
+        //If graph type is rainfall
+        if( graphType == "Rainfall" )
+        {
+            ((GraphPanel)(graphDisplayPanel)).RenderRainfall();
+        }
     }
     
 
