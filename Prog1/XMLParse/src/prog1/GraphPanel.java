@@ -228,6 +228,8 @@ public class GraphPanel extends JPanel
     public void createDailyDatasets( ArrayList<WeatherReading> stats )
     {
         TimeSeries Temp      = new TimeSeries( "Temp" );
+        TimeSeries garbage1  = new TimeSeries( "" );
+        TimeSeries garbage2  = new TimeSeries( "" );
         TimeSeries humidity  = new TimeSeries( "Humidity" );
         TimeSeries pressure  = new TimeSeries( "Pressue" );
         TimeSeries windSpeed = new TimeSeries( "Wind Speed" );
@@ -237,18 +239,23 @@ public class GraphPanel extends JPanel
         //Loop over each item in stats ArrayList
         for( WeatherReading item : stats )
         {
-            //Build time object to track time of current entry
+            //Find hour and minute of current reading
             int minute = 0;
-            int hour = 0;            
-            minute = Integer.parseInt( item.time.substring( 3, 5 ) );
-            hour = Integer.parseInt( item.time.substring( 0, 2 ) );
-            if( item.time.charAt( 5 ) == 'P' )
-            {
-                hour += 12;
-            }
+            int hour = 0;  
+            int colon = 0;
+            colon = item.time.indexOf( ":" );
+            minute = Integer.parseInt( item.time.substring( colon + 1, colon + 3 ) );
+            hour = Integer.parseInt( item.time.substring( 0, colon ) );
             
+            //Adjust for 12 o'clock
+            if( item.time.charAt( colon + 3 ) == 'P' && hour != 12 )
+                hour += 12;
+            if( item.time.charAt( colon + 3 ) == 'A' && hour == 12 )
+                hour -= 12;
+                
+            //Build time object to track time of current entry
             RegularTimePeriod t = new Minute( minute, hour, item.day, item.month, item.year );
-            System.out.println( t.toString() );
+            
             //Add current entry's fields to series
             Temp.add( t, item.temperature );
             humidity.add( t, item.humidity );
@@ -263,6 +270,8 @@ public class GraphPanel extends JPanel
         
         //Add series to datasets
         this.datasets.add( new TimeSeriesCollection( Temp ) );
+        this.datasets.add( new TimeSeriesCollection( garbage1 ) );
+        this.datasets.add( new TimeSeriesCollection( garbage2 ) );
         this.datasets.add( new TimeSeriesCollection( humidity ) );
         this.datasets.add( new TimeSeriesCollection( pressure ) );
         this.datasets.add( new TimeSeriesCollection( windSpeed ) );
