@@ -681,8 +681,12 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         
         //update the labels
         meanTempValueLabel.setText(((Double)wStats.avgTemp).toString());
-        highTempValueLabel.setText(((Double)wStats.highTemp).toString());
-        lowTempValueLabel.setText(((Double)wStats.lowTemp).toString());
+        highTempValueLabel.setText(((Double)wStats.highTemp).toString() + " at " +
+                  ((Integer)wStats.highTempHour).toString() + ":" +
+                   ((Integer)wStats.highTempMinute).toString());
+        lowTempValueLabel.setText(((Double)wStats.lowTemp).toString() + " at " +
+                  ((Integer)wStats.lowTempHour).toString() + ":" +
+                   ((Integer)wStats.lowTempMinute).toString());
         meanWindSpeedValueLabel.setText(((Double)wStats.avgWindSpeed).toString());
         prevailingWindDirectionValueLabel.setText(((Double)wStats.windDirection).toString());
         rainfallValueLabel.setText(((Double)wStats.totalRainFall).toString());
