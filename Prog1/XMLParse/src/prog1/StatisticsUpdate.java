@@ -84,4 +84,25 @@ public abstract class StatisticsUpdate {
         }
         return new DailyStats();
     }
+    
+    public static WeatherStats getWeeklyStats(AppDate start, AppDate end)
+    {
+        WeatherStats wStats = new WeatherStats();
+        
+        //start and end in the same month and year
+        if(start.getMonth() == end.getMonth() && start.getYear() == end.getYear())
+        {
+            
+        }
+        else if(start.getYear() == end.getYear())
+        {
+            
+        }
+        else
+        {
+            
+        }
+        
+        return wStats;
+    }
 }

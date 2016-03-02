@@ -38,46 +38,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         lowTempTherm = new org.jfree.chart.plot.JThermometer();
         rainfallTherm = new org.jfree.chart.plot.JThermometer();
         
-        //set the ranges for the thermometer objects
-        meanTempTherm.setRange(-30, 110);
-        highTempTherm.setRange(-30, 110);
-        lowTempTherm.setRange(-30, 110);
-        rainfallTherm.setRange(0, 30);
-        
-        //set the titles for the thermometer objects
-        meanTempTherm.addSubtitle("Mean Temp");
-        highTempTherm.addSubtitle("High Temp");
-        lowTempTherm.addSubtitle("Low Temp");
-        rainfallTherm.addSubtitle("Rainfall");
-        
-        //set the thermometer color value for the mean temp value
-        meanThermDisplayPanel = new javax.swing.JPanel();
-        meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
-        meanTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
-        meanTempTherm.setUnits(1);
-        meanThermDisplayPanel.add(meanTempTherm);
-        
-        //set the thermometer color value for the high temp value
-        highThermDisplayPanel = new javax.swing.JPanel();
-        highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
-        highTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
-        highTempTherm.setUnits(1);
-        highThermDisplayPanel.add(highTempTherm);
-        
-        //set the thermometer color value for the low temp value
-        lowThermDisplayPanel = new javax.swing.JPanel();
-        lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
-        lowTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
-        lowTempTherm.setUnits(1);
-        lowThermDisplayPanel.add(lowTempTherm);
-        
-        //set the thermometer color value for the rainfall value
-        rainfallDisplayPanel = new javax.swing.JPanel();
-        rainfallDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
-        rainfallTherm.setPreferredSize(new java.awt.Dimension(1, 1));
-        rainfallTherm.setUnits(0);
-        rainfallDisplayPanel.add(rainfallTherm);
-        
+        initTherms();
         initComponents();
 
     }
@@ -415,6 +376,52 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_quitMenuItemActionPerformed
 
+    /**
+     * This method initializes the thermometer objects.
+     */
+    private void initTherms()
+    {
+        //set the ranges for the thermometer objects
+        meanTempTherm.setRange(-30, 110);
+        highTempTherm.setRange(-30, 110);
+        lowTempTherm.setRange(-30, 110);
+        rainfallTherm.setRange(0, 30);
+        
+        //set the titles for the thermometer objects
+        meanTempTherm.addSubtitle("Mean Temp");
+        highTempTherm.addSubtitle("High Temp");
+        lowTempTherm.addSubtitle("Low Temp");
+        rainfallTherm.addSubtitle("Rainfall");
+        
+        //set the thermometer color value for the mean temp value
+        meanThermDisplayPanel = new javax.swing.JPanel();
+        meanThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
+        meanTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
+        meanTempTherm.setUnits(1);
+        meanThermDisplayPanel.add(meanTempTherm);
+        
+        //set the thermometer color value for the high temp value
+        highThermDisplayPanel = new javax.swing.JPanel();
+        highThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
+        highTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
+        highTempTherm.setUnits(1);
+        highThermDisplayPanel.add(highTempTherm);
+        
+        //set the thermometer color value for the low temp value
+        lowThermDisplayPanel = new javax.swing.JPanel();
+        lowThermDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
+        lowTempTherm.setPreferredSize(new java.awt.Dimension(1, 1));
+        lowTempTherm.setUnits(1);
+        lowThermDisplayPanel.add(lowTempTherm);
+        
+        //set the thermometer color value for the rainfall value
+        rainfallDisplayPanel = new javax.swing.JPanel();
+        rainfallDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));
+        rainfallTherm.setPreferredSize(new java.awt.Dimension(1, 1));
+        rainfallTherm.setUnits(0);
+        rainfallDisplayPanel.add(rainfallTherm);
+    }
+    
     /**
      * This method changes the date range for the graph to the entire month of
      * the date entered into the text field.
@@ -814,6 +821,10 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         }
         //set the display text in the text field to the date entered by the user
         beginDateTextField.setText(dateEntered.toString());
+        
+        //update weekly stats
+        WeatherStats wStats = StatisticsUpdate.getWeeklyStats(beginDate, endDate);
+        updateStatsShown(wStats);
     }//GEN-LAST:event_weeklyRadioButtonActionPerformed
 
     /**
