@@ -5,6 +5,8 @@
  */
 package prog1;
 
+import java.util.ArrayList;
+
 /**
  *  
  *
@@ -85,23 +87,80 @@ public abstract class StatisticsUpdate {
         return new DailyStats();
     }
     
-    public static WeatherStats getWeeklyStats(AppDate start, AppDate end)
+    public static WeatherStats getCustomStats(AppDate start, AppDate end)
     {
         WeatherStats wStats = new WeatherStats();
+        boolean isDone = false; //flag to exit loops when the end date is passed
         
         //start and end in the same month and year
         if(start.getMonth() == end.getMonth() && start.getYear() == end.getYear())
         {
-            
+            //loop through the data from each file
+            for(ArrayList<WeatherReading> readings : XMLParse.weatherReadings)
+            {
+                //shortcut exiting the loop
+                if(isDone == true)
+                {
+                    break;
+                }
+                //loop through to get the individual readings
+                for(WeatherReading reading : readings)
+                {
+                    /*if the reading is between the start and end dates, then
+                      track those readings for the aggregate totals/averages*/
+                    if((reading.year == start.getYear() && reading.month == start.getMonth()
+                            && reading.day >= start.getDay()) &&
+                            reading.day <= end.getDay())
+                    {
+                        wStats.AddToRunningTotals(reading);
+                    }
+                    else if(end.getYear() <= reading.year || (end.getMonth() <=
+                            reading.month & end.getYear() == reading.year))
+                    {
+                        isDone = true;
+                        break;
+                    }
+                }
+            }
         }
-        else if(start.getYear() == end.getYear())
-        {
-            
-        }
+        /*start and end are in the same year, but different months or both 
+          month and year are different*/
         else
         {
-            
+            //loop through the data from each file
+            for(ArrayList<WeatherReading> readings : XMLParse.weatherReadings)
+            {
+                //shortcut exiting the loop
+                if(isDone == true)
+                {
+                    break;
+                }
+                //loop through to get the individual readings
+                for(WeatherReading reading : readings)
+                {
+                    /*if the reading is between the start and end dates, then
+                      track those readings for the aggregate totals/averages*/
+                    if((reading.year == start.getYear() && reading.month == start.getMonth()
+                            && reading.day >= start.getDay()) ||
+                            (reading.day <= end.getDay() && reading.month == end.getMonth()
+                            && reading.year == end.getYear()))
+                    {
+                        wStats.AddToRunningTotals(reading);
+                    }
+                    else if(end.getYear() <= reading.year || (end.getMonth() <=
+                            reading.month & end.getYear() == reading.year))
+                    {
+                        isDone = true;
+                        break;
+                    }
+                }
+            }
         }
+        
+        //calculate average statistics for the date range
+        wStats.CalculateAverages();
+        
+        wStats.PrintStats();
         
         return wStats;
     }

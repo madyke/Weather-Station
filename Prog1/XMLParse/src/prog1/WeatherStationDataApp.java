@@ -20,7 +20,7 @@ import javax.swing.JFileChooser;
  * date ranges. The different data types to choose from are: temperature,
  * humidity, barometric pressure, wind speed, UV index, and rainfall.
  * 
- * @author Charles Parsons
+ * @author Charles Parsons & Matt Dyke
  */
 public class WeatherStationDataApp extends javax.swing.JFrame {
 
@@ -615,6 +615,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
      * @param evt event triggered when the Weekly radio button is chosen.
      */
     private void weeklyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weeklyRadioButtonActionPerformed
+
         WeeklyButtonAction( evt );
     }//GEN-LAST:event_weeklyRadioButtonActionPerformed
 
@@ -808,7 +809,7 @@ public class WeatherStationDataApp extends javax.swing.JFrame {
         beginDateTextField.setText(dateEntered.toString());
         
         //update weekly stats
-        WeatherStats wStats = StatisticsUpdate.getWeeklyStats(beginDate, endDate);
+        WeatherStats wStats = StatisticsUpdate.getCustomStats(beginDate, endDate);
         updateStatsShown(wStats);
         
         //Create datasets
