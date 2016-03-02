@@ -18,7 +18,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.time.Day;
+import org.jfree.data.time.*;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -210,6 +210,93 @@ public class GraphPanel extends JPanel
             UVIndex.add( t, item.avgUVIndex );
             rainfall.add( t, item.avgRainFall );
         }
+        
+        //Remove old datasets
+        this.datasets.clear();
+        
+        //Add series to datasets
+        this.datasets.add( new TimeSeriesCollection( highTemp ) );
+        this.datasets.add( new TimeSeriesCollection( avgTemp ) );
+        this.datasets.add( new TimeSeriesCollection( lowTemp ) );
+        this.datasets.add( new TimeSeriesCollection( humidity ) );
+        this.datasets.add( new TimeSeriesCollection( pressure ) );
+        this.datasets.add( new TimeSeriesCollection( windSpeed ) );
+        this.datasets.add( new TimeSeriesCollection( UVIndex ) );
+        this.datasets.add( new TimeSeriesCollection( rainfall ) );
+    }
+    
+    private void createMonthlyDatasets( ArrayList<MonthlyStats> stats )
+    {
+        TimeSeries highTemp  = new TimeSeries( "High Temp" );
+        TimeSeries avgTemp   = new TimeSeries( "Avgerage Temp" );
+        TimeSeries lowTemp   = new TimeSeries( "Low Temp" );
+        TimeSeries humidity  = new TimeSeries( "Humidity" );
+        TimeSeries pressure  = new TimeSeries( "Pressue" );
+        TimeSeries windSpeed = new TimeSeries( "Wind Speed" );
+        TimeSeries UVIndex   = new TimeSeries( "UV Index" );
+        TimeSeries rainfall  = new TimeSeries( "Rainfall" );
+        
+        //Loop over each item in stats ArrayList
+        for( MonthlyStats item : stats )
+        {
+            //Build time object to track time of current entry
+            RegularTimePeriod t = new Month( item.month, item.year );
+            
+            //Add current entry's fields to series
+            highTemp.add( t, item.highTemp );
+            avgTemp.add( t, item.avgTemp );
+            lowTemp.add( t, item.lowTemp );
+            humidity.add( t, item.avgHumidity );
+            pressure.add( t, item.avgBarometer );
+            windSpeed.add( t, item.avgWindSpeed );
+            UVIndex.add( t, item.avgUVIndex );
+            rainfall.add( t, item.avgRainFall );
+        }
+        
+        //Remove old datasets
+        this.datasets.clear();
+        
+        //Add series to datasets
+        this.datasets.add( new TimeSeriesCollection( highTemp ) );
+        this.datasets.add( new TimeSeriesCollection( avgTemp ) );
+        this.datasets.add( new TimeSeriesCollection( lowTemp ) );
+        this.datasets.add( new TimeSeriesCollection( humidity ) );
+        this.datasets.add( new TimeSeriesCollection( pressure ) );
+        this.datasets.add( new TimeSeriesCollection( windSpeed ) );
+        this.datasets.add( new TimeSeriesCollection( UVIndex ) );
+        this.datasets.add( new TimeSeriesCollection( rainfall ) );
+    }
+    
+    private void createYearlyDatasets( ArrayList<YearlyStats> stats )
+    {
+        TimeSeries highTemp  = new TimeSeries( "High Temp" );
+        TimeSeries avgTemp   = new TimeSeries( "Avgerage Temp" );
+        TimeSeries lowTemp   = new TimeSeries( "Low Temp" );
+        TimeSeries humidity  = new TimeSeries( "Humidity" );
+        TimeSeries pressure  = new TimeSeries( "Pressue" );
+        TimeSeries windSpeed = new TimeSeries( "Wind Speed" );
+        TimeSeries UVIndex   = new TimeSeries( "UV Index" );
+        TimeSeries rainfall  = new TimeSeries( "Rainfall" );
+        
+        //Loop over each item in stats ArrayList
+        for( YearlyStats item : stats )
+        {
+            //Build time object to track time of current entry
+            RegularTimePeriod t = new Year( item.year );
+            
+            //Add current entry's fields to series
+            highTemp.add( t, item.highTemp );
+            avgTemp.add( t, item.avgTemp );
+            lowTemp.add( t, item.lowTemp );
+            humidity.add( t, item.avgHumidity );
+            pressure.add( t, item.avgBarometer );
+            windSpeed.add( t, item.avgWindSpeed );
+            UVIndex.add( t, item.avgUVIndex );
+            rainfall.add( t, item.avgRainFall );
+        }
+        
+        //Remove old datasets
+        this.datasets.clear();
         
         //Add series to datasets
         this.datasets.add( new TimeSeriesCollection( highTemp ) );
